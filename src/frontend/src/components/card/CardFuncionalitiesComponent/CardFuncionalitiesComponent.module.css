@@ -1,0 +1,49 @@
+.card {
+  position: relative;
+
+  min-width: 200px;
+  min-height: 200px;
+
+  padding: var(--space-md);
+
+  background: var(--color-primary);
+  color: #fff;
+
+  border-radius: var(--radius);
+
+  display: flex;
+  align-items: flex-end;
+
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+/* hover moderno */
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow);
+}
+
+/* ícone topo direito */
+.icon {
+  position: absolute;
+  top: var(--space-sm);
+  right: var(--space-sm);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: #fff;
+  line-height: 0;
+}
+
+/* texto */
+.title {
+  font-family: var(--font-body);
+  font-size: var(--fs-md); 
+  font-weight: 600;
+
+  margin: 0;
+  line-height: 1.3;
+}
