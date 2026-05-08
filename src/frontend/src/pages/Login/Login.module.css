@@ -1,0 +1,164 @@
+.container {
+
+  margin-top: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 60px;
+}
+
+.container section {
+  flex: 1;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.logo {
+  height: 70vh;
+
+  object-fit: contain;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: 700;
+
+  margin-bottom: 32px;
+
+  line-height: 1.2;
+}
+
+.loginForm {
+  width: 100%;
+  max-width: 420px;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 20px;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+
+  gap: 8px;
+}
+
+.formGroup label {
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.formInput {
+  width: 100%;
+
+  padding: 14px 16px;
+
+  border: 1px solid #2b2b2b;
+  border-radius: 14px;
+
+  background: #1a1a1a;
+  color: white;
+
+  font-size: 1rem;
+
+  outline: none;
+
+  transition: 0.3s;
+}
+
+.formInput:focus {
+  border-color: #ff2d2d;
+
+  box-shadow: 0 0 0 3px rgba(255, 45, 45, 0.2);
+}
+
+.loginButton {
+  margin-top: 10px;
+
+  padding: 14px 18px;
+
+  border: none;
+  border-radius: 14px;
+
+  background: #ff2d2d;
+  color: white;
+
+  font-size: 1rem;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition: 0.3s;
+}
+
+.loginButton:hover {
+  transform: translateY(-2px);
+
+  box-shadow: 0 8px 20px rgba(255, 45, 45, 0.35);
+}
+
+@media (max-width: 1024px) {
+  .container {
+    gap: 40px;
+  }
+
+  .logo {
+    height: 50vw;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+
+    gap: 40px;
+
+    padding: 30px 20px;
+  }
+
+  .container section {
+    width: 100%;
+
+    align-items: center;
+    text-align: center;
+  }
+
+  .title {
+    font-size: 1.7rem;
+  }
+
+  .loginForm {
+    max-width: 100%;
+  }
+
+  .logo {
+    max-width: 60vw;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 20px 16px;
+  }
+
+  .title {
+    font-size: 1.4rem;
+  }
+
+  .formInput {
+    padding: 12px 14px;
+  }
+
+  .loginButton {
+    padding: 12px;
+  }
+
+  .logo {
+    max-width: 50vw;
+  }
+}

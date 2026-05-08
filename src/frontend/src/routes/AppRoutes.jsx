@@ -5,6 +5,7 @@ import Contact from "../pages/Contact/Contact";
 import { Adoption } from "../pages/Adoption/Adoption";
 import { Help } from "../pages/Help/help";
 import { Donate } from "../pages/Donate/Donate";
+import { Login } from "../pages/Login/Login";
 
 const AppRoutes = () => {
     return (
@@ -15,6 +16,7 @@ const AppRoutes = () => {
             <Route path="/ajudar" element={<Help />} />
             <Route path="/contato" element={<Contact />} />
             <Route path="/doar" element={<Donate />} />
+            <Route path="/admin" element={<Login />} />
         </Routes>
     );
 };
