@@ -1,4 +1,4 @@
-/* DESIGN TOKENS */
+/* DESIGN */
 :root {
   /* COLORS */
   --color-bg: #FDFAF6;
@@ -17,10 +17,17 @@
   --font-heading: 'Playfair Display', serif;
   --font-body: 'DM Sans', sans-serif;
 
+  /* Escala de corpo */
   --fs-xs: 12px;
   --fs-sm: 15px;
   --fs-md: 18px;
   --fs-xl: 60px;
+
+  /* Escala de headings — use via componente Title ou tags globais */
+  --fs-h1: clamp(40px, 6vw, 60px);
+  --fs-h2: clamp(32px, 4.5vw, 48px);
+  --fs-h3: clamp(20px, 2.5vw, 26px);
+  --fs-h4: var(--fs-md);
 
   /* SPACING */
   --space-xs: 10px;
@@ -45,6 +52,11 @@
   text-rendering: optimizeLegibility;
 }
 
+/* Evita scroll horizontal causado por seções full-bleed */
+html {
+  overflow-x: clip;
+}
+
 *,
 *::before,
 *::after {
@@ -66,37 +78,30 @@ body {
   flex-direction: column;
 }
 
-/* TYPOGRAPHY */
-h1, h2, h3 {
+/* ─── HIERARQUIA DE HEADINGS ─────────────────────────────────── */
+
+h1, h2, h3, h4 {
   font-family: var(--font-heading);
   color: var(--color-text-strong);
   margin: 0;
-}
-
-h1 {
-  font-size: var(--fs-xl);
   line-height: 1.1;
-  margin: var(--space-lg) 0;
 }
 
-h2 {
-  font-size: var(--fs-md);
-  margin-bottom: var(--space-xs);
+h1 { font-size: var(--fs-h1); }
+h2 { font-size: var(--fs-h2); }
+h3 { font-size: var(--fs-h3); }
+h4 { font-size: var(--fs-h4); font-family: var(--font-body); font-weight: 600; }
+
+/* <em> dentro de heading = cor de destaque, sem itálico */
+h1 em, h2 em, h3 em {
+  font-style: normal;
+  color: var(--color-primary);
 }
+
+/* ─── TIPOGRAFIA GERAL ───────────────────────────────────────── */
 
 p {
   font-size: var(--fs-sm);
-  line-height: 1.6;
+  line-height: 1.65;
   margin: 0;
-}
-
-/* RESPONSIVE */
-@media (max-width: 1024px) {
-  :root {
-    font-size: var(--fs-sm);
-  }
-
-  h1 {
-    font-size: 36px;
-  }
 }
