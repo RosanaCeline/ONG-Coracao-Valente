@@ -13,8 +13,13 @@
   border-radius: var(--radius);
   border: 1px solid transparent;
 
+  /* Garante tamanho mínimo e não ocupa largura total */
+  min-width: 140px;
+  width: fit-content;
+
   cursor: pointer;
   transition: all 0.2s ease;
+  white-space: nowrap;
 }
 
 /* conteúdo */

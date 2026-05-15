@@ -1,0 +1,131 @@
+.hero {
+  display: flex;
+  align-items: flex-end;
+  gap: var(--space-lg);
+  padding: var(--space-lg) 0 0;
+  min-height: 85vh;
+
+  animation: heroIn 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes heroIn {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ─── Conteúdo ──────────────────────────────────────────── */
+
+.content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  padding-bottom: var(--space-lg);
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  padding: 6px 14px;
+
+  font-size: var(--fs-xs);
+  color: var(--color-text);
+  width: fit-content;
+}
+
+.description {
+  max-width: 480px;
+  color: var(--color-text);
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+}
+
+/* ─── Imagem + bolinha ──────────────────────────────────── */
+
+.imageWrapper {
+  position: relative;
+  flex-shrink: 0;
+  width: 42%;
+  align-self: flex-end;
+}
+
+.dogImage {
+  width: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.ball {
+  position: absolute;
+  top: 18%;
+  right: 10%;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+
+  background: radial-gradient(circle at 35% 30%, #FFE066, #FF9500);
+  box-shadow:
+    inset -5px -5px 10px rgba(0, 0, 0, 0.18),
+    0 6px 16px rgba(255, 120, 0, 0.35);
+
+  animation: dogPlay 2.6s ease-in-out infinite;
+}
+
+.ball::before {
+  content: '';
+  position: absolute;
+  inset: -5px;
+  border-radius: 50%;
+  border: 3px dashed rgba(255, 220, 60, 0.55);
+  animation: ballSpin 2.6s linear infinite;
+}
+
+@keyframes dogPlay {
+  0%   { transform: translate(0px,   0px) rotate(0deg)   scale(1);    }
+  14%  { transform: translate(10px, -46px) rotate(52deg)  scale(0.96); }
+  27%  { transform: translate(20px,  -8px) rotate(95deg)  scale(1.09); }
+  42%  { transform: translate(12px, -38px) rotate(148deg) scale(0.95); }
+  56%  { transform: translate(2px,   -5px) rotate(198deg) scale(1.06); }
+  70%  { transform: translate(-12px,-32px) rotate(255deg) scale(0.97); }
+  84%  { transform: translate(-18px, -4px) rotate(308deg) scale(1.04); }
+  93%  { transform: translate(-8px, -16px) rotate(338deg) scale(0.99); }
+  100% { transform: translate(0px,   0px) rotate(360deg) scale(1);    }
+}
+
+@keyframes ballSpin {
+  to { transform: rotate(360deg); }
+}
+
+/* ─── Responsivo ────────────────────────────────────────── */
+
+@media (max-width: 768px) {
+  .hero {
+    flex-direction: column-reverse;
+    min-height: auto;
+    align-items: center;
+    gap: var(--space-md);
+  }
+
+  .imageWrapper {
+    width: 72%;
+    align-self: center;
+  }
+
+  .content {
+    padding-bottom: 0;
+  }
+
+  .description {
+    max-width: 100%;
+  }
+}

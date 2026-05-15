@@ -1,0 +1,60 @@
+.card {
+  background: var(--color-primary);
+  border-radius: var(--radius);
+  padding: var(--space-lg);
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: var(--space-md);
+
+  min-height: 220px;
+  height: 100%;
+
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 18px 36px -6px rgba(0, 0, 0, 0.22);
+}
+
+/* bolha decorativa */
+.card::after {
+  content: '';
+  position: absolute;
+  bottom: -30px;
+  right: -30px;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.06);
+  pointer-events: none;
+}
+
+/* ─── Ícone ──────────────────────────────────────────────── */
+
+.icon {
+  color: rgba(255, 255, 255, 0.65);
+  display: flex;
+  align-self: flex-end;
+}
+
+/* ─── Título ─────────────────────────────────────────────── */
+
+.title {
+  color: #fff;
+  flex: 1;
+  display: flex;
+  align-items: flex-end;
+}
+
+/* ─── Botão ──────────────────────────────────────────────── */
+
+.card > button {
+  align-self: flex-start;
+}

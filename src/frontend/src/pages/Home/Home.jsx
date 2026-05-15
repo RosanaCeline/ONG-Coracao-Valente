@@ -1,28 +1,20 @@
-import { Zap } from "lucide-react";
-import { useNavigate } from "react-router-dom";
-
-import ButtonComponent from "../../components/btn/ButtonComponent/ButtonComponent";
-import CardFunctionalitiesComponent from "../../components/card/CardFuncionalitiesComponent/CardFuncionalitiesComponent";
+import HeroSection from './HeroSection/HeroSection';
+import MissionSection from './MissionSection/MissionSection';
+import ExploreSection from './ExploreSection/ExploreSection';
+import InstagramSection from './InstagramSection/InstagramSection';
+import PartnersSection from './PartnersSection/PartnersSection';
+import styles from './Home.module.css';
 
 const Home = () => {
-
-    const navigate = useNavigate();
-
-    return (
-        <main>
-            <h1>Bem-vindo à nossa ONG!</h1>
-            <p>Toda vida importa.</p>
-
-            <ButtonComponent onClick={() => navigate("/contato")}>
-                Contato
-            </ButtonComponent>
-
-            <CardFunctionalitiesComponent
-                title="Contato com voluntários"
-                icon={Zap}
-            />
-        </main>
-    );
+  return (
+    <main className={styles.main}>
+      <HeroSection />
+      <MissionSection />
+      <ExploreSection />
+      <InstagramSection />
+      <PartnersSection />
+    </main>
+  );
 };
 
 export default Home;
