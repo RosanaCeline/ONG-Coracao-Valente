@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import HeroSection from './HeroSection/HeroSection';
 import MissionSection from './MissionSection/MissionSection';
 import ExploreSection from './ExploreSection/ExploreSection';
@@ -6,6 +7,10 @@ import PartnersSection from './PartnersSection/PartnersSection';
 import styles from './Home.module.css';
 
 const Home = () => {
+  useEffect(() => {
+    document.title = 'Início | ONG Coração Valente';
+  }, []);
+
   return (
     <main className={styles.main}>
       <HeroSection />
