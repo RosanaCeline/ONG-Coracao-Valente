@@ -1,0 +1,120 @@
+/* ── Full-bleed: cor ocupa 100% da viewport ──────────────── */
+.mission {
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100vw;
+
+  background: var(--color-primary);
+  margin-top: 60px;
+  overflow: hidden;
+}
+
+/* Inner: alinha conteúdo com o restante da página */
+.inner {
+  max-width: 1126px;
+  margin: 0 auto;
+  padding: 70px var(--space-md);
+
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+
+/* ── Conteúdo textual ────────────────────────────────────── */
+
+.content {
+  flex: 1;
+
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.content.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.label {
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  letter-spacing: 2.5px;
+  color: rgba(255, 255, 255, 0.65);
+  text-transform: uppercase;
+}
+
+.heading {
+  color: #fff;
+}
+
+.description {
+  font-size: var(--fs-sm);
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.75;
+  max-width: 500px;
+}
+
+.description strong {
+  color: #fff;
+  font-weight: 600;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+  margin-top: var(--space-xs);
+}
+
+/* ── Imagem ──────────────────────────────────────────────── */
+
+.imageWrapper {
+  flex-shrink: 0;
+  width: 38%;
+  align-self: flex-end;
+
+  opacity: 0;
+  transform: translateX(24px);
+  transition: opacity 0.7s ease 0.2s, transform 0.7s ease 0.2s;
+}
+
+.imageWrapper.imageVisible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.image {
+  width: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+/* ── Responsivo ──────────────────────────────────────────── */
+
+@media (max-width: 768px) {
+  .inner {
+    flex-direction: column;
+    padding: 50px var(--space-md);
+    gap: var(--space-lg);
+  }
+
+  .imageWrapper {
+    width: 70%;
+    align-self: center;
+  }
+
+  .description {
+    max-width: 100%;
+  }
+
+  .actions {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
