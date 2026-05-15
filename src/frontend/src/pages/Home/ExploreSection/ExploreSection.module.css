@@ -23,56 +23,81 @@
   text-transform: uppercase;
 }
 
-/* ─── Cards: scroll horizontal no mobile, grid no desktop ── */
+/* ─── Carrossel ──────────────────────────────────────────── */
 
-.cardsTrack {
+.carousel {
   display: flex;
+  align-items: stretch;
   gap: var(--space-sm);
-
-  /* Mobile: scroll horizontal com snap */
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;
-
-  /* Quebra o padding do #root para scroll ir até a borda */
-  margin-left: calc(-1 * var(--space-md));
-  margin-right: calc(-1 * var(--space-md));
-  padding-left: var(--space-md);
 }
 
-.cardsTrack::-webkit-scrollbar {
-  display: none;
+/* Setas */
+.arrow {
+  flex-shrink: 0;
+  width: 42px;
+  height: 42px;
+  align-self: center;
+
+  border-radius: 50%;
+  border: 1px solid var(--color-border);
+  background: #fff;
+  box-shadow: var(--shadow);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+  color: var(--color-text);
+  transition: background 0.2s ease, transform 0.2s ease;
 }
 
-.cardWrapper {
-  scroll-snap-align: start;
-  /* ~80% da largura: o próximo card aparece como "peek" */
-  flex: 0 0 calc(80% - var(--space-sm));
+.arrow:hover {
+  background: var(--color-surface);
+  transform: scale(1.08);
 }
 
-/* padding direito: margin-right no último card (overflow scroll clipa padding) */
-.cardWrapper:last-child {
-  margin-right: var(--space-md);
+/* Janela: clips o overflow do track */
+.window {
+  flex: 1;
+  overflow: hidden;
+  border-radius: var(--radius);
 }
 
-/* ─── Desktop: todos os cards visíveis em linha ─────────── */
+/* Track: todos os slides lado a lado */
+.track {
+  display: flex;
+  transition: transform 0.42s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  /* Cada slide ocupa 100% da janela */
+}
 
-@media (min-width: 769px) {
-  .cardsTrack {
-    overflow-x: visible;
-    margin-left: 0;
-    margin-right: 0;
-    padding-left: 0;
-    flex-wrap: nowrap;
-  }
+/* Cada slide = largura exata da janela */
+.slide {
+  flex: 0 0 100%;
+  min-width: 0;
+}
 
-  .cardWrapper {
-    flex: 1 1 0;
-    min-width: 0;
-  }
+/* ─── Dots ───────────────────────────────────────────────── */
 
-  .cardWrapper:last-child {
-    margin-right: 0;
-  }
+.dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: var(--space-xs);
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: none;
+  padding: 0;
+  background: var(--color-border);
+  cursor: pointer;
+  transition: background 0.25s ease, transform 0.25s ease;
+}
+
+.dotActive {
+  background: var(--color-primary);
+  transform: scale(1.4);
 }

@@ -1,5 +1,6 @@
 import { useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { PawPrint } from 'lucide-react';
 import ButtonComponent from '../../../components/btn/ButtonComponent/ButtonComponent';
 import Title from '../../../components/ui/Title/Title';
 import useInView from '../../../hooks/useInView';
@@ -39,6 +40,13 @@ const MissionSection = () => {
         </div>
 
         <div className={`${styles.imageWrapper} ${inView ? styles.imageVisible : ''}`}>
+          {/* Patas decorativas ao redor dos cachorros */}
+          <PawPrint className={`${styles.paw} ${styles.pawA}`} aria-hidden="true" />
+          <PawPrint className={`${styles.paw} ${styles.pawB}`} aria-hidden="true" />
+          <PawPrint className={`${styles.paw} ${styles.pawC}`} aria-hidden="true" />
+          <PawPrint className={`${styles.paw} ${styles.pawD}`} aria-hidden="true" />
+          <PawPrint className={`${styles.paw} ${styles.pawE}`} aria-hidden="true" />
+
           <img
             src={dogsImg}
             alt="Cachorros unidos na ONG Coração Valente"

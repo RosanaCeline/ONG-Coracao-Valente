@@ -1,4 +1,5 @@
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 import {
   BookOpen,
   HandCoins,
@@ -50,8 +51,12 @@ const cards = [
 ];
 
 const ExploreSection = () => {
+  const [current, setCurrent] = useState(0);
   const ref = useRef(null);
   const inView = useInView(ref, 0.15);
+
+  const prev = () => setCurrent((c) => (c === 0 ? cards.length - 1 : c - 1));
+  const next = () => setCurrent((c) => (c === cards.length - 1 ? 0 : c + 1));
 
   return (
     <section
@@ -64,17 +69,54 @@ const ExploreSection = () => {
         <em>Saiba</em> mais:
       </Title>
 
-      {/* Mobile: scroll horizontal com snap | Desktop: grid */}
-      <div className={styles.cardsTrack}>
-        {cards.map((card) => (
-          <div key={card.id} className={styles.cardWrapper}>
-            <ExploreCard
-              title={card.title}
-              buttonLabel={card.buttonLabel}
-              to={card.to}
-              icon={card.icon}
-            />
+      <div className={styles.carousel}>
+        <button
+          className={styles.arrow}
+          onClick={prev}
+          aria-label="Card anterior"
+        >
+          <ChevronLeft size={20} />
+        </button>
+
+        {/* Janela do carrossel — clips o conteúdo */}
+        <div className={styles.window}>
+          <div
+            className={styles.track}
+            style={{ transform: `translateX(calc(-${current * 100}%))` }}
+          >
+            {cards.map((card) => (
+              <div key={card.id} className={styles.slide}>
+                <ExploreCard
+                  title={card.title}
+                  buttonLabel={card.buttonLabel}
+                  to={card.to}
+                  icon={card.icon}
+                />
+              </div>
+            ))}
           </div>
+        </div>
+
+        <button
+          className={styles.arrow}
+          onClick={next}
+          aria-label="Próximo card"
+        >
+          <ChevronRight size={20} />
+        </button>
+      </div>
+
+      {/* Dots de navegação */}
+      <div className={styles.dots} role="tablist">
+        {cards.map((_, i) => (
+          <button
+            key={i}
+            role="tab"
+            aria-selected={i === current}
+            aria-label={`Card ${i + 1} de ${cards.length}`}
+            className={`${styles.dot} ${i === current ? styles.dotActive : ''}`}
+            onClick={() => setCurrent(i)}
+          />
         ))}
       </div>
     </section>
