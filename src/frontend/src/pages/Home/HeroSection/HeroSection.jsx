@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import ButtonComponent from '../../../components/btn/ButtonComponent/ButtonComponent';
 import Title from '../../../components/ui/Title/Title';
 import heroDog from '../../../assets/landingpage/HOME_cachorro_hero.png';
+import ballImg from '../../../assets/landingpage/HOME_bola_cachorro.png';
 import styles from './HeroSection.module.css';
 
 const HeroSection = () => {
@@ -13,7 +14,7 @@ const HeroSection = () => {
       <div className={styles.content}>
         <div className={styles.badge}>
           <MapPin size={14} />
-          <span>Corações Valentes • Trindade • Goiás</span>
+          <span>Coração Valente • Tianguá • Ceará</span>
         </div>
 
         <Title as="h1">
@@ -43,7 +44,12 @@ const HeroSection = () => {
           alt="Cachorro feliz da ONG Coração Valente"
           className={styles.dogImage}
         />
-        <div className={styles.ball} aria-hidden="true" />
+        <img
+          src={ballImg}
+          alt=""
+          aria-hidden="true"
+          className={styles.ball}
+        />
       </div>
     </section>
   );
