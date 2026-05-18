@@ -6,11 +6,12 @@ const ButtonComponent = ({
     variant = "red",
     size = 18,
     disabled = false,
+    className = '',
     ...props
 }) => {
     return (
         <button
-            className={`${styles.button} ${styles[`button--${variant}`]}`}
+            className={`${styles.button} ${styles[`button--${variant}`]} ${className}`.trim()}
             disabled={disabled}
             {...props}
         >

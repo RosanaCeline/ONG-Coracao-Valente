@@ -9,9 +9,8 @@ import dogHero from '../../../assets/landingpage/HOME_cachorro_hero.png';
 import dogBall from '../../../assets/landingpage/HOME_bola_cachorro.png';
 import dogsTogether from '../../../assets/landingpage/HOME_cachorros_unidos.png';
 
+import { INSTAGRAM_URL } from '../../../services/instagram';
 import styles from './AnimalsSection.module.css';
-
-const INSTAGRAM_URL = 'https://www.instagram.com/ong.coracaovalente/';
 
 const mockAnimals = [
   {
@@ -44,7 +43,6 @@ const AnimalsSection = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Substituir por fetch('/api/animals') quando o backend estiver pronto
     const timer = setTimeout(() => {
       setAnimals(mockAnimals);
       setLoading(false);

@@ -23,27 +23,27 @@
   text-transform: uppercase;
 }
 
-/* ─── Carrossel ──────────────────────────────────────────── */
+.subtitle {
+  color: var(--color-text);
+  margin-top: calc(-1 * var(--space-xs));
+}
 
 .carousel {
   display: flex;
-  align-items: stretch;
+  align-items: center;
   gap: var(--space-sm);
 }
 
-/* Setas */
 .arrow {
   flex-shrink: 0;
   width: 42px;
   height: 42px;
-  align-self: center;
-
   border-radius: 50%;
   border: 1px solid var(--color-border);
   background: #fff;
   box-shadow: var(--shadow);
 
-  display: flex;
+  display: none;
   align-items: center;
   justify-content: center;
 
@@ -57,47 +57,51 @@
   transform: scale(1.08);
 }
 
-/* Janela: clips o overflow do track */
-.window {
-  flex: 1;
-  overflow: hidden;
-  border-radius: var(--radius);
+@media (min-width: 640px) {
+  .arrow {
+    display: flex;
+  }
 }
 
-/* Track: todos os slides lado a lado */
 .track {
+  flex: 1;
   display: flex;
-  transition: transform 0.42s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  /* Cada slide ocupa 100% da janela */
+  gap: var(--space-sm);
+
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+
+  margin-left: calc(-1 * var(--space-md));
+  margin-right: calc(-1 * var(--space-md));
+  padding-left: var(--space-md);
 }
 
-/* Cada slide = largura exata da janela */
-.slide {
-  flex: 0 0 100%;
-  min-width: 0;
+.track::-webkit-scrollbar {
+  display: none;
 }
 
-/* ─── Dots ───────────────────────────────────────────────── */
-
-.dots {
-  display: flex;
-  justify-content: center;
-  gap: 8px;
-  margin-top: var(--space-xs);
+@media (min-width: 640px) {
+  .track {
+    margin-left: 0;
+    margin-right: 0;
+    padding-left: 0;
+  }
 }
 
-.dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  border: none;
-  padding: 0;
-  background: var(--color-border);
-  cursor: pointer;
-  transition: background 0.25s ease, transform 0.25s ease;
+.cardWrapper {
+  flex: 0 0 300px;
+  height: 300px;
+  scroll-snap-align: start;
 }
 
-.dotActive {
-  background: var(--color-primary);
-  transform: scale(1.4);
+.cardWrapper:last-child {
+  margin-right: var(--space-md);
+}
+
+@media (min-width: 640px) {
+  .cardWrapper:last-child {
+    margin-right: 0;
+  }
 }

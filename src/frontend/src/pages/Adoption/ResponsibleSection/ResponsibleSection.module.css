@@ -28,8 +28,6 @@
   color: var(--color-text);
 }
 
-/* ─── Checklist numerada ─────────────────────────────────── */
-
 .checklist {
   list-style: none;
   padding: 0;
@@ -76,8 +74,6 @@
   margin-bottom: 2px;
 }
 
-/* ─── Texto de fechamento ────────────────────────────────── */
-
 .closing {
   font-size: var(--fs-sm);
   line-height: 1.7;
@@ -88,8 +84,6 @@
 .closing strong {
   color: var(--color-text-strong);
 }
-
-/* ─── Divider ────────────────────────────────────────────── */
 
 .divider {
   border: none;

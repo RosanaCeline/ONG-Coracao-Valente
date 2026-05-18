@@ -28,8 +28,6 @@
   color: var(--color-text);
 }
 
-/* ─── Grid de animais ────────────────────────────────────── */
-
 .grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -49,8 +47,6 @@
   }
 }
 
-/* ─── Skeleton loader ────────────────────────────────────── */
-
 .skeleton {
   height: 360px;
   border-radius: var(--radius);
@@ -62,8 +58,6 @@
   0%, 100% { opacity: 1; }
   50%       { opacity: 0.45; }
 }
-
-/* ─── Footer da seção ────────────────────────────────────── */
 
 .footer {
   display: flex;

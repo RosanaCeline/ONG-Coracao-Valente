@@ -1,6 +1,4 @@
-/* DESIGN */
 :root {
-  /* COLORS */
   --color-bg: #FDFAF6;
   --color-surface: #F5F0EA;
   --color-surface-alt: #E4EEF4;
@@ -13,35 +11,29 @@
 
   --color-border: rgba(26, 26, 24, 0.1);
 
-  /* TYPOGRAPHY */
   --font-heading: 'Playfair Display', serif;
   --font-body: 'DM Sans', sans-serif;
 
-  /* Escala de corpo */
   --fs-xs: 12px;
   --fs-sm: 15px;
   --fs-md: 18px;
   --fs-xl: 60px;
 
-  /* Escala de headings — use via componente Title ou tags globais */
   --fs-h1: clamp(40px, 6vw, 60px);
   --fs-h2: clamp(32px, 4.5vw, 48px);
   --fs-h3: clamp(20px, 2.5vw, 26px);
   --fs-h4: var(--fs-md);
 
-  /* SPACING */
   --space-xs: 10px;
   --space-sm: 15px;
   --space-md: 20px;
   --space-lg: 30px;
 
-  /* EFFECTS */
   --radius: 22px;
   --shadow:
     0 10px 15px -3px rgba(0, 0, 0, 0.08),
     0 4px 6px -2px rgba(0, 0, 0, 0.04);
 
-  /* BASE CONFIG */
   font-family: var(--font-body);
   font-size: var(--fs-md);
   line-height: 1.5;
@@ -52,7 +44,6 @@
   text-rendering: optimizeLegibility;
 }
 
-/* Evita scroll horizontal causado por seções full-bleed */
 html {
   overflow-x: clip;
 }
@@ -78,8 +69,6 @@ body {
   flex-direction: column;
 }
 
-/* ─── HIERARQUIA DE HEADINGS ─────────────────────────────────── */
-
 h1, h2, h3, h4 {
   font-family: var(--font-heading);
   color: var(--color-text-strong);
@@ -92,13 +81,10 @@ h2 { font-size: var(--fs-h2); }
 h3 { font-size: var(--fs-h3); }
 h4 { font-size: var(--fs-h4); font-family: var(--font-body); font-weight: 600; }
 
-/* <em> dentro de heading = cor de destaque, sem itálico */
 h1 em, h2 em, h3 em {
   font-style: normal;
   color: var(--color-primary);
 }
-
-/* ─── TIPOGRAFIA GERAL ───────────────────────────────────────── */
 
 p {
   font-size: var(--fs-sm);

@@ -4,8 +4,6 @@
   gap: var(--space-sm);
 }
 
-/* ─── Card vermelho ──────────────────────────────────────── */
-
 .card {
   background: var(--color-primary);
   border-radius: var(--radius);
@@ -22,8 +20,6 @@
     0 8px 16px -4px rgba(0, 0, 0, 0.1);
 }
 
-/* ─── Foto ───────────────────────────────────────────────── */
-
 .photoWrapper {
   padding: var(--space-sm) var(--space-sm) 0;
 }
@@ -35,8 +31,6 @@
   border-radius: calc(var(--radius) - 4px);
   display: block;
 }
-
-/* ─── Footer do card ─────────────────────────────────────── */
 
 .cardFooter {
   display: flex;
@@ -61,8 +55,6 @@
   padding: 4px 10px;
   white-space: nowrap;
 }
-
-/* ─── Tags ───────────────────────────────────────────────── */
 
 .tags {
   display: flex;
