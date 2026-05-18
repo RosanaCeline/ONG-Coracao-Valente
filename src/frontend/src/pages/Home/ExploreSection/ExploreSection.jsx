@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import {
   BookOpen,
@@ -11,6 +11,9 @@ import ExploreCard from './ExploreCard/ExploreCard';
 import Title from '../../../components/ui/Title/Title';
 import useInView from '../../../hooks/useInView';
 import styles from './ExploreSection.module.css';
+
+const CARD_WIDTH = 500;
+const GAP = 15;
 
 const cards = [
   {
@@ -51,17 +54,23 @@ const cards = [
 ];
 
 const ExploreSection = () => {
-  const [current, setCurrent] = useState(0);
-  const ref = useRef(null);
-  const inView = useInView(ref, 0.15);
+  const trackRef = useRef(null);
+  const sectionRef = useRef(null);
+  const inView = useInView(sectionRef, 0.15);
 
-  const prev = () => setCurrent((c) => (c === 0 ? cards.length - 1 : c - 1));
-  const next = () => setCurrent((c) => (c === cards.length - 1 ? 0 : c + 1));
+  const scroll = (dir) => {
+    if (trackRef.current) {
+      trackRef.current.scrollBy({
+        left: dir * (CARD_WIDTH + GAP),
+        behavior: 'smooth',
+      });
+    }
+  };
 
   return (
     <section
       className={`${styles.section} ${inView ? styles.visible : ''}`}
-      ref={ref}
+      ref={sectionRef}
     >
       <span className={styles.label}>EXPLORE MAIS SOBRE A ONG</span>
 
@@ -69,55 +78,39 @@ const ExploreSection = () => {
         <em>Saiba</em> mais:
       </Title>
 
+      <p className={styles.subtitle}>
+        Ajude, adote, compartilhe amor, veja como:
+      </p>
+
       <div className={styles.carousel}>
         <button
           className={styles.arrow}
-          onClick={prev}
-          aria-label="Card anterior"
+          onClick={() => scroll(-1)}
+          aria-label="Rolar para o anterior"
         >
           <ChevronLeft size={20} />
         </button>
 
-        {/* Janela do carrossel — clips o conteúdo */}
-        <div className={styles.window}>
-          <div
-            className={styles.track}
-            style={{ transform: `translateX(calc(-${current * 100}%))` }}
-          >
-            {cards.map((card) => (
-              <div key={card.id} className={styles.slide}>
-                <ExploreCard
-                  title={card.title}
-                  buttonLabel={card.buttonLabel}
-                  to={card.to}
-                  icon={card.icon}
-                />
-              </div>
-            ))}
-          </div>
+        <div className={styles.track} ref={trackRef}>
+          {cards.map((card) => (
+            <div key={card.id} className={styles.cardWrapper}>
+              <ExploreCard
+                title={card.title}
+                buttonLabel={card.buttonLabel}
+                to={card.to}
+                icon={card.icon}
+              />
+            </div>
+          ))}
         </div>
 
         <button
           className={styles.arrow}
-          onClick={next}
-          aria-label="Próximo card"
+          onClick={() => scroll(1)}
+          aria-label="Rolar para o próximo"
         >
           <ChevronRight size={20} />
         </button>
-      </div>
-
-      {/* Dots de navegação */}
-      <div className={styles.dots} role="tablist">
-        {cards.map((_, i) => (
-          <button
-            key={i}
-            role="tab"
-            aria-selected={i === current}
-            aria-label={`Card ${i + 1} de ${cards.length}`}
-            className={`${styles.dot} ${i === current ? styles.dotActive : ''}`}
-            onClick={() => setCurrent(i)}
-          />
-        ))}
       </div>
     </section>
   );

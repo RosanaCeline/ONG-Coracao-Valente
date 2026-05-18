@@ -13,7 +13,6 @@
   border-radius: var(--radius);
   border: 1px solid transparent;
 
-  /* Garante tamanho mínimo e não ocupa largura total */
   min-width: 140px;
   width: fit-content;
 
@@ -22,7 +21,6 @@
   white-space: nowrap;
 }
 
-/* conteúdo */
 .text {
   display: inline-block;
 }
@@ -34,7 +32,6 @@
   line-height: 0;
 }
 
-/* VARIANT: RED (default)  */
 .button--red {
   background: var(--color-primary);
   color: #fff;
@@ -44,10 +41,9 @@
   filter: brightness(0.9);
 }
 
-/* VARIANT: WHITE */
 .button--white {
   background: #fff;
-  color: var(--color-text);
+  color: var(--color-primary);
 
   border: 1px solid rgba(201, 0, 8, 0.3);
   box-shadow: 0 2px 8px rgba(201, 0, 8, 0.15);
@@ -57,19 +53,26 @@
   background: var(--color-surface);
 }
 
-/* VARIANT: OUTLINE  */
 .button--outline {
   background: transparent;
   color: var(--color-text);
-
-  border: 1px solid var(--color-border);
+  border: 1px solid var(--color-text);
 }
 
 .button--outline:hover {
-  background: rgba(0, 0, 0, 0.03);
+  background: rgba(0, 0, 0, 0.04);
 }
 
-/* STATES  */
+.button--outline-white {
+  background: transparent;
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.7);
+}
+
+.button--outline-white:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+
 .button:disabled {
   opacity: 0.6;
   cursor: not-allowed;

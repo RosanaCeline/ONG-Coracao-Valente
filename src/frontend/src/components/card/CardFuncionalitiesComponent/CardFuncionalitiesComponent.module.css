@@ -18,13 +18,11 @@
   transition: all 0.2s ease;
 }
 
-/* hover moderno */
 .card:hover {
   transform: translateY(-6px);
   box-shadow: var(--shadow);
 }
 
-/* ícone topo direito */
 .icon {
   position: absolute;
   top: var(--space-sm);
@@ -38,7 +36,6 @@
   line-height: 0;
 }
 
-/* texto */
 .title {
   font-family: var(--font-body);
   font-size: var(--fs-md); 

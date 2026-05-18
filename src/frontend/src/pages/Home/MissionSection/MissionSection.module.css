@@ -1,4 +1,3 @@
-/* ── Full-bleed: cor ocupa 100% da viewport ──────────────── */
 .mission {
   position: relative;
   left: 50%;
@@ -10,7 +9,6 @@
   overflow: hidden;
 }
 
-/* Inner: alinha conteúdo com o restante da página */
 .inner {
   max-width: 1126px;
   margin: 0 auto;
@@ -20,8 +18,6 @@
   align-items: center;
   gap: 40px;
 }
-
-/* ── Conteúdo textual ────────────────────────────────────── */
 
 .content {
   flex: 1;
@@ -72,8 +68,6 @@
   margin-top: var(--space-xs);
 }
 
-/* ── Imagem + patas ──────────────────────────────────────── */
-
 .imageWrapper {
   flex-shrink: 0;
   width: 38%;
@@ -98,7 +92,6 @@
   z-index: 1;
 }
 
-/* Patas decorativas */
 .paw {
   position: absolute;
   color: rgba(255, 255, 255, 0.18);
@@ -110,8 +103,6 @@
 .pawC { width: 28px; height: 28px; top: -6%;  right: -10%; transform: rotate(30deg); }
 .pawD { width: 20px; height: 20px; bottom: 22%; right: -14%; transform: rotate(-15deg); }
 .pawE { width: 26px; height: 26px; bottom: 5%; left: -10%; transform: rotate(20deg);  }
-
-/* ── Responsivo ──────────────────────────────────────────── */
 
 @media (max-width: 768px) {
   .inner {

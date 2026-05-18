@@ -17,36 +17,36 @@ const PartnersSection = () => {
   const navigate = useNavigate();
 
   return (
-    <section
-      className={`${styles.section} ${inView ? styles.visible : ''}`}
-      ref={ref}
-    >
-      <span className={styles.label}>PARCEIROS</span>
+    <section className={styles.section} ref={ref}>
+      <div className={`${styles.inner} ${inView ? styles.visible : ''}`}>
+        <span className={styles.label}>PARCEIROS</span>
 
-      <Title as="h2">
-        Empresas que escolheram fazer parte disso.
-      </Title>
+        <Title as="h2" className={styles.heading}>
+          Empresas que escolheram fazer parte disso.
+        </Title>
 
-      <p className={styles.description}>
-        Nossos parceiros acreditam que cuidar dos animais é também cuidar da
-        comunidade. <strong>Se a sua empresa pensa assim, queremos conversar.</strong>
-      </p>
+        <p className={styles.description}>
+          Nossos parceiros acreditam que cuidar dos animais é também cuidar da
+          comunidade.{' '}
+          <strong>Se a sua empresa pensa assim, queremos conversar.</strong>
+        </p>
 
-      <div className={styles.logos}>
-        {partners.map((partner) => (
-          <div
-            key={partner.id}
-            className={styles.logo}
-            style={{ '--partner-color': partner.color }}
-          >
-            <span className={styles.logoName}>{partner.name}</span>
-          </div>
-        ))}
+        <div className={styles.logos}>
+          {partners.map((partner) => (
+            <div
+              key={partner.id}
+              className={styles.logo}
+              style={{ '--partner-color': partner.color }}
+            >
+              <span className={styles.logoName}>{partner.name}</span>
+            </div>
+          ))}
+        </div>
+
+        <ButtonComponent variant="white" onClick={() => navigate('/contato')}>
+          Quero ser parceiro
+        </ButtonComponent>
       </div>
-
-      <ButtonComponent onClick={() => navigate('/contato')}>
-        Quero ser parceiro
-      </ButtonComponent>
     </section>
   );
 };

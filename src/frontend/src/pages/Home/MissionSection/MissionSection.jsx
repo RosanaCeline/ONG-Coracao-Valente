@@ -40,7 +40,6 @@ const MissionSection = () => {
         </div>
 
         <div className={`${styles.imageWrapper} ${inView ? styles.imageVisible : ''}`}>
-          {/* Patas decorativas ao redor dos cachorros */}
           <PawPrint className={`${styles.paw} ${styles.pawA}`} aria-hidden="true" />
           <PawPrint className={`${styles.paw} ${styles.pawB}`} aria-hidden="true" />
           <PawPrint className={`${styles.paw} ${styles.pawC}`} aria-hidden="true" />
