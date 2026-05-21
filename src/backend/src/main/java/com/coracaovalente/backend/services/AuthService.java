@@ -1,4 +1,65 @@
 package com.coracaovalente.backend.services;
 
-public class AuthService {
+import com.coracaovalente.backend.data.dto.request.AuthRequestDTO;
+import com.coracaovalente.backend.data.dto.response.TokenResponseDTO;
+import com.coracaovalente.backend.exception.InvalidPasswordException;
+import com.coracaovalente.backend.exception.UserAlreadyRegisteredException;
+import com.coracaovalente.backend.model.user.User;
+import com.coracaovalente.backend.model.user.UserRole;
+import com.coracaovalente.backend.repository.UserRepository;
+import com.coracaovalente.backend.security.jwt.TokenService;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Service;
+
+@Service
+@RequiredArgsConstructor
+public class AuthService implements UserDetailsService {
+
+    @Autowired
+    AuthenticationManager authenticationManager;
+
+    @Autowired
+    UserRepository userRepository;
+
+    @Autowired
+    TokenService tokenService;
+
+    public TokenResponseDTO login(AuthRequestDTO request) {
+        try {
+            var auth = authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(request.email(), request.password())
+            );
+
+            String token = tokenService.generateToken((User) auth.getPrincipal());
+
+            return new TokenResponseDTO(token);
+        } catch (BadCredentialsException e) {
+            throw new InvalidPasswordException();
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public User register(AuthRequestDTO request) {
+        if (this.userRepository.findByEmail(request.email()) != null) throw new UserAlreadyRegisteredException();
+
+        String encryptedPassword = new BCryptPasswordEncoder().encode(request.password());
+        User newUser = new User(request.email(), encryptedPassword, UserRole.USER);
+
+        return userRepository.save(newUser);
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        return userRepository.findByEmail(username);
+    }
 }
