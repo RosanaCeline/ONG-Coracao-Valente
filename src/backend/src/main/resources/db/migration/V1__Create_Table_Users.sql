@@ -1,0 +1,7 @@
+CREATE TABLE users (
+    id SERIAL PRIMARY KEY,
+    email VARCHAR(255) NOT NULL UNIQUE,
+    password VARCHAR(60) NOT NULL,
+    enabled BOOLEAN DEFAULT TRUE,
+    role VARCHAR(10) NOT NULL,
+);
