@@ -1,10 +1,7 @@
-package com.coracaovalente.backend.model;
+package com.coracaovalente.backend.model.user;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -17,7 +14,7 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
-@RequiredArgsConstructor
+@AllArgsConstructor
 public class User implements UserDetails {
 
     @Id
@@ -30,15 +27,27 @@ public class User implements UserDetails {
     @Column(nullable = false, length = 60)
     private String password;
 
+    @Enumerated(EnumType.STRING)
+    private UserRole role;
+
     @Column(nullable = false)
     private boolean enabled = true;
 
-    @Enumerated(EnumType.STRING)
-    private Role role;
+    public User(String email, String encryptedPassword, UserRole role) {
+        this.email = email;
+        this.password = encryptedPassword;
+        this.role = role;
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority(role.name()));
+        if (this.role == UserRole.ADMIN) return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"), new SimpleGrantedAuthority("ROLE_USER"));
+        else return List.of(new SimpleGrantedAuthority("ROLE_USER"));
+    }
+
+    @Override
+    public String getUsername() {
+        return email;
     }
 
     @Override public boolean isAccountNonExpired() { return true; }
