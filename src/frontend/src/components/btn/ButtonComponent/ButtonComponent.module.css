@@ -55,12 +55,12 @@
 
 .button--outline {
   background: transparent;
-  color: var(--color-text);
-  border: 1px solid var(--color-text);
+  color: var(--btn-color, var(--color-text));
+  border: 1px solid var(--btn-border-color, var(--color-text));
 }
 
 .button--outline:hover {
-  background: rgba(0, 0, 0, 0.04);
+  background: var(--btn-hover-bg, rgba(0, 0, 0, 0.04));
 }
 
 .button--outline-white {
