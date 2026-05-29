@@ -22,7 +22,7 @@ const HeroSection = () => {
         </Title>
 
         <p className={styles.description}>
-          Na Serra da Bitapaba, a ONG Coração Valente é o primeiro passo para um novo começo.
+          Na Serra da Ibiapaba, a ONG Coração Valente é o primeiro passo para um novo começo.
           Atuamos como um lar transitório, acolhendo animais vulneráveis{' '}
           <strong>temporariamente</strong>, cuidando com <strong>dedicação</strong> e
           conectamos cada um deles a um lar <strong>cheio de amor</strong>.

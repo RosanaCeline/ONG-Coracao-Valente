@@ -76,6 +76,9 @@
   margin-left: calc(-1 * var(--space-md));
   margin-right: calc(-1 * var(--space-md));
   padding-left: var(--space-md);
+  padding-top: 10px;
+  padding-bottom: 14px;
+  margin-top: -10px;
 }
 
 .track::-webkit-scrollbar {
