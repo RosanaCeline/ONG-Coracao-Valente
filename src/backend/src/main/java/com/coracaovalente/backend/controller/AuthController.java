@@ -1,6 +1,7 @@
 package com.coracaovalente.backend.controller;
 
 import com.coracaovalente.backend.config.SecurityConfig;
+import com.coracaovalente.backend.controller.docs.AuthControllerDocs;
 import com.coracaovalente.backend.data.dto.request.AuthRequestDTO;
 import com.coracaovalente.backend.data.dto.response.TokenResponseDTO;
 import com.coracaovalente.backend.model.user.User;
@@ -19,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/auth")
 @RequiredArgsConstructor
 @SecurityRequirement(name = SecurityConfig.SECURITY)
-public class AuthController {
+public class AuthController implements AuthControllerDocs {
 
     private final AuthService authService;
 
