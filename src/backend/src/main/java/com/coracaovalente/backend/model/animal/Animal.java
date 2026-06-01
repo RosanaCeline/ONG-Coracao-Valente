@@ -3,7 +3,7 @@ package com.coracaovalente.backend.model.animal;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.awt.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,12 +36,28 @@ public class Animal {
     private String photoUrl;
 
     @Column(name = "phone_number", length = 20)
-    private String phoneNumber; // opcional
-
-    @Column(name = "observations", length = 300)
-    private TextArea observations; // opcional
+    private String phoneNumber;
 
     @ManyToMany
     @JoinTable(name = "animal_tags")
-    private List<Tag> tags = new ArrayList<>(); // opcional
+    private List<Tag> tags = new ArrayList<>();
+
+    @Column(name = "registered_at", nullable = false)
+    private LocalDateTime registeredAt;
+
+    @Column(name = "is_adopted", nullable = false)
+    private Boolean isAdopted = false;
+
+    public Animal(String name, String age, Gender gender, Race race, String photoUrl,
+                  String phoneNumber, List<Tag> tags, LocalDateTime registeredAt) {
+        this.name = name;
+        this.age = age;
+        this.gender = gender;
+        this.race = race;
+        this.photoUrl = photoUrl;
+        this.phoneNumber = phoneNumber;
+        this.tags = tags != null ? tags : new ArrayList<>();
+        this.registeredAt = registeredAt;
+        this.isAdopted = false;
+    }
 }
