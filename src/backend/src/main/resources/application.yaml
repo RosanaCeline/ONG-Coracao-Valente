@@ -1,5 +1,7 @@
 server:
   port: 8080
+  error:
+    include-stacktrace: always
 security:
   jwt:
     token:
@@ -25,3 +27,5 @@ spring:
 logging:
   level:
     root: INFO
+
+kind: Application
