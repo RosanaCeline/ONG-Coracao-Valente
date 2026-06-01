@@ -17,7 +17,7 @@ import java.time.ZoneOffset;
 public class TokenService {
 
     @Value("${security.jwt.token.secret-key}")
-    private static String secretKey;
+    private String secretKey;
 
     public String generateToken(User user) throws JsonProcessingException {
         try {
