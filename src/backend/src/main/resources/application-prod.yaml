@@ -1,0 +1,35 @@
+server:
+  port: 8080
+  error:
+    include-stacktrace: never
+security:
+  jwt:
+    token:
+      secret-key: ${CORACAO_VALENTE_SECURITY_JWT_KEY}
+      expire-length: 3600000
+      issuer: ${CORACAO_VALENTE_SECURITY_JWT_ISSUER}
+spring:
+  application:
+    name: Coracao Valente API
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: ${CORACAO_VALENTE_DATABASE_URL}         # variável diferente para o banco em produção
+    username: ${CORACAO_VALENTE_DATABASE_USERNAME}
+    password: ${CORACAO_VALENTE_DATABASE_PASSWORD}
+  jpa:
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate.jdbc.time_zone: America/Sao_Paulo
+    show-sql: false
+    open-in-view: false
+  flyway:
+    baseline-on-migrate: true
+logging:
+  level:
+    root: WARN
+springdoc:
+  api-docs:
+    enabled: false
+  swagger-ui:
+    enabled: false

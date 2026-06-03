@@ -1,3 +1,31 @@
+server:
+  port: 8080
+  error:
+    include-stacktrace: always
+security:
+  jwt:
+    token:
+      secret-key: ${CORACAO_VALENTE_SECURITY_JWT_KEY}
+      expire-length: 3600000
 spring:
   application:
-    name: backend
+    name: Coracao Valente API
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: ${CORACAO_VALENTE_DATABASE_URL}         # variável diferente para o banco dev
+    username: ${CORACAO_VALENTE_DATABASE_USERNAME}
+    password: ${CORACAO_VALENTE_DATABASE_PASSWORD}
+  jpa:
+    hibernate:
+      ddl-auto: validate                        # permite validar schema automaticamente no dev
+    properties:
+      hibernate.jdbc.time_zone: America/Sao_Paulo
+    show-sql: false                           # show-sql:true - se quiser mostrar as queries no console no dev
+    open-in-view: false
+  flyway:
+    baseline-on-migrate: true
+logging:
+  level:
+    root: INFO
+
+kind: Application

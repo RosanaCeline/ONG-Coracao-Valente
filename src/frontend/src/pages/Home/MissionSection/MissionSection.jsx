@@ -33,7 +33,12 @@ const MissionSection = () => {
             <ButtonComponent variant="white" onClick={() => navigate('/adocao')}>
               Conhecer os animais
             </ButtonComponent>
-            <ButtonComponent variant="outline" onClick={() => navigate('/ajudar')}>
+            <ButtonComponent
+              variant="outline"
+              borderColor="var(--color-white)"
+              color="var(--color-white)"
+              onClick={() => navigate('/ajudar')}
+            >
               Seja voluntário
             </ButtonComponent>
           </div>
