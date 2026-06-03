@@ -1,0 +1,90 @@
+.section {
+  padding: 70px 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.textContent {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.label {
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  letter-spacing: 2.5px;
+  color: var(--color-secondary);
+  text-transform: uppercase;
+}
+
+.description {
+  color: var(--color-text);
+  max-width: 480px;
+  line-height: 1.7;
+}
+
+.widgetWrapper {
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100vw;
+}
+
+.widget {
+  display: block;
+  width: 100%;
+  height: 480px;
+  border: none;
+  overflow: hidden;
+}
+
+.widgetPlaceholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+
+  padding: 48px var(--space-md);
+  border: 1px dashed var(--color-border, #ddd);
+  border-radius: var(--radius);
+  color: var(--color-text-muted, rgba(0, 0, 0, 0.4));
+  text-align: center;
+}
+
+.widgetPlaceholder p {
+  font-size: var(--fs-sm);
+  margin: 0;
+}
+
+.widgetPlaceholder code {
+  font-family: monospace;
+  background: var(--color-surface);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 0.9em;
+}
+
+.cta {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+}
+
+@media (max-width: 600px) {
+  .widget {
+    height: 380px;
+  }
+}
