@@ -4,7 +4,7 @@
   gap: var(--space-lg);
   padding: var(--space-lg) 0 0;
   min-height: 85vh;
-  overflow: hidden;
+  overflow: visible;
 
   animation: heroIn 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
@@ -75,67 +75,65 @@
   animation: ballBounce 2.4s linear 0.5s 1 both;
 }
 
-/* física: e ≈ 0.6 → cada quique = 60% da altura anterior */
-/* queda inicial: 160px → 96px → 58px → 35px → 21px → 9px  */
 @keyframes ballBounce {
   0% {
-    transform: translateY(-160px) scaleX(0.9) scaleY(1.1) rotate(0deg);
+    transform: translateY(-160px) rotate(0deg);
     animation-timing-function: ease-in;
   }
 
   /* 1º impacto — squash */
   20% {
-    transform: translateY(0px) scaleX(1.45) scaleY(0.6) rotate(70deg);
+    transform: translateY(0px) rotate(70deg);
     animation-timing-function: ease-out;
   }
   /* 1º pico */
   36% {
-    transform: translateY(-96px) scaleX(0.88) scaleY(1.12) rotate(128deg);
+    transform: translateY(-96px) rotate(128deg);
     animation-timing-function: ease-in;
   }
 
   /* 2º impacto */
   50% {
-    transform: translateY(0px) scaleX(1.32) scaleY(0.68) rotate(182deg);
+    transform: translateY(0px) rotate(182deg);
     animation-timing-function: ease-out;
   }
   /* 2º pico */
   61% {
-    transform: translateY(-58px) scaleX(0.92) scaleY(1.08) rotate(224deg);
+    transform: translateY(-58px) rotate(224deg);
     animation-timing-function: ease-in;
   }
 
   /* 3º impacto */
   71% {
-    transform: translateY(0px) scaleX(1.2) scaleY(0.8) rotate(260deg);
+    transform: translateY(0px) rotate(260deg);
     animation-timing-function: ease-out;
   }
   /* 3º pico */
   79% {
-    transform: translateY(-35px) scaleX(0.94) scaleY(1.06) rotate(291deg);
+    transform: translateY(-35px) rotate(291deg);
     animation-timing-function: ease-in;
   }
 
   /* 4º impacto */
   86% {
-    transform: translateY(0px) scaleX(1.12) scaleY(0.88) rotate(316deg);
+    transform: translateY(0px) rotate(316deg);
     animation-timing-function: ease-out;
   }
   /* 4º pico */
   91% {
-    transform: translateY(-21px) scaleX(0.96) scaleY(1.04) rotate(332deg);
+    transform: translateY(-21px) rotate(332deg);
     animation-timing-function: ease-in;
   }
 
   /* 5º impacto */
   96% {
-    transform: translateY(0px) scaleX(1.05) scaleY(0.95) rotate(344deg);
+    transform: translateY(0px) rotate(344deg);
     animation-timing-function: ease-out;
   }
 
   /* repouso */
   100% {
-    transform: translateY(0px) scaleX(1) scaleY(1) rotate(350deg);
+    transform: translateY(0px) rotate(350deg);
   }
 }
 
