@@ -13,7 +13,6 @@ import jakarta.validation.Valid;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 
 @Tag(name = "Animal", description = "Controlador para gerenciamento de animais")
 @SecurityRequirement(name = SecurityConfig.SECURITY)
@@ -46,4 +45,11 @@ public interface AnimalControllerDocs {
     @ApiResponse(responseCode = "404", description = "Animal não encontrado", content = @Content)
     @ApiResponse(responseCode = "500", description = "Erro inesperado no servidor", content = @Content)
     public ResponseEntity<Void> deleteAnimal (Long id);
+
+    @Operation(summary = "Marcar um animal como adotado", description = "Método para marcar um animal informando que ele já foi adotado")
+    @ApiResponse(responseCode = "200", description = "Animal marcado com sucesso")
+    @ApiResponse(responseCode = "401", description = "Requisição não autorizada", content = @Content)
+    @ApiResponse(responseCode = "404", description = "Animal não encontrado", content = @Content)
+    @ApiResponse(responseCode = "500", description = "Erro inesperado no servidor", content = @Content)
+    public ResponseEntity<Animal> markAsAdopted (Long id);
 }

@@ -36,4 +36,9 @@ public class AnimalController implements AnimalControllerDocs {
 
         return ResponseEntity.noContent().build();
     }
+
+    @PatchMapping("/{id}/adopt")
+    public ResponseEntity<Animal> markAsAdopted (@PathVariable Long id) {
+        return  ResponseEntity.ok().body(animalService.markAsAdopted(id));
+    }
 }

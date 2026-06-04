@@ -77,4 +77,14 @@ public class AnimalService {
         cloudinaryService.deletePhoto(id);
         animalRepository.deleteById(animal.getId());
     }
+
+    @Transactional
+    public Animal markAsAdopted (Long id) {
+        Animal animal = animalRepository.findById(id)
+                .orElseThrow(AnimalNotFoundException::new);
+
+        animal.setIsAdopted(true);
+
+        return animal;
+    }
 }
