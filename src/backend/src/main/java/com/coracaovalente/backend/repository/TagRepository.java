@@ -8,4 +8,6 @@ import java.util.List;
 
 public interface TagRepository extends JpaRepository<Tag, Long> {
     List<Tag> findAllById(java.awt.@Size(max = 5, message = "Animal pode ter no máximo 5 tags") List list);
+
+    boolean existsByNameIgnoreCase(String name);
 }
