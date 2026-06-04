@@ -1,6 +1,7 @@
 package com.coracaovalente.backend.services;
 
 import com.cloudinary.Cloudinary;
+import com.cloudinary.utils.ObjectUtils;
 import com.coracaovalente.backend.exception.InvalidMediaTypeException;
 import com.coracaovalente.backend.exception.MediaFileTooLargeException;
 import lombok.RequiredArgsConstructor;
@@ -43,6 +44,14 @@ public class CloudinaryService {
             return (String) uploadResult.get("secure_url");
         } catch (IOException e) {
             throw new RuntimeException("Erro ao fazer upload para Cloudinary", e);
+        }
+    }
+
+    public void deletePhoto(Long id) {
+        try {
+            cloudinary.uploader().destroy("animal_pics/animal_" + id, ObjectUtils.emptyMap());
+        } catch (IOException e) {
+            throw new RuntimeException("Erro ao deletar foto do Cloudinary", e);
         }
     }
 }
