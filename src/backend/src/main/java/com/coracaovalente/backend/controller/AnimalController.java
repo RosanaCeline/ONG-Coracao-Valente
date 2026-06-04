@@ -1,26 +1,25 @@
 package com.coracaovalente.backend.controller;
 
+import com.coracaovalente.backend.controller.docs.AnimalControllerDocs;
 import com.coracaovalente.backend.data.dto.request.AnimalRequestDTO;
 import com.coracaovalente.backend.model.animal.Animal;
 import com.coracaovalente.backend.services.AnimalService;
-import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 @RestController
-@RequestMapping("/animal")
+@RequestMapping("/api/animal")
 @RequiredArgsConstructor
-public class AnimalController {
+public class AnimalController implements AnimalControllerDocs {
 
     private final AnimalService animalService;
 
-    @PostMapping("/")
-    public ResponseEntity<Animal> registerAnimal (@RequestBody @Valid AnimalRequestDTO request) {
+    @PostMapping(name = "/", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<Animal> registerAnimal (@ModelAttribute @Valid AnimalRequestDTO request) {
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body(animalService.registerAnimal(request));

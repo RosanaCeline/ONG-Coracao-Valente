@@ -6,7 +6,6 @@ import com.coracaovalente.backend.data.dto.request.AuthRequestDTO;
 import com.coracaovalente.backend.data.dto.response.TokenResponseDTO;
 import com.coracaovalente.backend.model.user.User;
 import com.coracaovalente.backend.services.AuthService;
-import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -19,7 +18,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/auth")
 @RequiredArgsConstructor
-@SecurityRequirement(name = SecurityConfig.SECURITY)
 public class AuthController implements AuthControllerDocs {
 
     private final AuthService authService;
