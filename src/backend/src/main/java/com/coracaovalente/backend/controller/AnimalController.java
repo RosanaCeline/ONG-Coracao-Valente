@@ -5,7 +5,6 @@ import com.coracaovalente.backend.data.dto.request.AnimalRequestDTO;
 import com.coracaovalente.backend.model.animal.Animal;
 import com.coracaovalente.backend.model.animal.Gender;
 import com.coracaovalente.backend.model.animal.Race;
-import com.coracaovalente.backend.model.animal.Tag;
 import com.coracaovalente.backend.services.AnimalService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
