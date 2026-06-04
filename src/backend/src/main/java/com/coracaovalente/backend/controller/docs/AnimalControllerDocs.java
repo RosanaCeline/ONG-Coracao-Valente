@@ -29,6 +29,7 @@ public interface AnimalControllerDocs {
     @ApiResponse(responseCode = "201", description = "Animal cadastrado com sucesso")
     @ApiResponse(responseCode = "400", description = "Dados inválidos", content = @Content)
     @ApiResponse(responseCode = "401", description = "Requisição não autorizada", content = @Content)
+    @ApiResponse(responseCode = "403", description = "Acesso negado", content = @Content)
     @ApiResponse(responseCode = "404", description = "Usuário não encontrado", content = @Content)
     @ApiResponse(responseCode = "500", description = "Erro inesperado no servidor", content = @Content)
     public ResponseEntity<Animal> registerAnimal (AnimalRequestDTO request);
@@ -40,6 +41,7 @@ public interface AnimalControllerDocs {
     @ApiResponse(responseCode = "200", description = "Animal editado com sucesso")
     @ApiResponse(responseCode = "400", description = "Dados inválidos", content = @Content)
     @ApiResponse(responseCode = "401", description = "Requisição não autorizada", content = @Content)
+    @ApiResponse(responseCode = "403", description = "Acesso negado", content = @Content)
     @ApiResponse(responseCode = "500", description = "Erro inesperado no servidor", content = @Content)
     public ResponseEntity<Animal> editAnimal (Long id, @ModelAttribute @Valid AnimalRequestDTO request);
 
@@ -47,6 +49,7 @@ public interface AnimalControllerDocs {
     @Operation(summary = "Exclue um animal", description = "Método para excluir um animal já cadastrado no sistema")
     @ApiResponse(responseCode = "204", description = "Animal excluido com sucesso")
     @ApiResponse(responseCode = "401", description = "Requisição não autorizada", content = @Content)
+    @ApiResponse(responseCode = "403", description = "Acesso negado", content = @Content)
     @ApiResponse(responseCode = "404", description = "Animal não encontrado", content = @Content)
     @ApiResponse(responseCode = "500", description = "Erro inesperado no servidor", content = @Content)
     public ResponseEntity<Void> deleteAnimal (Long id);
@@ -55,6 +58,7 @@ public interface AnimalControllerDocs {
     @Operation(summary = "Marcar um animal como adotado", description = "Método para marcar um animal informando que ele já foi adotado")
     @ApiResponse(responseCode = "200", description = "Animal marcado com sucesso")
     @ApiResponse(responseCode = "401", description = "Requisição não autorizada", content = @Content)
+    @ApiResponse(responseCode = "403", description = "Acesso negado", content = @Content)
     @ApiResponse(responseCode = "404", description = "Animal não encontrado", content = @Content)
     @ApiResponse(responseCode = "500", description = "Erro inesperado no servidor", content = @Content)
     public ResponseEntity<Animal> markAsAdopted (Long id);
@@ -63,6 +67,7 @@ public interface AnimalControllerDocs {
     @Operation(summary = "Busca um animal", description = "Método para buscar um animal pelo ID")
     @ApiResponse(responseCode = "200", description = "Animal encontrado com sucesso")
     @ApiResponse(responseCode = "401", description = "Requisição não autorizada", content = @Content)
+    @ApiResponse(responseCode = "403", description = "Acesso negado", content = @Content)
     @ApiResponse(responseCode = "404", description = "Animal não encontrado", content = @Content)
     @ApiResponse(responseCode = "500", description = "Erro inesperado no servidor", content = @Content)
     public ResponseEntity<Animal> getAnimal (Long id);
@@ -75,6 +80,7 @@ public interface AnimalControllerDocs {
     @Parameter(name = "tagIds", description = "Filtrar por IDs de tags", required = false, example = "1")
     @ApiResponse(responseCode = "200", description = "Lista de animais retornada com sucesso")
     @ApiResponse(responseCode = "401", description = "Requisição não autorizada", content = @Content)
+    @ApiResponse(responseCode = "403", description = "Acesso negado", content = @Content)
     @ApiResponse(responseCode = "500", description = "Erro inesperado no servidor", content = @Content)
     public ResponseEntity<List<Animal>> getAnimals (Boolean isAdopted, Race race, Gender gender, List<Long> tagIds);
 }
