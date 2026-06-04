@@ -127,6 +127,13 @@
 			<artifactId>java-jwt</artifactId>
 			<version>4.5.1</version>
 		</dependency>
+
+		<!-- Dependencia do Cloudinary -->
+		<dependency>
+			<groupId>com.cloudinary</groupId>
+			<artifactId>cloudinary-http44</artifactId>
+			<version>1.38.0</version>
+		</dependency>
 	</dependencies>
 
 	<build>
