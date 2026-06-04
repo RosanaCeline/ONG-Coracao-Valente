@@ -26,6 +26,7 @@ public interface AuthControllerDocs {
     @ApiResponse(responseCode = "201", description = "Usuário cadastrado com sucesso")
     @ApiResponse(responseCode = "400", description = "Dados inválidos", content = @Content)
     @ApiResponse(responseCode = "401", description = "Requisição não autorizada", content = @Content)
+    @ApiResponse(responseCode = "403", description = "Acesso negado", content = @Content)
     @ApiResponse(responseCode = "500", description = "Erro inesperado no servidor", content = @Content)
     public ResponseEntity<?> register(@RequestBody @Valid AuthRequestDTO request);
 }
