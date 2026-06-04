@@ -8,7 +8,7 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.awt.*;
+import java.util.List;
 
 @Schema(name = "AnimalRequestDTO", description = "DTO para que o usuário crie ou edite um animal")
 public record AnimalRequestDTO(
@@ -28,7 +28,7 @@ public record AnimalRequestDTO(
         @NotNull(message = "Raça é obrigatória")
         Race race,
 
-        @Schema(description = "Foto do animal")
+        @Schema(description = "Foto do animal", type = "string", format = "binary")
         @NotNull(message = "Foto é obrigatória")
         MultipartFile photo,
 
@@ -36,5 +36,5 @@ public record AnimalRequestDTO(
         String phoneNumber,
 
         @Size(max = 5, message = "Animal pode ter no máximo 5 tags")
-        List tagIds
+        List<Long> tagIds
 ) {}

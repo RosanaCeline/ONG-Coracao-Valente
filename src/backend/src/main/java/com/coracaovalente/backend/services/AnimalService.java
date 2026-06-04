@@ -8,7 +8,6 @@ import com.coracaovalente.backend.repository.TagRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -22,10 +21,10 @@ public class AnimalService {
 
     private final TagRepository tagRepository;
 
+    private final CloudinaryService cloudinaryService;
+
     @Transactional
     public Animal registerAnimal (AnimalRequestDTO request) {
-        String photoUrl = uploadPhoto(request.photo());
-
         List<Tag> tags = tagRepository.findAllById(request.tagIds());
 
         Animal newAnimal = new Animal(
@@ -33,18 +32,17 @@ public class AnimalService {
                 request.age().trim().toLowerCase(),
                 request.gender(),
                 request.race(),
-                photoUrl,
                 request.phoneNumber() != null ? request.phoneNumber().trim() : null,
                 tags,
                 LocalDateTime.now(ZoneId.of("America/Sao_Paulo"))
         );
 
-        return animalRepository.save(newAnimal);
-    }
+        Animal animal = animalRepository.save(newAnimal);
 
-    private String uploadPhoto(MultipartFile photo) {
-        if (photo == null || photo.isEmpty()) return null;
+        String photoUrl = cloudinaryService.uploadPhoto(request.photo(), animal.getId());
 
-        return "Vou fazer depois";
+        animal.setPhotoUrl(photoUrl);
+
+        return animal;
     }
 }
