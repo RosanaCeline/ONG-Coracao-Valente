@@ -1,0 +1,1 @@
+ALTER TABLE animal_tags RENAME COLUMN tag_id TO tags_id;
