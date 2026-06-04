@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/tag")
 @RequiredArgsConstructor
@@ -15,8 +17,8 @@ public class TagController implements TagControllerDocs {
 
     private final TagService tagService;
 
-    @PostMapping("/{name}")
-    public ResponseEntity<Tag> createTag (@PathVariable String name) {
+    @PostMapping
+    public ResponseEntity<Tag> createTag (@RequestParam String name) {
         return ResponseEntity.status(HttpStatus.CREATED).body(tagService.createTag(name));
     }
 
@@ -24,5 +26,10 @@ public class TagController implements TagControllerDocs {
     public ResponseEntity<Void> deleteTag(@PathVariable Long id) {
         tagService.deleteTag(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping
+    public ResponseEntity<List<Tag>> getTags () {
+        return ResponseEntity.ok().body(tagService.getTags());
     }
 }
