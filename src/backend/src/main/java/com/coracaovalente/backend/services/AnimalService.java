@@ -68,4 +68,13 @@ public class AnimalService {
 
         return animal;
     }
+
+    @Transactional
+    public void deleteAnimal (Long id) {
+        Animal animal = animalRepository.findById(id)
+                .orElseThrow(AnimalNotFoundException::new);
+
+        cloudinaryService.deletePhoto(id);
+        animalRepository.deleteById(animal.getId());
+    }
 }

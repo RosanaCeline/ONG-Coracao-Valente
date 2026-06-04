@@ -29,4 +29,11 @@ public class AnimalController implements AnimalControllerDocs {
     public ResponseEntity<Animal> editAnimal (@PathVariable Long id, @ModelAttribute @Valid AnimalRequestDTO request) {
         return ResponseEntity.ok().body(animalService.editAnimal(id, request));
     }
+
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<Void> deleteAnimal (@PathVariable Long id) {
+        animalService.deleteAnimal(id);
+
+        return ResponseEntity.noContent().build();
+    }
 }

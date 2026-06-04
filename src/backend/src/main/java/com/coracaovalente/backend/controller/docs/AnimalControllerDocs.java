@@ -25,8 +25,10 @@ public interface AnimalControllerDocs {
     @ApiResponse(responseCode = "201", description = "Animal cadastrado com sucesso")
     @ApiResponse(responseCode = "400", description = "Dados inválidos", content = @Content)
     @ApiResponse(responseCode = "401", description = "Requisição não autorizada", content = @Content)
+    @ApiResponse(responseCode = "404", description = "Usuário não encontrado", content = @Content)
     @ApiResponse(responseCode = "500", description = "Erro inesperado no servidor", content = @Content)
     public ResponseEntity<Animal> registerAnimal (AnimalRequestDTO request);
+
 
     @Operation(summary = "Edita um animal", description = "Método para editar um animal já cadastrado no sistema",
             requestBody = @RequestBody(content = @Content(mediaType = MediaType.MULTIPART_FORM_DATA_VALUE))
@@ -35,5 +37,13 @@ public interface AnimalControllerDocs {
     @ApiResponse(responseCode = "400", description = "Dados inválidos", content = @Content)
     @ApiResponse(responseCode = "401", description = "Requisição não autorizada", content = @Content)
     @ApiResponse(responseCode = "500", description = "Erro inesperado no servidor", content = @Content)
-    public ResponseEntity<Animal> editAnimal (@PathVariable Long id, @ModelAttribute @Valid AnimalRequestDTO request);
+    public ResponseEntity<Animal> editAnimal (Long id, @ModelAttribute @Valid AnimalRequestDTO request);
+
+
+    @Operation(summary = "Exclue um animal", description = "Método para excluir um animal já cadastrado no sistema")
+    @ApiResponse(responseCode = "204", description = "Animal excluido com sucesso")
+    @ApiResponse(responseCode = "401", description = "Requisição não autorizada", content = @Content)
+    @ApiResponse(responseCode = "404", description = "Animal não encontrado", content = @Content)
+    @ApiResponse(responseCode = "500", description = "Erro inesperado no servidor", content = @Content)
+    public ResponseEntity<Void> deleteAnimal (Long id);
 }
