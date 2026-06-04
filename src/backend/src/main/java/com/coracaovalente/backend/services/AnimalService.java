@@ -1,6 +1,7 @@
 package com.coracaovalente.backend.services;
 
 import com.coracaovalente.backend.data.dto.request.AnimalRequestDTO;
+import com.coracaovalente.backend.exception.AnimalNotFoundException;
 import com.coracaovalente.backend.model.animal.Animal;
 import com.coracaovalente.backend.model.animal.Tag;
 import com.coracaovalente.backend.repository.AnimalRepository;
@@ -42,6 +43,28 @@ public class AnimalService {
         String photoUrl = cloudinaryService.uploadPhoto(request.photo(), animal.getId());
 
         animal.setPhotoUrl(photoUrl);
+
+        return animal;
+    }
+
+    @Transactional
+    public Animal editAnimal (Long id, AnimalRequestDTO request) {
+        Animal animal = animalRepository.findById(id)
+                .orElseThrow(AnimalNotFoundException::new);
+
+        List<Tag> tags = tagRepository.findAllById(request.tagIds());
+
+        animal.setName(request.name().trim());
+        animal.setAge(request.age().trim().toLowerCase());
+        animal.setGender(request.gender());
+        animal.setRace(request.race());
+        animal.setPhoneNumber(request.phoneNumber() != null ? request.phoneNumber().trim() : null);
+        animal.setTags(tags);
+
+        if (request.photo() != null && !request.photo().isEmpty()) {
+            String photoUrl = cloudinaryService.uploadPhoto(request.photo(), animal.getId());
+            animal.setPhotoUrl(photoUrl);
+        }
 
         return animal;
     }
