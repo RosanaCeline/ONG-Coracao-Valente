@@ -1,6 +1,4 @@
-/* DESIGN TOKENS */
 :root {
-  /* COLORS */
   --color-bg: #FDFAF6;
   --color-surface: #F5F0EA;
   --color-surface-alt: #E4EEF4;
@@ -11,9 +9,10 @@
   --color-primary: #C90008;
   --color-secondary: #3D6278;
 
+  --color-white: #fff;
+
   --color-border: rgba(26, 26, 24, 0.1);
 
-  /* TYPOGRAPHY */
   --font-heading: 'Playfair Display', serif;
   --font-body: 'DM Sans', sans-serif;
 
@@ -22,19 +21,21 @@
   --fs-md: 18px;
   --fs-xl: 60px;
 
-  /* SPACING */
+  --fs-h1: clamp(40px, 6vw, 60px);
+  --fs-h2: clamp(32px, 4.5vw, 48px);
+  --fs-h3: clamp(20px, 2.5vw, 26px);
+  --fs-h4: var(--fs-md);
+
   --space-xs: 10px;
   --space-sm: 15px;
   --space-md: 20px;
   --space-lg: 30px;
 
-  /* EFFECTS */
   --radius: 22px;
   --shadow:
     0 10px 15px -3px rgba(0, 0, 0, 0.08),
     0 4px 6px -2px rgba(0, 0, 0, 0.04);
 
-  /* BASE CONFIG */
   font-family: var(--font-body);
   font-size: var(--fs-md);
   line-height: 1.5;
@@ -43,6 +44,10 @@
 
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+}
+
+html {
+  overflow-x: clip;
 }
 
 *,
@@ -66,37 +71,25 @@ body {
   flex-direction: column;
 }
 
-/* TYPOGRAPHY */
-h1, h2, h3 {
+h1, h2, h3, h4 {
   font-family: var(--font-heading);
   color: var(--color-text-strong);
   margin: 0;
-}
-
-h1 {
-  font-size: var(--fs-xl);
   line-height: 1.1;
-  margin: var(--space-lg) 0;
 }
 
-h2 {
-  font-size: var(--fs-md);
-  margin-bottom: var(--space-xs);
+h1 { font-size: var(--fs-h1); }
+h2 { font-size: var(--fs-h2); }
+h3 { font-size: var(--fs-h3); }
+h4 { font-size: var(--fs-h4); font-family: var(--font-body); font-weight: 600; }
+
+h1 em, h2 em, h3 em {
+  font-style: normal;
+  color: var(--color-primary);
 }
 
 p {
   font-size: var(--fs-sm);
-  line-height: 1.6;
+  line-height: 1.65;
   margin: 0;
-}
-
-/* RESPONSIVE */
-@media (max-width: 1024px) {
-  :root {
-    font-size: var(--fs-sm);
-  }
-
-  h1 {
-    font-size: 36px;
-  }
 }

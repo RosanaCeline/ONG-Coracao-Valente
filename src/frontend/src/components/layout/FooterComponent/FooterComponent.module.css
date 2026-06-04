@@ -1,0 +1,105 @@
+.footer {
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100vw;
+  margin-top: auto;
+  background: #111;
+}
+
+.inner {
+  max-width: 1126px;
+  margin: 0 auto;
+  padding: var(--space-lg) var(--space-md) var(--space-md);
+}
+
+
+.brand {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-md);
+}
+
+.logoCircle {
+  flex-shrink: 0;
+  width: 68px;
+  height: 68px;
+  border-radius: 50%;
+  background: #fff;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logoImg {
+  width: 44px;
+  height: 44px;
+  object-fit: contain;
+}
+
+
+.brandInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding-top: 4px;
+}
+
+.brandName {
+  font-size: var(--fs-md);
+  font-weight: 600;
+  color: #fff;
+  font-family: var(--font-body);
+  line-height: 1;
+}
+
+.address {
+  font-size: var(--fs-xs);
+  font-style: normal;
+  color: rgba(255, 255, 255, 0.5);
+  line-height: 1.5;
+}
+
+.socials {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  margin-top: 4px;
+}
+
+.socialLink {
+  color: rgba(255, 255, 255, 0.6);
+  display: flex;
+  align-items: center;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.socialLink:hover {
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+.divider {
+  border: none;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  margin: var(--space-md) 0 var(--space-sm);
+}
+
+.rights {
+  font-size: var(--fs-xs);
+  color: rgba(255, 255, 255, 0.35);
+  margin: 0;
+}
+
+@media (max-width: 480px) {
+  .logoCircle {
+    width: 56px;
+    height: 56px;
+  }
+
+  .logoImg {
+    width: 36px;
+    height: 36px;
+  }
+}
