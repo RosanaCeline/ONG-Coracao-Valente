@@ -8,6 +8,8 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class TagService {
@@ -30,6 +32,10 @@ public class TagService {
                 .orElseThrow(TagNotFoundException::new);
 
         tagRepository.deleteById(tag.getId());
+    }
+
+    public List<Tag> getTags () {
+        return tagRepository.findAll();
     }
 
     private String capitalize(String text) {
