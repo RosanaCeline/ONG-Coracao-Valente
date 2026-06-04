@@ -3,7 +3,10 @@ package com.coracaovalente.backend.controller.docs;
 import com.coracaovalente.backend.config.SecurityConfig;
 import com.coracaovalente.backend.data.dto.request.AnimalRequestDTO;
 import com.coracaovalente.backend.model.animal.Animal;
+import com.coracaovalente.backend.model.animal.Gender;
+import com.coracaovalente.backend.model.animal.Race;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -13,6 +16,8 @@ import jakarta.validation.Valid;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ModelAttribute;
+
+import java.util.List;
 
 @Tag(name = "Animal", description = "Controlador para gerenciamento de animais")
 @SecurityRequirement(name = SecurityConfig.SECURITY)
@@ -46,10 +51,30 @@ public interface AnimalControllerDocs {
     @ApiResponse(responseCode = "500", description = "Erro inesperado no servidor", content = @Content)
     public ResponseEntity<Void> deleteAnimal (Long id);
 
+
     @Operation(summary = "Marcar um animal como adotado", description = "Método para marcar um animal informando que ele já foi adotado")
     @ApiResponse(responseCode = "200", description = "Animal marcado com sucesso")
     @ApiResponse(responseCode = "401", description = "Requisição não autorizada", content = @Content)
     @ApiResponse(responseCode = "404", description = "Animal não encontrado", content = @Content)
     @ApiResponse(responseCode = "500", description = "Erro inesperado no servidor", content = @Content)
     public ResponseEntity<Animal> markAsAdopted (Long id);
+
+
+    @Operation(summary = "Busca um animal", description = "Método para buscar um animal pelo ID")
+    @ApiResponse(responseCode = "200", description = "Animal encontrado com sucesso")
+    @ApiResponse(responseCode = "401", description = "Requisição não autorizada", content = @Content)
+    @ApiResponse(responseCode = "404", description = "Animal não encontrado", content = @Content)
+    @ApiResponse(responseCode = "500", description = "Erro inesperado no servidor", content = @Content)
+    public ResponseEntity<Animal> getAnimal (Long id);
+
+
+    @Operation(summary = "Lista animais", description = "Método para listar animais com filtros opcionais")
+    @Parameter(name = "isAdopted", description = "Filtrar por status de adoção", required = false, example = "false")
+    @Parameter(name = "race", description = "Filtrar por raça", required = false, example = "DOG")
+    @Parameter(name = "gender", description = "Filtrar por sexo", required = false, example = "MALE")
+    @Parameter(name = "tagIds", description = "Filtrar por IDs de tags", required = false, example = "1")
+    @ApiResponse(responseCode = "200", description = "Lista de animais retornada com sucesso")
+    @ApiResponse(responseCode = "401", description = "Requisição não autorizada", content = @Content)
+    @ApiResponse(responseCode = "500", description = "Erro inesperado no servidor", content = @Content)
+    public ResponseEntity<List<Animal>> getAnimals (Boolean isAdopted, Race race, Gender gender, List<Long> tagIds);
 }
