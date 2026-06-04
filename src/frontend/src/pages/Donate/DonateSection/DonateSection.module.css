@@ -25,11 +25,6 @@
     max-width: 560px;
 }
 
-.donateArea {
-    width: 420px;
-    flex-shrink: 0;
-}
-
 @media (max-width: 900px) {
     .content {
         flex-direction: column;

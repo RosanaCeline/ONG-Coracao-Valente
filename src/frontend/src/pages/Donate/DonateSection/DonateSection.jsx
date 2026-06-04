@@ -5,7 +5,7 @@ import Title from '../../../components/ui/Title/Title';
 import ButtonComponent from './../../../components/btn/ButtonComponent/ButtonComponent';
 import donate20 from "../../../assets/donate/donate-20.png";
 import donate50 from '../../../assets/donate/donate-50.png';
-import donate100 from '../../../assets//donate/donate-100.png';
+import donate100 from '../../../assets/donate/donate-100.png';
 
 const donationExplains = [
     {
@@ -89,7 +89,7 @@ export default function DonateSection() {
                         </button>
                     </div>
                     <div className={styles.donationExplain}>
-                        <img src={donationExplains[donateActiveButton].img} alt={donationExplains[donateActiveButton].title} />
+                        <img src={donationExplains[donateActiveButton].img} alt={donationExplains[donateActiveButton].description} />
                         <p>{donationExplains[donateActiveButton].description}</p>
                     </div>
                     <div className={styles.customDonate}>

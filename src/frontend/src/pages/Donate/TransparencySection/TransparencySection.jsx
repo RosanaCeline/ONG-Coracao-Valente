@@ -15,28 +15,28 @@ const expenseData = [
         title: 'ALIMENTAÇÃO DOS ANIMAIS',
         value: 189980,
         percentage: 34,
-        color: '#F5A623',
+        color: '#C87941',
         icon: food
     },
     {
         title: 'ATENDIMENTO VETERINÁRIO',
         value: 162840,
         percentage: 30,
-        color: '#3B82F6',
+        color: '#3D6278',
         icon: veterinaryCare
     },
     {
         title: 'VACINAS E MEDICAMENTOS',
         value: 108560,
         percentage: 20,
-        color: '#B44DDB',
+        color: '#6B8C6E',
         icon: vaccine
     },
     {
         title: 'MANUTENÇÃO DO ABRIGO',
         value: 81420,
         percentage: 15,
-        color: '#22B8B0',
+        color: '#8C7B6A',
         icon: maintenance
     }
 ];
@@ -51,10 +51,12 @@ export default function TransparencySection() {
             ref={ref}
             >
             <div className={styles.content}>
-                <Title as="h1">
-                    Para onde vai sua <em>doação?</em>
+                <div>
+                    <Title as="h1">
+                        Para onde vai sua <em>doação?</em>
+                    </Title>
                     <ExpenseChart data={expenseData} />
-                </Title>
+                </div>
                 <section>
                     <ExpenseCards data={expenseData} />
                 </section>

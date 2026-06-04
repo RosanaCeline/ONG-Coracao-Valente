@@ -19,7 +19,7 @@ export default function DonationSaveLivesSection() {
                             e muita paciência, <strong>ela é um exemplo de resiliência e esperança!</strong>
                         </p>
                     </div>
-                    <img src={donatePet} className={styles.image} />
+                    <img src={donatePet} className={styles.image} alt='Sua doação pode salvar uma vida' />
                 </div>
             </div>
         </section>
