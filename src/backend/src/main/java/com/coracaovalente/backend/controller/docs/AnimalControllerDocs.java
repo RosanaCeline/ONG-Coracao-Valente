@@ -9,8 +9,11 @@ import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 
 @Tag(name = "Animal", description = "Controlador para gerenciamento de animais")
 @SecurityRequirement(name = SecurityConfig.SECURITY)
@@ -24,4 +27,13 @@ public interface AnimalControllerDocs {
     @ApiResponse(responseCode = "401", description = "Requisição não autorizada", content = @Content)
     @ApiResponse(responseCode = "500", description = "Erro inesperado no servidor", content = @Content)
     public ResponseEntity<Animal> registerAnimal (AnimalRequestDTO request);
+
+    @Operation(summary = "Edita um animal", description = "Método para editar um animal já cadastrado no sistema",
+            requestBody = @RequestBody(content = @Content(mediaType = MediaType.MULTIPART_FORM_DATA_VALUE))
+    )
+    @ApiResponse(responseCode = "200", description = "Animal editado com sucesso")
+    @ApiResponse(responseCode = "400", description = "Dados inválidos", content = @Content)
+    @ApiResponse(responseCode = "401", description = "Requisição não autorizada", content = @Content)
+    @ApiResponse(responseCode = "500", description = "Erro inesperado no servidor", content = @Content)
+    public ResponseEntity<Animal> editAnimal (@PathVariable Long id, @ModelAttribute @Valid AnimalRequestDTO request);
 }

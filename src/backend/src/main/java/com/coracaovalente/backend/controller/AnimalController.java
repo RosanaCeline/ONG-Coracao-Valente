@@ -18,10 +18,15 @@ public class AnimalController implements AnimalControllerDocs {
 
     private final AnimalService animalService;
 
-    @PostMapping(name = "/", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @PostMapping(value = "/", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<Animal> registerAnimal (@ModelAttribute @Valid AnimalRequestDTO request) {
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body(animalService.registerAnimal(request));
+    }
+
+    @PutMapping(value = "/{id}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<Animal> editAnimal (@PathVariable Long id, @ModelAttribute @Valid AnimalRequestDTO request) {
+        return ResponseEntity.ok().body(animalService.editAnimal(id, request));
     }
 }
