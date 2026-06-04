@@ -22,8 +22,8 @@
 .content {
   flex: 1;
 
-  display: contents;
-  flex-direction: column;
+  display: flex;
+  flex-direction: row;
   gap: var(--space-md);
 
   opacity: 0;
