@@ -1,9 +1,10 @@
-@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=DM+Sans:wght@400;600&display=swap");
-
-.page {
-  min-height: 100vh;
+.main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  padding: var(--space-lg) 0;
 }
-
 .container {
   padding: var(--space-lg) 0;
   display: flex;
@@ -20,20 +21,6 @@
   font-family: var(--font-body);
   margin: 0;
 }
-
-.headline {
-  font-size: var(--fs-xl);
-  font-weight: 800;
-  line-height: 1.1;
-  font-family: var(--font-heading);
-  color: var(--color-text-strong);
-  margin: 0;
-}
-
-.destaque {
-  color: var(--color-primary);
-}
-
 .subtitulo {
   font-size: var(--fs-sm);
   line-height: 1.65;
@@ -56,7 +43,7 @@
   flex-direction: column;
   align-items: center;
   gap: var(--space-xs);
-  border: 1px solid var(--color-text-strong);
+  border: 1px solid var(--color-border);
   transition:
     transform 0.2s ease,
     box-shadow 0.2s ease;
@@ -68,7 +55,7 @@
 }
 
 .cardImg {
-  width: 120px;
+  border-radius: var(--radius);
   height: 120px;
   object-fit: cover;
   border-radius: 10px;
@@ -82,28 +69,10 @@
   text-align: center;
 }
 
-.btn {
-  align-self: center;
-  padding: var(--space-sm) var(--space-lg);
-  background: var(--color-primary);
-  color: var(--color-bg);
-  font-size: var(--fs-sm);
-  font-weight: 600;
-  border: none;
-  border-radius: var(--radius);
-  cursor: pointer;
-  font-family: var(--font-body);
-  transition: background 0.2s ease;
-}
-
-.btn:hover {
-  background: #a30006;
-}
-
 .secaoImpacto {
   display: flex;
   align-items: center;
-  gap: 60px;
+  gap: var(--space-lg);
   padding-top: var(--space-lg);
   border-top: 1px solid var(--color-border);
 }
@@ -113,15 +82,6 @@
   display: flex;
   flex-direction: column;
   gap: var(--space-sm);
-}
-
-.headlineImpacto {
-  font-size: var(--fs-xl);
-  font-weight: 800;
-  line-height: 1.1;
-  font-family: var(--font-heading);
-  color: var(--color-text-strong);
-  margin: 0;
 }
 
 .textoImpacto {
@@ -136,39 +96,27 @@
   margin-top: var(--space-xs);
 }
 
-.btnDar {
-  padding: var(--space-sm) var(--space-md);
-  background: var(--color-primary);
-  color: var(--color-bg);
-  font-size: var(--fs-sm);
-  font-weight: 600;
-  border: none;
-  border-radius: var(--radius);
-  cursor: pointer;
-  font-family: var(--font-body);
-  transition: background 0.2s ease;
-}
-
-.btnDar:hover {
-  background: #a30006;
-}
-
 .cachorroImg {
   width: 320px;
   object-fit: contain;
   flex-shrink: 0;
 }
-
 .secaoForm {
-  border-radius: var(--radius);
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100vw;
   background: var(--color-primary);
-  margin: 0 calc(-1 * var(--space-md));
-  padding: 60px var(--space-md);
-  display: flex;
-  gap: 60px;
-  align-items: flex-start;
 }
 
+.secaoFormInner {
+  max-width: 1126px;
+  margin: 0 auto;
+  padding: 60px var(--space-md);
+  display: flex;
+  gap: var(--space-lg);
+  align-items: flex-start;
+}
 .formEsquerda {
   flex: 1;
   display: flex;
@@ -192,14 +140,8 @@
   font-family: var(--font-body);
   margin: 0;
 }
-
 .headlineForm {
-  font-size: var(--fs-xl);
-  font-weight: 800;
-  line-height: 1.1;
   color: var(--color-bg);
-  font-family: var(--font-heading);
-  margin: 0;
 }
 
 .formSubtitulo {
@@ -227,26 +169,6 @@
   font-family: var(--font-body);
   color: var(--color-text);
   outline: none;
-}
-
-.btnForm {
-  width: 100%;
-  padding: var(--space-sm);
-  background: var(--color-bg);
-  color: var(--color-primary);
-  font-size: var(--fs-sm);
-  font-weight: 600;
-  border: none;
-  border-radius: var(--radius);
-  cursor: pointer;
-  font-family: var(--font-body);
-  margin-top: var(--space-xs);
-  transition: opacity 0.2s ease;
-}
-
-.btnForm:hover {
-  background: #a30006;
-  color: var(--color-bg);
 }
 
 @media (max-width: 1024px) {
@@ -284,38 +206,9 @@
     gap: 30px;
     padding: 40px 20px;
   }
-
-  .headline {
-    font-size: 36px;
-  }
-
-  .headlineImpacto {
-    font-size: 36px;
-  }
-
-  .headlineForm {
-    font-size: 36px;
-  }
 }
-
 @media (max-width: 480px) {
   .grid {
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .headline {
-    font-size: 28px;
-  }
-
-  .headlineImpacto {
-    font-size: 28px;
-  }
-
-  .headlineForm {
-    font-size: 28px;
-  }
-
-  .btn {
-    width: 100%;
+    grid-template-columns: 1fr;
   }
 }
