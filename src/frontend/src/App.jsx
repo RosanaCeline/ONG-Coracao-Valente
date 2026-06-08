@@ -1,16 +1,25 @@
-import { BrowserRouter } from "react-router-dom";
-import AppRoutes from "./routes/AppRoutes";
-import { Navbar } from "./components/layout/NavbarComponent/NavbarComponent";
-import FooterComponent from "./components/layout/FooterComponent/FooterComponent";
+import { BrowserRouter, useLocation } from 'react-router-dom';
+import AppRoutes from './routes/AppRoutes';
+import { Navbar } from './components/layout/NavbarComponent/NavbarComponent';
+import FooterComponent from './components/layout/FooterComponent/FooterComponent';
 
-function App() {
+const AppShell = () => {
+  const location = useLocation();
+  const isAdminPanel = location.pathname.startsWith('/admin/painel');
+
   return (
-    <BrowserRouter>
-      <Navbar />
+    <>
+      {!isAdminPanel && <Navbar />}
       <AppRoutes />
-      <FooterComponent />
-    </BrowserRouter>
-  )
-}
+      {!isAdminPanel && <FooterComponent />}
+    </>
+  );
+};
 
-export default App
+const App = () => (
+  <BrowserRouter>
+    <AppShell />
+  </BrowserRouter>
+);
+
+export default App;
