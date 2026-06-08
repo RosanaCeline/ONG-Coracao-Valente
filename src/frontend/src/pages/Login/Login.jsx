@@ -1,6 +1,7 @@
 import styles from "./Login.module.css";
 import logo from "../../assets/full-logo.png";
 import { useEffect } from "react";
+import ButtonComponent from "../../components/btn/ButtonComponent/ButtonComponent";
 
 export function Login(){
     useEffect(() => {
@@ -23,9 +24,9 @@ export function Login(){
                         <label htmlFor="password">Senha</label>
                         <input type="password" id="password" className={styles.formInput} />
                     </div>
-                    <button type="submit" className={styles.loginButton}>
+                    <ButtonComponent style={{ width: '100%', marginTop: '10px' }}>
                         Entrar
-                    </button>
+                    </ButtonComponent>
                 </form>
             </section>
         </div>
