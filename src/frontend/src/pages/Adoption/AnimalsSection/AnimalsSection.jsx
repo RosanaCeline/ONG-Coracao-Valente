@@ -4,37 +4,9 @@ import ButtonComponent from '../../../components/btn/ButtonComponent/ButtonCompo
 import Title from '../../../components/ui/Title/Title';
 import AnimalCard from '../AnimalCard/AnimalCard';
 import useInView from '../../../hooks/useInView';
-
-import dogHero from '../../../assets/landingpage/HOME_cachorro_hero.png';
-import dogBall from '../../../assets/landingpage/HOME_bola_cachorro.png';
-import dogsTogether from '../../../assets/landingpage/HOME_cachorros_unidos.png';
-
+import { getAnimals } from '../../../services/animals';
 import { INSTAGRAM_URL } from '../../../services/instagram';
 import styles from './AnimalsSection.module.css';
-
-const mockAnimals = [
-  {
-    id: 1,
-    name: 'Luna',
-    age: '5 meses',
-    photo: dogHero,
-    tags: ['Cão', 'Fêmea', 'Dócil', 'Carinhosa'],
-  },
-  {
-    id: 2,
-    name: 'Thor',
-    age: '8 meses',
-    photo: dogBall,
-    tags: ['Cão', 'Macho', 'Brincalhão', 'Ativo'],
-  },
-  {
-    id: 3,
-    name: 'Mel',
-    age: '2 anos',
-    photo: dogsTogether,
-    tags: ['Cão', 'Fêmea', 'Tranquila', 'Vacinada'],
-  },
-];
 
 const AnimalsSection = () => {
   const ref = useRef(null);
@@ -43,12 +15,10 @@ const AnimalsSection = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setAnimals(mockAnimals);
+    getAnimals().then(data => {
+      setAnimals(data);
       setLoading(false);
-    }, 500);
-
-    return () => clearTimeout(timer);
+    });
   }, []);
 
   return (
@@ -58,7 +28,7 @@ const AnimalsSection = () => {
     >
       <span className={styles.label}>ADOTE</span>
 
-      <Title as="h1">
+      <Title as="h2">
         Eles estão{' '}
         <em>esperando por você.</em>
       </Title>
