@@ -37,7 +37,7 @@ const MissionSection = () => {
               variant="outline"
               borderColor="var(--color-white)"
               color="var(--color-white)"
-              onClick={() => navigate('/ajudar')}
+              onClick={() => navigate('/voluntariado')}
             >
               Seja voluntário
             </ButtonComponent>
