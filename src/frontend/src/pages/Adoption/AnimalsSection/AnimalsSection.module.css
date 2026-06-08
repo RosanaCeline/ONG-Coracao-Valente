@@ -1,5 +1,6 @@
 .section {
   padding: var(--space-lg) 0 60px;
+  min-height: 60vh;
 
   display: flex;
   flex-direction: column;
