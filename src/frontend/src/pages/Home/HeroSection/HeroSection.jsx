@@ -2,19 +2,21 @@ import { MapPin } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import ButtonComponent from '../../../components/btn/ButtonComponent/ButtonComponent';
 import Title from '../../../components/ui/Title/Title';
+import { ONG_INFO } from '../../../services/ong';
 import heroDog from '../../../assets/landingpage/HOME_cachorro_hero.png';
 import ballImg from '../../../assets/landingpage/HOME_bola_cachorro.png';
 import styles from './HeroSection.module.css';
 
 const HeroSection = () => {
   const navigate = useNavigate();
+  const { name, city, state } = ONG_INFO;
 
   return (
     <section className={styles.hero}>
       <div className={styles.content}>
         <div className={styles.badge}>
           <MapPin size={14} />
-          <span>Coração Valente • Tianguá • Ceará</span>
+          <span>{name} • {city} • {state}</span>
         </div>
 
         <Title as="h1">
@@ -41,7 +43,7 @@ const HeroSection = () => {
       <div className={styles.imageWrapper}>
         <img
           src={heroDog}
-          alt="Cachorro feliz da ONG Coração Valente"
+          alt={`Cachorro feliz da ${name}`}
           className={styles.dogImage}
         />
         <img
