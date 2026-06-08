@@ -1,5 +1,12 @@
 import { NavLink, useNavigate, useLocation } from "react-router-dom";
-import { House, BookOpen, Heart, Users, Headset, HandHeart } from "lucide-react";
+import {
+  House,
+  BookOpen,
+  Heart,
+  Users,
+  Headset,
+  HandHeart,
+} from "lucide-react";
 import ButtonComponent from "../../btn/ButtonComponent/ButtonComponent";
 import styles from "./NavbarComponent.module.css";
 
@@ -16,7 +23,9 @@ export const Navbar = () => {
             to="/"
             end
             className={({ isActive }) =>
-              isActive ? `${styles["nav-item"]} ${styles.active}` : styles["nav-item"]
+              isActive
+                ? `${styles["nav-item"]} ${styles.active}`
+                : styles["nav-item"]
             }
           >
             <House />
@@ -26,7 +35,9 @@ export const Navbar = () => {
           <NavLink
             to="/historia"
             className={({ isActive }) =>
-              isActive ? `${styles["nav-item"]} ${styles.active}` : styles["nav-item"]
+              isActive
+                ? `${styles["nav-item"]} ${styles.active}`
+                : styles["nav-item"]
             }
           >
             <BookOpen />
@@ -36,7 +47,9 @@ export const Navbar = () => {
           <NavLink
             to="/adocao"
             className={({ isActive }) =>
-              isActive ? `${styles["nav-item"]} ${styles.active}` : styles["nav-item"]
+              isActive
+                ? `${styles["nav-item"]} ${styles.active}`
+                : styles["nav-item"]
             }
           >
             <Heart />
@@ -44,19 +57,23 @@ export const Navbar = () => {
           </NavLink>
 
           <NavLink
-            to="/ajudar"
+            to="/voluntariado"
             className={({ isActive }) =>
-              isActive ? `${styles["nav-item"]} ${styles.active}` : styles["nav-item"]
+              isActive
+                ? `${styles["nav-item"]} ${styles.active}`
+                : styles["nav-item"]
             }
           >
             <Users />
-            <span className={styles.label}>AJUDAR</span>
+            <span className={styles.label}>VOLUNTARIAR</span>
           </NavLink>
 
           <NavLink
             to="/contato"
             className={({ isActive }) =>
-              isActive ? `${styles["nav-item"]} ${styles.active}` : styles["nav-item"]
+              isActive
+                ? `${styles["nav-item"]} ${styles.active}`
+                : styles["nav-item"]
             }
           >
             <Headset />

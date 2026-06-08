@@ -41,7 +41,7 @@ const cards = [
     id: 4,
     title: 'Veja como se voluntariar.',
     buttonLabel: 'Ser voluntário',
-    to: '/ajudar',
+    to: '/voluntariado',
     icon: HandHelping,
   },
   {

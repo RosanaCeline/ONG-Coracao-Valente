@@ -13,6 +13,7 @@
   max-width: 1126px;
   margin: 0 auto;
   padding: 70px var(--space-md);
+  min-height: 420px;
 
   display: flex;
   align-items: center;
@@ -60,7 +61,6 @@
   font-weight: 600;
 }
 
-
 .image {
   padding: 0 32px;
   border-radius: 10%;
@@ -71,6 +71,19 @@
   z-index: 1;
 }
 
+@media (max-width: 900px) {
+  .content {
+    align-items: center;
+  }
+
+  .textArea {
+    max-width: 100%;
+  }
+
+  .image {
+    width: 100%;
+  }
+}
 
 @media (max-width: 768px) {
   .inner {
@@ -82,18 +95,4 @@
   .description {
     max-width: 100%;
   }
-}
-
-@media (max-width: 900px) {
-    .content {
-        align-items: center;
-    }
-
-    .textArea {
-        max-width: 100%;
-    }
-
-    .image {
-        width: 100%;
-    }
 }
