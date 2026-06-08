@@ -12,6 +12,7 @@
   max-width: 1126px;
   margin: 0 auto;
   padding: 70px var(--space-md);
+  min-height: 380px;
 
   display: flex;
   flex-direction: column;
