@@ -38,6 +38,10 @@ const Modal = ({ title, onClose, children }) => (
 
 // ── Main ─────────────────────────────────────────────────────────────────────
 const CalendarPage = () => {
+  useEffect(() => {
+    document.title = 'Calendário | ONG Coração Valente';
+  }, []);
+
   const [events,  setEvents]  = useState([]);
   const [loading, setLoading] = useState(true);
   const [modal,   setModal]   = useState(null);

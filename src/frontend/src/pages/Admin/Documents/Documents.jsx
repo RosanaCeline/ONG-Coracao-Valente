@@ -17,6 +17,10 @@ const triggerDownload = (doc) => {
 };
 
 const Documents = () => {
+  useEffect(() => {
+    document.title = 'Documentos | ONG Coração Valente';
+  }, []);
+
   const [docs,    setDocs]    = useState({});
   const [loading, setLoading] = useState(true);
   const [busy,    setBusy]    = useState({});

@@ -188,6 +188,10 @@ const AnimalCard = ({ animal, onEdit, onAdopt, onDelete }) => {
 
 // ── Main component ──────────────────────────────────────────────────────────
 const Animals = () => {
+  useEffect(() => {
+    document.title = 'Animais | ONG Coração Valente';
+  }, []);
+
   const [animals, setAnimals] = useState([]);
   const [availableTags, setAvailableTags] = useState([]);
   const [loading, setLoading] = useState(true);

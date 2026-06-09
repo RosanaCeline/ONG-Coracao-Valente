@@ -78,6 +78,10 @@ const isFormValid = (f) =>
 // ── Component ────────────────────────────────────────────────────────────────
 
 const OngInfo = () => {
+  useEffect(() => {
+    document.title = 'Informações da ONG | ONG Coração Valente';
+  }, []);
+
   const [form, setForm] = useState(null);
   const [logoPreview, setLogoPreview] = useState('');
   const [cepLoading, setCepLoading] = useState(false);

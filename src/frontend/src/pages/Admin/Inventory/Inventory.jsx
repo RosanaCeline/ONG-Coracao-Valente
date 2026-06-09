@@ -36,6 +36,10 @@ const Modal = ({ title, onClose, children }) => (
 
 // ── Main ─────────────────────────────────────────────────────────────────────
 const Inventory = () => {
+  useEffect(() => {
+    document.title = 'Estoque | ONG Coração Valente';
+  }, []);
+
   const [items,   setItems]  = useState([]);
   const [loading, setLoading]= useState(true);
   const [modal,   setModal]  = useState(null);

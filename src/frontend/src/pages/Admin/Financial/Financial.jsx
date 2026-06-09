@@ -116,6 +116,10 @@ const Modal = ({ title, onClose, children }) => (
 
 // ── Main ─────────────────────────────────────────────────────────────────────
 const Financial = () => {
+  useEffect(() => {
+    document.title = 'Financeiro | ONG Coração Valente';
+  }, []);
+
   const [tab,       setTab]      = useState('gastos');
   const [expenses,  setExpenses] = useState([]);
   const [donations, setDonations]= useState([]);

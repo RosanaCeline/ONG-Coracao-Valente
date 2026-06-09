@@ -34,6 +34,10 @@ const Dashboard = () => {
   const [expenses, setExpenses] = useState([]);
 
   useEffect(() => {
+    document.title = 'Painel | ONG Coração Valente';
+  }, []);
+
+  useEffect(() => {
     getAnimals().then(setAnimals);
     getExpenseBreakdown().then(setExpenses);
   }, []);
