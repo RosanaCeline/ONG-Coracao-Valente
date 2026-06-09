@@ -1,11 +1,13 @@
 .container {
-
+  flex: 1;
   margin-top: 60px;
+
   display: flex;
   align-items: center;
   justify-content: center;
 
   gap: 60px;
+  padding: var(--space-lg) 0;
 }
 
 .container section {
@@ -17,13 +19,13 @@
 }
 
 .logo {
-  height: 70vh;
-
+  height: 52vh;
+  max-width: 100%;
   object-fit: contain;
 }
 
 .title {
-  font-size: 2rem;
+  font-size: var(--fs-h2);
   font-weight: 700;
 
   margin-bottom: 32px;
@@ -49,7 +51,7 @@
 }
 
 .formGroup label {
-  font-size: 0.95rem;
+  font-size: var(--fs-sm);
   font-weight: 500;
 }
 
@@ -64,43 +66,20 @@
   background: #1a1a1a;
   color: white;
 
-  font-size: 1rem;
+  font-size: var(--fs-sm);
+  font-family: var(--font-body);
 
   outline: none;
 
-  transition: 0.3s;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .formInput:focus {
-  border-color: #ff2d2d;
+  border-color: var(--color-primary);
 
-  box-shadow: 0 0 0 3px rgba(255, 45, 45, 0.2);
+  box-shadow: 0 0 0 3px rgba(201, 0, 8, 0.2);
 }
 
-.loginButton {
-  margin-top: 10px;
-
-  padding: 14px 18px;
-
-  border: none;
-  border-radius: 14px;
-
-  background: #ff2d2d;
-  color: white;
-
-  font-size: 1rem;
-  font-weight: 700;
-
-  cursor: pointer;
-
-  transition: 0.3s;
-}
-
-.loginButton:hover {
-  transform: translateY(-2px);
-
-  box-shadow: 0 8px 20px rgba(255, 45, 45, 0.35);
-}
 
 @media (max-width: 1024px) {
   .container {
@@ -108,7 +87,7 @@
   }
 
   .logo {
-    height: 50vw;
+    height: 44vh;
   }
 }
 
@@ -116,9 +95,10 @@
   .container {
     flex-direction: column;
 
-    gap: 40px;
+    gap: var(--space-lg);
 
-    padding: 30px 20px;
+    padding: 30px var(--space-md);
+    margin-top: 30px;
   }
 
   .container section {
@@ -129,7 +109,7 @@
   }
 
   .title {
-    font-size: 1.7rem;
+    font-size: var(--fs-h3);
   }
 
   .loginForm {
@@ -137,28 +117,23 @@
   }
 
   .logo {
-    max-width: 60vw;
+    height: auto;
+    max-width: 52vw;
   }
 }
 
 @media (max-width: 480px) {
   .container {
-    padding: 20px 16px;
-  }
-
-  .title {
-    font-size: 1.4rem;
+    padding: 20px var(--space-md);
+    margin-top: 16px;
+    gap: var(--space-md);
   }
 
   .formInput {
     padding: 12px 14px;
   }
 
-  .loginButton {
-    padding: 12px;
-  }
-
   .logo {
-    max-width: 50vw;
+    max-width: 60vw;
   }
 }
