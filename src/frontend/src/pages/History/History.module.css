@@ -1,0 +1,229 @@
+.main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.main em {
+  color: var(--color-primary);
+  font-style: italic;
+}
+
+/* QUEM SOMOS */
+.quemSomos {
+  padding: 48px var(--space-lg) 60px;
+  max-width: 750px;
+  margin: 0 auto;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.chapeu {
+  font-size: var(--fs-xs);
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-primary);
+  margin-bottom: var(--space-md);
+}
+
+.quemSomos h1 {
+  font-family: var(--font-heading);
+  font-size: var(--fs-h1);
+  font-weight: 900;
+  line-height: 1.12;
+  color: var(--color-text-strong);
+  margin-bottom: var(--space-lg);
+}
+
+.paragrafos {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.paragrafos p {
+  font-size: var(--fs-sm);
+  line-height: 1.75;
+  color: var(--color-text);
+}
+
+/* AÇÕES */
+.acoes {
+  padding: 48px 0 40px;
+}
+
+.acoes h2 {
+  font-family: var(--font-heading);
+  font-size: var(--fs-h2);
+  font-weight: 800;
+  line-height: 1.2;
+  color: var(--color-text-strong);
+  padding: 0 var(--space-lg);
+  margin-bottom: var(--space-lg);
+}
+
+/* CAROUSEL */
+.carouselWrapper {
+  overflow: hidden;
+}
+
+/* Track width = TOTAL cards × 100% of wrapper. Each cardSlide = 1/TOTAL of track = 100% of wrapper. */
+.carouselTrack {
+  display: flex;
+  width: 500%;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.cardSlide {
+  width: 20%;
+  padding: 0 var(--space-lg);
+  box-sizing: border-box;
+}
+
+.card {
+  border-radius: var(--radius);
+  overflow: hidden;
+  position: relative;
+  background: var(--color-surface);
+  box-shadow: var(--shadow);
+}
+
+.card img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  display: block;
+}
+
+.cardPlaceholder {
+  width: 100%;
+  height: 250px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-xs);
+  background: linear-gradient(135deg, var(--color-surface), var(--color-surface-alt));
+}
+
+.placeholderEmoji {
+  font-size: 40px;
+  opacity: 0.6;
+}
+
+.placeholderLabel {
+  font-size: var(--fs-xs);
+  color: var(--color-text);
+}
+
+.cardLabel {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(to top, rgba(172, 53, 53, 0.72) 60%, transparent);
+  padding: 28px 16px 16px;
+  color: var(--color-white);
+}
+
+.cardLabel strong {
+  display: block;
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.cardLabel span {
+  font-size: 11px;
+  opacity: 0.82;
+  font-weight: 300;
+}
+
+/* CONTROLES */
+.carouselControls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-md);
+  margin-top: var(--space-md);
+  padding: 0 var(--space-lg);
+}
+
+.arrowBtn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1.5px solid var(--color-border);
+  background: transparent;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 0.2s, background 0.2s;
+  padding: 0;
+  flex-shrink: 0;
+}
+
+.arrowBtn:hover {
+  border-color: var(--color-primary);
+  background: color-mix(in srgb, var(--color-primary) 8%, transparent);
+}
+
+.arrowBtn svg {
+  width: 14px;
+  height: 14px;
+  stroke: var(--color-text);
+  transition: stroke 0.2s;
+}
+
+.arrowBtn:hover svg {
+  stroke: var(--color-primary);
+}
+
+.dots {
+  display: flex;
+  gap: 7px;
+  align-items: center;
+}
+
+.dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--color-border);
+  cursor: pointer;
+  border: none;
+  padding: 0;
+  transition: background 0.2s, transform 0.2s;
+}
+
+.dotActive {
+  background: var(--color-primary);
+  transform: scale(1.3);
+}
+
+/* CTA */
+.cta {
+  padding: 36px var(--space-lg) 60px;
+  display: flex;
+  justify-content: center;
+}
+
+@media (min-width: 768px) {
+  .quemSomos {
+    padding: 80px var(--space-lg) 60px;
+  }
+
+  .acoes {
+    padding: 60px 0;
+  }
+
+  .acoes h2,
+  .carouselWrapper,
+  .carouselControls {
+    max-width: 750px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
