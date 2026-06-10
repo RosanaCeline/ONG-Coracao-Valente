@@ -1,9 +1,9 @@
 CREATE TABLE IF NOT EXISTS animals (
-    id BIGINT PRIMARY KEY,
+    id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
     age VARCHAR(50) NOT NULL,
     gender VARCHAR(10) NOT NULL,
-    RACE VARCHAR(10) NOT NULL,
+    race VARCHAR(10) NOT NULL,
     photo_url VARCHAR(255),
     phone_number VARCHAR(20),
     registered_at TIMESTAMP NOT NULL,
@@ -17,6 +17,6 @@ CREATE TABLE IF NOT EXISTS tags (
 
 CREATE TABLE IF NOT EXISTS animal_tags (
     animal_id BIGINT NOT NULL REFERENCES animals(id) ON DELETE CASCADE,
-    tag_id BIGINT NOT NULL REFERENCES tags(id) ON DELETE CASCADE,
-    PRIMARY KEY (animal_id, tag_id)
+    tags_id BIGINT NOT NULL REFERENCES tags(id) ON DELETE CASCADE,
+    PRIMARY KEY (animal_id, tags_id)
 );

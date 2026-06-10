@@ -7,4 +7,6 @@ CREATE TABLE IF NOT EXISTS payment (
     pix_city VARCHAR(15) NULL
 );
 
-CREATE UNIQUE INDEX payment_singleton ON payment ((id = 1)) WHERE id = 1;
+CREATE UNIQUE INDEX IF NOT EXISTS payment_singleton
+ON payment ((id = 1))
+WHERE id = 1;

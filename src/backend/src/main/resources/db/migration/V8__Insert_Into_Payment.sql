@@ -1,1 +1,0 @@
-INSERT INTO payment (id) VALUES (1);
