@@ -17,6 +17,11 @@ const NAV_LINKS = [
 const AdminLayout = () => {
   const navigate = useNavigate();
 
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    navigate('/admin');
+  };
+
   return (
     <div className={styles.layout}>
       <header className={navStyles.header}>
@@ -40,7 +45,7 @@ const AdminLayout = () => {
           <ButtonComponent
             icon={LogOut}
             variant="red"
-            onClick={() => navigate('/admin')}
+            onClick={handleLogout}
             className={navStyles.donateBtn}
           >
             SAIR

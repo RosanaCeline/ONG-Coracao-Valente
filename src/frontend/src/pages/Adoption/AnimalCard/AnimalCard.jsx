@@ -7,11 +7,12 @@ const buildWhatsappUrl = (name, age) => {
   return `https://api.whatsapp.com/send/?phone=${WHATSAPP_NUMBER}&text=${encodeURIComponent(message)}&type=phone_number&app_absent=0`;
 };
 
-const AnimalCard = ({ name, age, photo, tags }) => {
+// API returns: { id, name, age, photoUrl, tags: [{id, name}], gender, race, isAdopted, ... }
+const AnimalCard = ({ name, age, photoUrl, tags = [] }) => {
   return (
     <article className={styles.card}>
       <div className={styles.photoWrapper}>
-        <img src={photo} alt={`Foto de ${name}`} className={styles.photo} />
+        <img src={photoUrl} alt={`Foto de ${name}`} className={styles.photo} />
       </div>
 
       <div className={styles.cardFooter}>
@@ -21,8 +22,8 @@ const AnimalCard = ({ name, age, photo, tags }) => {
 
       <div className={styles.tags} aria-label="Características">
         {tags.map((tag) => (
-          <span key={tag} className={styles.tag}>
-            {tag}
+          <span key={tag.id} className={styles.tag}>
+            {tag.name}
           </span>
         ))}
       </div>
