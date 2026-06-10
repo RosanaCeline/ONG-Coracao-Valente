@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import java.util.List;
 
 @Tag(name = "Animal", description = "Controlador para gerenciamento de animais")
-@SecurityRequirement(name = SecurityConfig.SECURITY)
 public interface AnimalControllerDocs {
 
     @Operation(summary = "Cadastra um animal", description = "Método para cadastrar um animal no sistema",
@@ -32,6 +31,7 @@ public interface AnimalControllerDocs {
     @ApiResponse(responseCode = "403", description = "Acesso negado", content = @Content)
     @ApiResponse(responseCode = "404", description = "Usuário não encontrado", content = @Content)
     @ApiResponse(responseCode = "500", description = "Erro inesperado no servidor", content = @Content)
+    @SecurityRequirement(name = SecurityConfig.SECURITY)
     public ResponseEntity<Animal> registerAnimal (AnimalRequestDTO request);
 
 
@@ -43,6 +43,7 @@ public interface AnimalControllerDocs {
     @ApiResponse(responseCode = "401", description = "Requisição não autorizada", content = @Content)
     @ApiResponse(responseCode = "403", description = "Acesso negado", content = @Content)
     @ApiResponse(responseCode = "500", description = "Erro inesperado no servidor", content = @Content)
+    @SecurityRequirement(name = SecurityConfig.SECURITY)
     public ResponseEntity<Animal> editAnimal (Long id, @ModelAttribute @Valid AnimalRequestDTO request);
 
 
@@ -52,6 +53,7 @@ public interface AnimalControllerDocs {
     @ApiResponse(responseCode = "403", description = "Acesso negado", content = @Content)
     @ApiResponse(responseCode = "404", description = "Animal não encontrado", content = @Content)
     @ApiResponse(responseCode = "500", description = "Erro inesperado no servidor", content = @Content)
+    @SecurityRequirement(name = SecurityConfig.SECURITY)
     public ResponseEntity<Void> deleteAnimal (Long id);
 
 
@@ -61,6 +63,7 @@ public interface AnimalControllerDocs {
     @ApiResponse(responseCode = "403", description = "Acesso negado", content = @Content)
     @ApiResponse(responseCode = "404", description = "Animal não encontrado", content = @Content)
     @ApiResponse(responseCode = "500", description = "Erro inesperado no servidor", content = @Content)
+    @SecurityRequirement(name = SecurityConfig.SECURITY)
     public ResponseEntity<Animal> markAsAdopted (Long id);
 
 
@@ -70,6 +73,7 @@ public interface AnimalControllerDocs {
     @ApiResponse(responseCode = "403", description = "Acesso negado", content = @Content)
     @ApiResponse(responseCode = "404", description = "Animal não encontrado", content = @Content)
     @ApiResponse(responseCode = "500", description = "Erro inesperado no servidor", content = @Content)
+    @SecurityRequirement(name = SecurityConfig.SECURITY)
     public ResponseEntity<Animal> getAnimal (Long id);
 
 
@@ -79,8 +83,6 @@ public interface AnimalControllerDocs {
     @Parameter(name = "gender", description = "Filtrar por sexo", required = false, example = "MALE")
     @Parameter(name = "tagIds", description = "Filtrar por IDs de tags", required = false, example = "1")
     @ApiResponse(responseCode = "200", description = "Lista de animais retornada com sucesso")
-    @ApiResponse(responseCode = "401", description = "Requisição não autorizada", content = @Content)
-    @ApiResponse(responseCode = "403", description = "Acesso negado", content = @Content)
     @ApiResponse(responseCode = "500", description = "Erro inesperado no servidor", content = @Content)
     public ResponseEntity<List<Animal>> getAnimals (Boolean isAdopted, Race race, Gender gender, List<Long> tagIds);
 }
