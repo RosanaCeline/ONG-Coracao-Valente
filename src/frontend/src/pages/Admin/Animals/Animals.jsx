@@ -1,26 +1,29 @@
 import { useState, useEffect, useRef } from 'react';
-import { Plus, Pencil, Trash2, Heart, X, Upload, ChevronDown } from 'lucide-react';
-import { getAnimals } from '../../../services/animals';
+import { Plus, Pencil, Trash2, Heart, X, Upload, ChevronDown, Loader2 } from 'lucide-react';
+import { getAnimals, createAnimal, updateAnimal, deleteAnimal, adoptAnimal } from '../../../services/animals';
 import { getTags, createTag } from '../../../services/tags';
 import styles from './Animals.module.css';
 
 const STATUS_CONFIG = {
-  disponivel:    { label: 'Disponível para adoção', color: '#9EB89C' },
-  em_tratamento: { label: 'Em tratamento',          color: '#E8B86A' },
-  adotado:       { label: 'Adotado',                color: '#7AACBF' },
+  disponivel: { label: 'Disponível para adoção', color: '#9EB89C' },
+  adotado:    { label: 'Adotado',                color: '#7AACBF' },
 };
 
-const ANIMAL_TYPES = ['Cão', 'Gato', 'Outro'];
+const RACE_OPTIONS = [
+  { value: 'DOG', label: 'Cão' },
+  { value: 'CAT', label: 'Gato' },
+];
+
+const GENDER_OPTIONS = [
+  { value: 'MALE',   label: 'Macho' },
+  { value: 'FEMALE', label: 'Fêmea' },
+];
 
 const EMPTY_FORM = {
-  name: '', tipo: 'Cão', age: '',
+  name: '', race: 'DOG', gender: 'MALE', age: '', phoneNumber: '',
   photoFile: null, photoPreview: '',
   tags: [],
-  status: 'disponivel',
-  adopterName: '', adopterContact: '', adoptionDate: '',
 };
-
-const today = () => new Date().toISOString().split('T')[0];
 
 // ── Modal wrapper ───────────────────────────────────────────────────────────
 const Modal = ({ title, onClose, children }) => (
@@ -38,10 +41,11 @@ const Modal = ({ title, onClose, children }) => (
 );
 
 // ── Tag multi-select ────────────────────────────────────────────────────────
+// available / selected: [{id, name}]
 const TagSelect = ({ available, selected, onChange, onCreateTag }) => {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen]     = useState(false);
   const [newTag, setNewTag] = useState('');
-  const wrapRef = useRef(null);
+  const wrapRef             = useRef(null);
 
   useEffect(() => {
     const handle = (e) => {
@@ -51,28 +55,34 @@ const TagSelect = ({ available, selected, onChange, onCreateTag }) => {
     return () => document.removeEventListener('mousedown', handle);
   }, []);
 
+  const isSelected = (tag) => selected.some(t => t.id === tag.id);
+
   const toggle = (tag) =>
-    onChange(selected.includes(tag) ? selected.filter(t => t !== tag) : [...selected, tag]);
+    onChange(isSelected(tag) ? selected.filter(t => t.id !== tag.id) : [...selected, tag]);
 
   const handleCreate = async () => {
     const trimmed = newTag.trim();
     if (!trimmed) return;
-    await onCreateTag(trimmed);
-    if (!selected.includes(trimmed)) onChange([...selected, trimmed]);
-    setNewTag('');
+    try {
+      const created = await onCreateTag(trimmed);
+      if (created && !isSelected(created)) onChange([...selected, created]);
+      setNewTag('');
+    } catch {
+      /* ignore */
+    }
   };
 
   return (
     <div className={styles.tagSelectWrap} ref={wrapRef}>
       <div className={styles.selectedChips}>
         {selected.map(tag => (
-          <span key={tag} className={styles.chip}>
-            {tag}
+          <span key={tag.id} className={styles.chip}>
+            {tag.name}
             <button
               type="button"
               className={styles.chipRemove}
               onClick={() => toggle(tag)}
-              aria-label={`Remover ${tag}`}
+              aria-label={`Remover ${tag.name}`}
             >
               <X size={11} />
             </button>
@@ -92,13 +102,13 @@ const TagSelect = ({ available, selected, onChange, onCreateTag }) => {
         <div className={styles.tagDropdown}>
           <div className={styles.tagOptions}>
             {available.map(tag => (
-              <label key={tag} className={styles.tagOption}>
+              <label key={tag.id} className={styles.tagOption}>
                 <input
                   type="checkbox"
-                  checked={selected.includes(tag)}
+                  checked={isSelected(tag)}
                   onChange={() => toggle(tag)}
                 />
-                {tag}
+                {tag.name}
               </label>
             ))}
           </div>
@@ -122,19 +132,20 @@ const TagSelect = ({ available, selected, onChange, onCreateTag }) => {
 
 // ── Animal card ─────────────────────────────────────────────────────────────
 const AnimalCard = ({ animal, onEdit, onAdopt, onDelete }) => {
-  const status = STATUS_CONFIG[animal.status];
+  const status    = animal.isAdopted ? STATUS_CONFIG.adotado : STATUS_CONFIG.disponivel;
+  const raceLabel = animal.race === 'DOG' ? 'Cão' : 'Gato';
 
   return (
     <div className={styles.card}>
-      {animal.photo && (
-        <img src={animal.photo} alt={animal.name} className={styles.cardPhoto} />
+      {animal.photoUrl && (
+        <img src={animal.photoUrl} alt={animal.name} className={styles.cardPhoto} />
       )}
       <div className={styles.cardBody}>
         <div className={styles.cardTop}>
           <div>
             <p className={styles.cardName}>{animal.name}</p>
             <p className={styles.cardAge}>
-              {animal.tipo && <span className={styles.cardTipo}>{animal.tipo}</span>}
+              <span className={styles.cardTipo}>{raceLabel}</span>
               {animal.age}
             </p>
           </div>
@@ -146,16 +157,9 @@ const AnimalCard = ({ animal, onEdit, onAdopt, onDelete }) => {
         {animal.tags?.length > 0 && (
           <div className={styles.tags}>
             {animal.tags.map(tag => (
-              <span key={tag} className={styles.tag}>{tag}</span>
+              <span key={tag.id} className={styles.tag}>{tag.name}</span>
             ))}
           </div>
-        )}
-
-        {animal.status === 'adotado' && animal.adopter && (
-          <p className={styles.adopterInfo}>
-            Adotado por <strong>{animal.adopter.name}</strong>
-            {animal.adopter.date && ` em ${new Date(animal.adopter.date).toLocaleDateString('pt-BR')}`}
-          </p>
         )}
 
         <div className={styles.cardActions}>
@@ -163,7 +167,7 @@ const AnimalCard = ({ animal, onEdit, onAdopt, onDelete }) => {
             <Pencil size={15} />
             Editar
           </button>
-          {animal.status !== 'adotado' && (
+          {!animal.isAdopted && (
             <button
               className={`${styles.actionBtn} ${styles.actionAdopt}`}
               onClick={() => onAdopt(animal)}
@@ -192,49 +196,49 @@ const Animals = () => {
     document.title = 'Animais | ONG Coração Valente';
   }, []);
 
-  const [animals, setAnimals] = useState([]);
+  const [animals, setAnimals]           = useState([]);
   const [availableTags, setAvailableTags] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [modal, setModal] = useState(null);
-  const [form, setForm] = useState(EMPTY_FORM);
+  const [loading, setLoading]           = useState(true);
+  const [saving, setSaving]             = useState(false);
+  const [modal, setModal]               = useState(null);
+  const [form, setForm]                 = useState(EMPTY_FORM);
+  const [formError, setFormError]       = useState('');
 
   useEffect(() => {
-    Promise.all([getAnimals(), getTags()]).then(([data, tags]) => {
-      setAnimals(data);
-      setAvailableTags(tags);
-      setLoading(false);
-    });
+    Promise.all([getAnimals(), getTags()])
+      .then(([data, tags]) => {
+        setAnimals(data);
+        setAvailableTags(tags);
+      })
+      .catch(() => {})
+      .finally(() => setLoading(false));
   }, []);
 
-  const closeModal = () => setModal(null);
+  const closeModal = () => { setModal(null); setFormError(''); };
 
   const openAdd = () => {
     setForm(EMPTY_FORM);
+    setFormError('');
     setModal({ type: 'add' });
   };
 
   const openEdit = (animal) => {
     setForm({
-      name: animal.name,
-      tipo: animal.tipo ?? 'Cão',
-      age: animal.age,
-      photoFile: null,
-      photoPreview: animal.photo ?? '',
-      tags: animal.tags ?? [],
-      status: animal.status,
-      adopterName: animal.adopter?.name ?? '',
-      adopterContact: animal.adopter?.contact ?? '',
-      adoptionDate: animal.adopter?.date ?? '',
+      name:         animal.name,
+      race:         animal.race,
+      gender:       animal.gender,
+      age:          animal.age,
+      phoneNumber:  animal.phoneNumber ?? '',
+      photoFile:    null,
+      photoPreview: animal.photoUrl ?? '',
+      tags:         animal.tags ?? [],
     });
+    setFormError('');
     setModal({ type: 'edit', animal });
   };
 
-  const openAdopt = (animal) => {
-    setForm({ ...EMPTY_FORM, adoptionDate: today() });
-    setModal({ type: 'adopt', animal });
-  };
-
-  const openDelete = (animal) => setModal({ type: 'delete', animal });
+  const openAdopt  = (animal) => { setFormError(''); setModal({ type: 'adopt', animal }); };
+  const openDelete = (animal) => { setFormError(''); setModal({ type: 'delete', animal }); };
 
   const set = (field) => (e) =>
     setForm(prev => ({ ...prev, [field]: e.target.value }));
@@ -244,58 +248,93 @@ const Animals = () => {
     if (!file) return;
     setForm(prev => ({
       ...prev,
-      photoFile: file,
+      photoFile:    file,
       photoPreview: URL.createObjectURL(file),
     }));
   };
 
-  const handleTagsChange = (tags) =>
-    setForm(prev => ({ ...prev, tags }));
+  const handleTagsChange   = (tags) => setForm(prev => ({ ...prev, tags }));
 
   const handleCreateTag = async (label) => {
-    await createTag(label);
-    setAvailableTags(prev => prev.includes(label) ? prev : [...prev, label]);
-  };
-
-  const handleSave = (e) => {
-    e.preventDefault();
-    const adopter = form.status === 'adotado' && form.adopterName
-      ? { name: form.adopterName, contact: form.adopterContact, date: form.adoptionDate }
-      : undefined;
-
-    const updated = {
-      name: form.name,
-      tipo: form.tipo,
-      age: form.age,
-      photo: form.photoPreview,
-      tags: form.tags,
-      status: form.status,
-      adopter,
-    };
-
-    if (modal.type === 'add') {
-      setAnimals(prev => [...prev, { id: Date.now(), ...updated }]);
-    } else {
-      setAnimals(prev => prev.map(a =>
-        a.id === modal.animal.id ? { ...a, ...updated } : a
-      ));
+    try {
+      const tag = await createTag(label);
+      setAvailableTags(prev => prev.some(t => t.id === tag.id) ? prev : [...prev, tag]);
+      return tag;
+    } catch (err) {
+      if (err.status === 409) {
+        return availableTags.find(t => t.name.toLowerCase() === label.toLowerCase()) ?? null;
+      }
+      throw err;
     }
-    closeModal();
   };
 
-  const handleAdopt = (e) => {
+  const buildFormData = async () => {
+    const fd = new FormData();
+    fd.append('name',   form.name);
+    fd.append('age',    form.age);
+    fd.append('gender', form.gender);
+    fd.append('race',   form.race);
+    if (form.phoneNumber?.trim()) fd.append('phoneNumber', form.phoneNumber.trim());
+    form.tags.forEach(t => fd.append('tagIds', t.id));
+
+    if (form.photoFile) {
+      fd.append('photo', form.photoFile);
+    } else if (modal?.type === 'edit' && form.photoPreview) {
+      const r    = await fetch(form.photoPreview);
+      const blob = await r.blob();
+      fd.append('photo', blob, 'photo.jpg');
+    }
+    return fd;
+  };
+
+  const handleSave = async (e) => {
     e.preventDefault();
-    setAnimals(prev => prev.map(a =>
-      a.id === modal.animal.id
-        ? { ...a, status: 'adotado', adopter: { name: form.adopterName, contact: form.adopterContact, date: form.adoptionDate } }
-        : a
-    ));
-    closeModal();
+    setSaving(true);
+    setFormError('');
+    try {
+      const fd = await buildFormData();
+      let result;
+      if (modal.type === 'add') {
+        result = await createAnimal(fd);
+        setAnimals(prev => [result, ...prev]);
+      } else {
+        result = await updateAnimal(modal.animal.id, fd);
+        setAnimals(prev => prev.map(a => a.id === result.id ? result : a));
+      }
+      closeModal();
+    } catch (err) {
+      setFormError(err.message || 'Erro ao salvar animal.');
+    } finally {
+      setSaving(false);
+    }
   };
 
-  const handleDelete = () => {
-    setAnimals(prev => prev.filter(a => a.id !== modal.animal.id));
-    closeModal();
+  const handleAdopt = async () => {
+    setSaving(true);
+    setFormError('');
+    try {
+      const result = await adoptAnimal(modal.animal.id);
+      setAnimals(prev => prev.map(a => a.id === result.id ? result : a));
+      closeModal();
+    } catch (err) {
+      setFormError(err.message || 'Erro ao registrar adoção.');
+    } finally {
+      setSaving(false);
+    }
+  };
+
+  const handleDelete = async () => {
+    setSaving(true);
+    setFormError('');
+    try {
+      await deleteAnimal(modal.animal.id);
+      setAnimals(prev => prev.filter(a => a.id !== modal.animal.id));
+      closeModal();
+    } catch (err) {
+      setFormError(err.message || 'Erro ao remover animal.');
+    } finally {
+      setSaving(false);
+    }
   };
 
   // ── Render ────────────────────────────────────────────────────────────────
@@ -349,10 +388,18 @@ const Animals = () => {
 
             <div className={styles.formGrid}>
               <div className={styles.field}>
-                <label className={styles.label}>Tipo</label>
-                <select className={styles.select} value={form.tipo} onChange={set('tipo')}>
-                  {ANIMAL_TYPES.map(t => (
-                    <option key={t} value={t}>{t}</option>
+                <label className={styles.label}>Espécie</label>
+                <select className={styles.select} value={form.race} onChange={set('race')}>
+                  {RACE_OPTIONS.map(o => (
+                    <option key={o.value} value={o.value}>{o.label}</option>
+                  ))}
+                </select>
+              </div>
+              <div className={styles.field}>
+                <label className={styles.label}>Sexo</label>
+                <select className={styles.select} value={form.gender} onChange={set('gender')}>
+                  {GENDER_OPTIONS.map(o => (
+                    <option key={o.value} value={o.value}>{o.label}</option>
                   ))}
                 </select>
               </div>
@@ -366,6 +413,17 @@ const Animals = () => {
                   required
                 />
               </div>
+            </div>
+
+            <div className={styles.field}>
+              <label className={styles.label}>Telefone de contato <span style={{ fontWeight: 400, opacity: 0.6 }}>(opcional)</span></label>
+              <input
+                className={styles.input}
+                value={form.phoneNumber}
+                onChange={set('phoneNumber')}
+                placeholder="Ex: (88) 99999-9999"
+                inputMode="tel"
+              />
             </div>
 
             <div className={styles.field}>
@@ -386,6 +444,7 @@ const Animals = () => {
                     accept="image/*"
                     className={styles.photoInput}
                     onChange={handlePhotoChange}
+                    required={modal.type === 'add'}
                   />
                 </label>
               </div>
@@ -401,55 +460,18 @@ const Animals = () => {
               />
             </div>
 
-            <div className={styles.field}>
-              <label className={styles.label}>Status</label>
-              <select className={styles.select} value={form.status} onChange={set('status')}>
-                <option value="disponivel">Disponível para adoção</option>
-                <option value="em_tratamento">Em tratamento</option>
-                <option value="adotado">Adotado</option>
-              </select>
-            </div>
-
-            {form.status === 'adotado' && (
-              <div className={styles.adopterSection}>
-                <p className={styles.adopterLabel}>Informações da adoção</p>
-                <div className={styles.formGrid}>
-                  <div className={styles.field}>
-                    <label className={styles.label}>Nome do adotante</label>
-                    <input
-                      className={styles.input}
-                      value={form.adopterName}
-                      onChange={set('adopterName')}
-                      placeholder="Ex: Maria Silva"
-                    />
-                  </div>
-                  <div className={styles.field}>
-                    <label className={styles.label}>Contato</label>
-                    <input
-                      className={styles.input}
-                      value={form.adopterContact}
-                      onChange={set('adopterContact')}
-                      placeholder="Telefone ou email"
-                    />
-                  </div>
-                </div>
-                <div className={styles.field}>
-                  <label className={styles.label}>Data da adoção</label>
-                  <input
-                    className={styles.input}
-                    type="date"
-                    value={form.adoptionDate}
-                    onChange={set('adoptionDate')}
-                  />
-                </div>
-              </div>
+            {formError && (
+              <p style={{ color: '#c90008', fontSize: '0.83rem', margin: 0 }}>{formError}</p>
             )}
 
             <div className={styles.formActions}>
-              <button type="button" className={styles.cancelBtn} onClick={closeModal}>
+              <button type="button" className={styles.cancelBtn} onClick={closeModal} disabled={saving}>
                 Cancelar
               </button>
-              <button type="submit" className={styles.saveBtn}>Salvar</button>
+              <button type="submit" className={styles.saveBtn} disabled={saving}>
+                {saving ? <Loader2 size={15} className={styles.spin} /> : null}
+                Salvar
+              </button>
             </div>
           </form>
         </Modal>
@@ -458,42 +480,22 @@ const Animals = () => {
       {/* ── Adopt modal ── */}
       {modal?.type === 'adopt' && (
         <Modal title={`Registrar adoção — ${modal.animal.name}`} onClose={closeModal}>
-          <form className={styles.form} onSubmit={handleAdopt}>
-            <div className={styles.field}>
-              <label className={styles.label}>Nome do adotante</label>
-              <input
-                className={styles.input}
-                value={form.adopterName}
-                onChange={set('adopterName')}
-                placeholder="Ex: Maria Silva"
-                required
-              />
-            </div>
-            <div className={styles.field}>
-              <label className={styles.label}>Contato</label>
-              <input
-                className={styles.input}
-                value={form.adopterContact}
-                onChange={set('adopterContact')}
-                placeholder="Telefone ou email"
-              />
-            </div>
-            <div className={styles.field}>
-              <label className={styles.label}>Data da adoção</label>
-              <input
-                className={styles.input}
-                type="date"
-                value={form.adoptionDate}
-                onChange={set('adoptionDate')}
-              />
-            </div>
+          <div className={styles.deleteBody}>
+            <p className={styles.deleteText}>
+              Confirmar que <strong>{modal.animal.name}</strong> foi adotado?
+              Esta ação marcará o animal como adotado no sistema.
+            </p>
+            {formError && (
+              <p style={{ color: '#c90008', fontSize: '0.83rem', margin: 0 }}>{formError}</p>
+            )}
             <div className={styles.formActions}>
-              <button type="button" className={styles.cancelBtn} onClick={closeModal}>
-                Cancelar
+              <button className={styles.cancelBtn} onClick={closeModal} disabled={saving}>Cancelar</button>
+              <button className={styles.saveBtn} onClick={handleAdopt} disabled={saving}>
+                {saving ? <Loader2 size={15} className={styles.spin} /> : null}
+                Confirmar adoção
               </button>
-              <button type="submit" className={styles.saveBtn}>Confirmar adoção</button>
             </div>
-          </form>
+          </div>
         </Modal>
       )}
 
@@ -504,9 +506,15 @@ const Animals = () => {
             <p className={styles.deleteText}>
               Tem certeza que deseja remover <strong>{modal.animal.name}</strong>? Essa ação não pode ser desfeita.
             </p>
+            {formError && (
+              <p style={{ color: '#c90008', fontSize: '0.83rem', margin: 0 }}>{formError}</p>
+            )}
             <div className={styles.formActions}>
-              <button className={styles.cancelBtn} onClick={closeModal}>Cancelar</button>
-              <button className={styles.deleteBtn} onClick={handleDelete}>Remover</button>
+              <button className={styles.cancelBtn} onClick={closeModal} disabled={saving}>Cancelar</button>
+              <button className={styles.deleteBtn} onClick={handleDelete} disabled={saving}>
+                {saving ? <Loader2 size={15} className={styles.spin} /> : null}
+                Remover
+              </button>
             </div>
           </div>
         </Modal>
