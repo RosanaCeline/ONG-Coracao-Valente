@@ -82,6 +82,10 @@
   font-size: 13px !important;
 }
 
+.donateBtn .text {
+  display: none;
+}
+
 .donateActive {
   border-radius: 999px !important;
   min-width: auto !important;
@@ -99,7 +103,7 @@
   }
 
   .navbar {
-    width: calc(100% - 16px);
+    min-width: calc(100% - 16px);
 
     display: flex;
     justify-content: space-between;
