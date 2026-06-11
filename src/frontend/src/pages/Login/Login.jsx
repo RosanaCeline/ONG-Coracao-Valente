@@ -35,7 +35,7 @@ export function Login() {
       localStorage.setItem('token', token);
       navigate('/admin/painel');
     } catch {
-      setError('Erro ao conectar ao servidor. Verifique se o backend está rodando.');
+      setError('Erro ao conectar ao servidor. Verifique se o servidor está rodando.');
     } finally {
       setLoading(false);
     }

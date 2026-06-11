@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { PawPrint, Users, HandCoins, Cat, Wallet, Building2, Package, CalendarDays, FolderOpen, ChevronRight } from 'lucide-react';
+import { PawPrint, Users, HandCoins } from 'lucide-react';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
 import { ONG_INFO } from '../../../services/ong';
@@ -73,39 +73,6 @@ const Dashboard = () => {
     <div className={styles.page}>
       <h1 className={styles.heading}>Painel</h1>
 
-      <div className={styles.quickActions}>
-        <Link to="/admin/painel/animais" className={styles.quickAction}>
-          <Cat size={18} aria-hidden="true" />
-          <span>Animais</span>
-          <ChevronRight size={16} className={styles.quickArrow} aria-hidden="true" />
-        </Link>
-        <Link to="/admin/painel/financeiro" className={styles.quickAction}>
-          <Wallet size={18} aria-hidden="true" />
-          <span>Financeiro</span>
-          <ChevronRight size={16} className={styles.quickArrow} aria-hidden="true" />
-        </Link>
-        <Link to="/admin/painel/estoque" className={styles.quickAction}>
-          <Package size={18} aria-hidden="true" />
-          <span>Estoque</span>
-          <ChevronRight size={16} className={styles.quickArrow} aria-hidden="true" />
-        </Link>
-        <Link to="/admin/painel/calendario" className={styles.quickAction}>
-          <CalendarDays size={18} aria-hidden="true" />
-          <span>Calendário</span>
-          <ChevronRight size={16} className={styles.quickArrow} aria-hidden="true" />
-        </Link>
-        <Link to="/admin/painel/documentos" className={styles.quickAction}>
-          <FolderOpen size={18} aria-hidden="true" />
-          <span>Documentos</span>
-          <ChevronRight size={16} className={styles.quickArrow} aria-hidden="true" />
-        </Link>
-        <Link to="/admin/painel/ong" className={styles.quickAction}>
-          <Building2 size={18} aria-hidden="true" />
-          <span>Informações da ONG</span>
-          <ChevronRight size={16} className={styles.quickArrow} aria-hidden="true" />
-        </Link>
-      </div>
-
       <div className={styles.metrics}>
         <div className={styles.metricCard}>
           <PawPrint size={20} className={styles.metricIcon} aria-hidden="true" />
@@ -129,38 +96,60 @@ const Dashboard = () => {
       <div className={styles.charts}>
         <div className={styles.chartCard}>
           <h2 className={styles.chartTitle}>Destino das doações</h2>
-          <div className={styles.chartWrap}>
-            {expenses.length > 0 && <Doughnut data={expenseChart} options={DOUGHNUT_OPTIONS} />}
-          </div>
-          <ul className={styles.legend}>
-            {expenses.map(e => (
-              <li key={e.id} className={styles.legendItem}>
-                <span className={styles.legendDot} style={{ background: EXPENSE_COLORS[e.id] }} />
-                <span className={styles.legendLabel}>{e.title}</span>
-                <span className={styles.legendValue}>
-                  {totalArrecadado > 0
-                    ? `${Math.round((e.value / totalArrecadado) * 100)}%`
-                    : '—'}
-                </span>
-              </li>
-            ))}
-          </ul>
+          {expenses.length > 0 ? (
+            <>
+              <div className={styles.chartWrap}>
+                <Doughnut data={expenseChart} options={DOUGHNUT_OPTIONS} />
+              </div>
+              <ul className={styles.legend}>
+                {expenses.map(e => (
+                  <li key={e.id} className={styles.legendItem}>
+                    <span className={styles.legendDot} style={{ background: EXPENSE_COLORS[e.id] }} />
+                    <span className={styles.legendLabel}>{e.title}</span>
+                    <span className={styles.legendValue}>
+                      {totalArrecadado > 0
+                        ? `${Math.round((e.value / totalArrecadado) * 100)}%`
+                        : '—'}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </>
+          ) : (
+            <div className={styles.emptyState}>
+              <p className={styles.emptyMsg}>Nenhum dado financeiro registrado ainda.</p>
+              <Link to="/admin/painel/financeiro" className={styles.emptyLink}>
+                Preencher dados financeiros →
+              </Link>
+            </div>
+          )}
         </div>
 
         <div className={styles.chartCard}>
           <h2 className={styles.chartTitle}>Status dos animais</h2>
-          <div className={styles.chartWrap}>
-            {animals.length > 0 && <Doughnut data={animalChart} options={DOUGHNUT_OPTIONS} />}
-          </div>
-          <ul className={styles.legend}>
-            {Object.entries(statusGroups).map(([status, count]) => (
-              <li key={status} className={styles.legendItem}>
-                <span className={styles.legendDot} style={{ background: STATUS_META[status]?.color }} />
-                <span className={styles.legendLabel}>{STATUS_META[status]?.label}</span>
-                <span className={styles.legendValue}>{count}</span>
-              </li>
-            ))}
-          </ul>
+          {animals.length > 0 ? (
+            <>
+              <div className={styles.chartWrap}>
+                <Doughnut data={animalChart} options={DOUGHNUT_OPTIONS} />
+              </div>
+              <ul className={styles.legend}>
+                {Object.entries(statusGroups).map(([status, count]) => (
+                  <li key={status} className={styles.legendItem}>
+                    <span className={styles.legendDot} style={{ background: STATUS_META[status]?.color }} />
+                    <span className={styles.legendLabel}>{STATUS_META[status]?.label}</span>
+                    <span className={styles.legendValue}>{count}</span>
+                  </li>
+                ))}
+              </ul>
+            </>
+          ) : (
+            <div className={styles.emptyState}>
+              <p className={styles.emptyMsg}>Nenhum animal cadastrado ainda.</p>
+              <Link to="/admin/painel/animais" className={styles.emptyLink}>
+                Cadastrar animais →
+              </Link>
+            </div>
+          )}
         </div>
       </div>
     </div>
