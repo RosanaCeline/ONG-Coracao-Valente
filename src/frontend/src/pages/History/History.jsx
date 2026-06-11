@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import useInView from '../../hooks/useInView';
 import dogPaw from '../../assets/historypage/HISTORY_dog_paw.webp';
 import styles from './History.module.css';
 import ButtonComponent from '../../components/btn/ButtonComponent/ButtonComponent';
@@ -118,6 +119,10 @@ function Carousel() {
 
 const History = () => {
   const navigate = useNavigate();
+  const quemSomosRef = useRef(null);
+  const acoesRef = useRef(null);
+  const quemSomosInView = useInView(quemSomosRef, 0.1);
+  const acoesInView = useInView(acoesRef, 0.1);
 
   useEffect(() => {
     document.title = 'História | ONG Coração Valente';
@@ -125,12 +130,15 @@ const History = () => {
 
   return (
     <main className={styles.main}>
-      <section className={styles.quemSomos}>
+      <section
+        className={`${styles.quemSomos} ${quemSomosInView ? styles.visible : ''}`}
+        ref={quemSomosRef}
+      >
         <div className={styles.quemSomosHeader}>
           <div className={styles.imageWrapper}>
             <img
               src={dogPaw}
-              alt={`Pata de cachorro da ${name}`}
+              alt="Pata de cachorro da ONG Coração Valente"
               className={styles.dogPaw}
             />
           </div>
@@ -150,15 +158,20 @@ const History = () => {
         </div>
       </section>
 
-      <section className={styles.acoes}>
+      <section
+        className={`${styles.acoes} ${acoesInView ? styles.visible : ''}`}
+        ref={acoesRef}
+      >
         <h2>
           Nossas principais <em>ações</em>
         </h2>
         <Carousel />
 
-        <ButtonComponent className={styles.cta} onClick={() => navigate('/voluntariado')}>
-          Quero ser voluntário
-        </ButtonComponent>
+        <div className={styles.cta}>
+          <ButtonComponent onClick={() => navigate('/voluntariado')}>
+            Quero ser voluntário
+          </ButtonComponent>
+        </div>
       </section>
     </main>
   );

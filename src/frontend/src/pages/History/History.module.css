@@ -11,15 +11,15 @@
 
 /* QUEM SOMOS */
 .quemSomos {
-  padding: 48px var(--space-lg) 60px;
-  max-width: 750px;
-  margin: 0 auto;
-  width: 100%;
-  box-sizing: border-box;
+  padding: var(--section-padding-y) var(--space-md);
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
 }
 
-.quemSomosHeader {
-  display: block;
+.quemSomos.visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .chapeu {
@@ -56,6 +56,7 @@
   display: flex;
   flex-direction: column;
   gap: var(--space-md);
+  max-width: 660px;
 }
 
 .paragrafos p {
@@ -66,11 +67,19 @@
 
 /* AÇÕES */
 .acoes {
-  padding: 48px 0 40px;
+  padding: var(--section-padding-y) 0;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s ease 0.1s, transform 0.7s ease 0.1s;
+}
+
+.acoes.visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .acoes h2 {
@@ -79,13 +88,14 @@
   font-weight: 800;
   line-height: 1.2;
   color: var(--color-text-strong);
-  padding: 0 var(--space-lg);
+  padding: 0 var(--space-md);
   margin-bottom: var(--space-lg);
 }
 
 /* CAROUSEL */
 .carouselWrapper {
   overflow: hidden;
+  width: 100%;
 }
 
 /* Track width = TOTAL cards × 100% of wrapper. Each cardSlide = 1/TOTAL of track = 100% of wrapper. */
@@ -97,7 +107,7 @@
 
 .cardSlide {
   width: 20%;
-  padding: 0 var(--space-lg);
+  padding: 0 var(--space-md);
   box-sizing: border-box;
 }
 
@@ -168,7 +178,8 @@
   justify-content: center;
   gap: var(--space-md);
   margin-top: var(--space-md);
-  padding: 0 var(--space-lg);
+  padding: 0 var(--space-md);
+  width: 100%;
 }
 
 .arrowBtn {
@@ -225,12 +236,14 @@
 }
 
 .cta {
-  margin-top: var(--space-lg);
+  padding: 36px var(--space-md) 60px;
+  display: flex;
+  justify-content: center;
 }
 
 @media (min-width: 768px) {
   .quemSomos {
-    padding: 80px var(--space-lg) 60px;
+    padding: var(--section-padding-y-lg) var(--space-md);
   }
 
   .card img {
@@ -238,14 +251,6 @@
   }
 
   .acoes {
-    padding: 60px 0;
-  }
-
-  .acoes h2,
-  .carouselWrapper,
-  .carouselControls {
-    max-width: 750px;
-    margin-left: auto;
-    margin-right: auto;
+    padding: var(--section-padding-y-lg) 0;
   }
 }
