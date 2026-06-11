@@ -46,16 +46,25 @@ const CARDS = [
 const TOTAL = CARDS.length;
 
 function CarouselCard({ card }) {
-  const [imgError, setImgError] = useState(!card.src);
+  const [status, setStatus] = useState(card.src ? 'loading' : 'error');
+
   return (
     <div className={styles.cardSlide}>
       <div className={styles.card}>
-        {!imgError && card.src ? (
-          <img src={card.src} alt={card.alt} onError={() => setImgError(true)} />
-        ) : (
-          <div className={styles.cardPlaceholder}>
-            <span className={styles.placeholderEmoji}>{card.emoji}</span>
-            <span className={styles.placeholderLabel}>{card.alt}</span>
+        {card.src && (
+          <img
+            src={card.src}
+            alt={card.alt}
+            className={status === 'loaded' ? undefined : styles.imgHidden}
+            onLoad={() => setStatus('loaded')}
+            onError={() => setStatus('error')}
+          />
+        )}
+        {status !== 'loaded' && (
+          <div className={styles.cardSkeleton}>
+            {status === 'error' && (
+              <span className={styles.skeletonAlt}>{card.alt}</span>
+            )}
           </div>
         )}
         <div className={styles.cardLabel}>
