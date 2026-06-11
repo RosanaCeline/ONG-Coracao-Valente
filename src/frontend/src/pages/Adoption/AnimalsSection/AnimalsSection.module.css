@@ -1,5 +1,5 @@
 .section {
-  padding: var(--space-lg) 0 60px;
+  padding: var(--space-lg) 0 var(--section-padding-y);
   min-height: 60vh;
 
   display: flex;

@@ -31,6 +31,9 @@
   --space-md: 20px;
   --space-lg: 30px;
 
+  --section-padding-y: 60px;
+  --section-padding-y-lg: 80px;
+
   --radius: 22px;
   --shadow:
     0 10px 15px -3px rgba(0, 0, 0, 0.08),

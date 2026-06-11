@@ -11,11 +11,15 @@
 
 /* QUEM SOMOS */
 .quemSomos {
-  padding: 48px var(--space-lg) 60px;
-  max-width: 750px;
-  margin: 0 auto;
-  width: 100%;
-  box-sizing: border-box;
+  padding: var(--section-padding-y) var(--space-md);
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.quemSomos.visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .chapeu {
@@ -36,10 +40,23 @@
   margin-bottom: var(--space-lg);
 }
 
+.imageWrapper {
+  float: right;
+  margin-left: 16px;
+  margin-bottom: 8px;
+}
+
+.dogPaw {
+  width: 23svw;
+  max-width: 170px;
+  display: block;
+}
+
 .paragrafos {
   display: flex;
   flex-direction: column;
   gap: var(--space-md);
+  max-width: 660px;
 }
 
 .paragrafos p {
@@ -50,7 +67,19 @@
 
 /* AÇÕES */
 .acoes {
-  padding: 48px 0 40px;
+  padding: var(--section-padding-y) 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s ease 0.1s, transform 0.7s ease 0.1s;
+}
+
+.acoes.visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .acoes h2 {
@@ -59,13 +88,14 @@
   font-weight: 800;
   line-height: 1.2;
   color: var(--color-text-strong);
-  padding: 0 var(--space-lg);
+  padding: 0 var(--space-md);
   margin-bottom: var(--space-lg);
 }
 
 /* CAROUSEL */
 .carouselWrapper {
   overflow: hidden;
+  width: 100%;
 }
 
 /* Track width = TOTAL cards × 100% of wrapper. Each cardSlide = 1/TOTAL of track = 100% of wrapper. */
@@ -77,7 +107,7 @@
 
 .cardSlide {
   width: 20%;
-  padding: 0 var(--space-lg);
+  padding: 0 var(--space-md);
   box-sizing: border-box;
 }
 
@@ -91,30 +121,43 @@
 
 .card img {
   width: 100%;
-  height: 250px;
+  height: 40svh;
   object-fit: cover;
+  object-position: top;
   display: block;
 }
 
-.cardPlaceholder {
+.imgHidden {
+  display: none;
+}
+
+.cardSkeleton {
   width: 100%;
-  height: 250px;
+  height: 40svh;
+  background: linear-gradient(
+    90deg,
+    var(--color-surface) 25%,
+    var(--color-surface-alt) 50%,
+    var(--color-surface) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.6s ease-in-out infinite;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: var(--space-xs);
-  background: linear-gradient(135deg, var(--color-surface), var(--color-surface-alt));
 }
 
-.placeholderEmoji {
-  font-size: 40px;
-  opacity: 0.6;
+@keyframes shimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
 }
 
-.placeholderLabel {
+.skeletonAlt {
   font-size: var(--fs-xs);
   color: var(--color-text);
+  opacity: 0.5;
+  text-align: center;
+  padding: 0 var(--space-md);
 }
 
 .cardLabel {
@@ -147,7 +190,8 @@
   justify-content: center;
   gap: var(--space-md);
   margin-top: var(--space-md);
-  padding: 0 var(--space-lg);
+  padding: 0 var(--space-md);
+  width: 100%;
 }
 
 .arrowBtn {
@@ -203,27 +247,23 @@
   transform: scale(1.3);
 }
 
-/* CTA */
 .cta {
-  padding: 36px var(--space-lg) 60px;
+  padding: 36px var(--space-md) 60px;
   display: flex;
   justify-content: center;
 }
 
 @media (min-width: 768px) {
   .quemSomos {
-    padding: 80px var(--space-lg) 60px;
+    padding: var(--section-padding-y-lg) var(--space-md);
+  }
+
+  .card img,
+  .cardSkeleton {
+    height: 75svh;
   }
 
   .acoes {
-    padding: 60px 0;
-  }
-
-  .acoes h2,
-  .carouselWrapper,
-  .carouselControls {
-    max-width: 750px;
-    margin-left: auto;
-    margin-right: auto;
+    padding: var(--section-padding-y-lg) 0;
   }
 }
