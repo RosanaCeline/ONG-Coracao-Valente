@@ -97,10 +97,6 @@
   transform: scale(1.03);
 }
 
-  .active .label {
-    display: inline;
-  }
-
 @media (max-width: 660px) {
   .headerSpacer {
     height: 66px;
@@ -144,7 +140,7 @@
   }
 
   .active .label {
-    display: none;
+    display: inline;
   }
 
   .donateBtn,
@@ -164,6 +160,10 @@
   .nav-item svg {
     width: 18px;
     height: 18px;
+  }
+
+  .active .label {
+    display: none;
   }
 
   .donateBtn :global(.text),
