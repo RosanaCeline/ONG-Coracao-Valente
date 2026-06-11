@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import dogPaw from '../../assets/historypage/HISTORY_dog_paw.webp';
 import styles from './History.module.css';
 import ButtonComponent from '../../components/btn/ButtonComponent/ButtonComponent';
 
@@ -125,15 +126,27 @@ const History = () => {
   return (
     <main className={styles.main}>
       <section className={styles.quemSomos}>
-        <p className={styles.chapeu}>Quem Somos</p>
-        <h1>
-          De uma <em>ideia</em>, uma revolução de <em>amor.</em>
-        </h1>
+        <div className={styles.quemSomosHeader}>
+          <div className={styles.imageWrapper}>
+            <img
+              src={dogPaw}
+              alt={`Pata de cachorro da ${name}`}
+              className={styles.dogPaw}
+            />
+          </div>
+
+          <p className={styles.chapeu}>Quem Somos</p>
+
+          <h1>
+            De uma <em>ideia</em>, uma revolução de <em>amor.</em>
+          </h1>
+        </div>
+
         <div className={styles.paragrafos}>
-          <p>Em 21 de setembro de 2018, em Tianguá, um grupo de pessoas decidiu não indignar-se não apenas pelo sofrimento — mas precisou agir. Assim nasceu a ONG Coração Valente.</p>
-          <p>Desde então, resgatamos, tratamos e encaminhamos centenas de animais que chegaram até nós machucados, assustados ou simplesmente esquecidos. Não somos um abrigo permanente: somos a ponte entre o abandono e um novo lar.</p>
-          <p>Cada castração realizada, cada feira de adoção organizada e cada ação educativa levada às escolas é um passo em direção a uma Serra da Ibiapaba mais consciente e mais justa com os animais.</p>
-          <p>Tudo isso só é possível graças a você — voluntários, doadores e parceiros que acreditam que o cuidado com os animais diz muito sobre quem somos como comunidade.</p>
+          <p>Em 21 de setembro de 2018, em Tianguá, um grupo de pessoas decidiu não indignar-se não apenas pelo sofrimento — mas precisou agir. <strong>Assim nasceu a ONG Coração Valente.</strong></p>
+          <p>Desde então, <strong>resgatamos, tratamos e encaminhamos</strong> centenas de animais que chegaram até nós machucados, assustados ou simplesmente esquecidos. <strong>Não somos um abrigo permanente: somos a ponte entre o abandono e um novo lar.</strong></p>
+          <p>Cada castração realizada, cada feira de adoção organizada e cada ação educativa levada às escolas é um passo em direção a uma <strong>Serra da Ibiapaba mais consciente e mais justa com os animais.</strong></p>
+          <p><strong>Tudo isso só é possível graças a você</strong> — voluntários, doadores e parceiros que acreditam que <strong>o cuidado com os animais diz muito sobre quem somos como comunidade.</strong></p>
         </div>
       </section>
 
@@ -142,10 +155,8 @@ const History = () => {
           Nossas principais <em>ações</em>
         </h2>
         <Carousel />
-      </section>
 
-      <section className={styles.cta}>
-        <ButtonComponent onClick={() => navigate('/voluntariado')}>
+        <ButtonComponent className={styles.cta} onClick={() => navigate('/voluntariado')}>
           Quero ser voluntário
         </ButtonComponent>
       </section>
