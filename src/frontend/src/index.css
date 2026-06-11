@@ -21,7 +21,7 @@
   --fs-md: 18px;
   --fs-xl: 60px;
 
-  --fs-h1: clamp(42px, 6vw, 60px);
+  --fs-h1: clamp(40px, 6vw, 60px);
   --fs-h2: clamp(32px, 4.5vw, 48px);
   --fs-h3: clamp(20px, 2.5vw, 26px);
   --fs-h4: var(--fs-md);
@@ -30,6 +30,9 @@
   --space-sm: 15px;
   --space-md: 20px;
   --space-lg: 30px;
+
+  --section-padding-y: 60px;
+  --section-padding-y-lg: 80px;
 
   --radius: 22px;
   --shadow:
