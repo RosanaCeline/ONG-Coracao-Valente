@@ -4,7 +4,7 @@ import { PawPrint } from 'lucide-react';
 import ButtonComponent from '../../../components/btn/ButtonComponent/ButtonComponent';
 import Title from '../../../components/ui/Title/Title';
 import useInView from '../../../hooks/useInView';
-import dogsImg from '../../../assets/landingpage/HOME_cachorros_unidos.png';
+import dogsImg from '../../../assets/landingpage/HOME_cachorros_unidos.webp';
 import styles from './MissionSection.module.css';
 
 const MissionSection = () => {

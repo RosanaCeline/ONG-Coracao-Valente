@@ -3,8 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import ButtonComponent from '../../../components/btn/ButtonComponent/ButtonComponent';
 import Title from '../../../components/ui/Title/Title';
 import { ONG_INFO } from '../../../services/ong';
-import heroDog from '../../../assets/landingpage/HOME_cachorro_hero.png';
-import ballImg from '../../../assets/landingpage/HOME_bola_cachorro.png';
+import heroDog from '../../../assets/landingpage/HOME_cachorro_hero.webp';
+import ballImg from '../../../assets/landingpage/HOME_bola_cachorro.webp';
 import styles from './HeroSection.module.css';
 
 const HeroSection = () => {
