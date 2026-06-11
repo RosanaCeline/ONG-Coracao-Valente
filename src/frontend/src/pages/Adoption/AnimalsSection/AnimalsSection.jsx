@@ -15,10 +15,10 @@ const AnimalsSection = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    getAnimals().then(data => {
+    getAnimals({ isAdopted: false }).then(data => {
       setAnimals(data);
       setLoading(false);
-    });
+    }).catch(() => setLoading(false));
   }, []);
 
   return (

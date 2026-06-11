@@ -1,1 +1,0 @@
-ALTER TABLE animals RENAME COLUMN "RACE" TO race;

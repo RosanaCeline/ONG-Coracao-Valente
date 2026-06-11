@@ -21,6 +21,10 @@
   white-space: nowrap;
 }
 
+.button:hover {
+  scale: 1.02;
+}
+
 .text {
   display: inline-block;
 }

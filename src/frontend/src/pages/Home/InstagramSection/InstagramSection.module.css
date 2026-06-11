@@ -1,5 +1,5 @@
 .section {
-  padding: 70px 0;
+  padding: 50px 0;
   min-height: 60vh;
   display: flex;
   flex-direction: column;
@@ -8,6 +8,12 @@
   opacity: 0;
   transform: translateY(28px);
   transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+@media (min-width: 640px) {
+  .section {
+    padding: 70px 0;
+  }
 }
 
 .section.visible {

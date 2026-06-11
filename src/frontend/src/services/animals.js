@@ -1,32 +1,26 @@
-import dogHero from '../assets/landingpage/HOME_cachorro_hero.png';
-import dogBall from '../assets/landingpage/HOME_bola_cachorro.png';
-import dogsTogether from '../assets/landingpage/HOME_cachorros_unidos.png';
+import { apiFetch } from './api';
 
-const _mockAnimals = [
-  {
-    id: 1,
-    name: 'Luna',
-    age: '5 meses',
-    photo: dogHero,
-    tags: ['Cão', 'Fêmea', 'Dócil', 'Carinhosa'],
-  },
-  {
-    id: 2,
-    name: 'Thor',
-    age: '8 meses',
-    photo: dogBall,
-    tags: ['Cão', 'Macho', 'Brincalhão', 'Ativo'],
-  },
-  {
-    id: 3,
-    name: 'Mel',
-    age: '2 anos',
-    photo: dogsTogether,
-    tags: ['Cão', 'Fêmea', 'Tranquila', 'Vacinada'],
-  },
-];
+export async function getAnimals(filters = {}) {
+  const params = new URLSearchParams();
+  if (filters.isAdopted !== undefined) params.set('isAdopted', filters.isAdopted);
+  if (filters.race)   params.set('race', filters.race);
+  if (filters.gender) params.set('gender', filters.gender);
+  const qs = params.toString();
+  return apiFetch(`/api/animal${qs ? `?${qs}` : ''}`);
+}
 
-export async function getAnimals() {
-  await new Promise(resolve => setTimeout(resolve, 500));
-  return _mockAnimals;
+export async function createAnimal(formData) {
+  return apiFetch('/api/animal', { method: 'POST', body: formData });
+}
+
+export async function updateAnimal(id, formData) {
+  return apiFetch(`/api/animal/${id}`, { method: 'PUT', body: formData });
+}
+
+export async function deleteAnimal(id) {
+  return apiFetch(`/api/animal/${id}`, { method: 'DELETE' });
+}
+
+export async function adoptAnimal(id) {
+  return apiFetch(`/api/animal/${id}/adopt`, { method: 'PATCH' });
 }
