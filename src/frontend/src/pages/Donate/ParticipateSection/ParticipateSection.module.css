@@ -5,14 +5,14 @@
   width: 100vw;
 
   background: var(--color-primary);
-  margin-top: 60px;
+  margin-top: var(--section-padding-y);
   overflow: hidden;
 }
 
 .inner {
   max-width: 1126px;
   margin: 0 auto;
-  padding: 70px var(--space-md);
+  padding: var(--section-padding-y-lg) var(--space-md);
   min-height: 420px;
 
   display: flex;
@@ -45,7 +45,7 @@
 @media (max-width: 768px) {
   .inner {
     flex-direction: column;
-    padding: 50px var(--space-md);
+    padding: var(--section-padding-y) var(--space-md);
     gap: var(--space-lg);
     min-height: auto;
   }
