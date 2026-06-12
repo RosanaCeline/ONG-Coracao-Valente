@@ -5,7 +5,6 @@ import {
   HandCoins,
   PawPrint,
   HandHelping,
-  MessageCircleQuestion,
 } from 'lucide-react';
 import ExploreCard from './ExploreCard/ExploreCard';
 import Title from '../../../components/ui/Title/Title';
@@ -43,13 +42,6 @@ const cards = [
     buttonLabel: 'Ser voluntário',
     to: '/voluntariado',
     icon: HandHelping,
-  },
-  {
-    id: 5,
-    title: 'Tem alguma dúvida? A gente responde.',
-    buttonLabel: 'Falar com a ONG',
-    to: '/contato',
-    icon: MessageCircleQuestion,
   },
 ];
 

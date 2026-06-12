@@ -4,7 +4,6 @@ import {
   BookOpen,
   Heart,
   Users,
-  Headset,
   HandHeart,
 } from "lucide-react";
 import ButtonComponent from "../../btn/ButtonComponent/ButtonComponent";
@@ -66,18 +65,6 @@ export const Navbar = () => {
           >
             <Users />
             <span className={styles.label}>VOLUNTARIAR</span>
-          </NavLink>
-
-          <NavLink
-            to="/contato"
-            className={({ isActive }) =>
-              isActive
-                ? `${styles["nav-item"]} ${styles.active}`
-                : styles["nav-item"]
-            }
-          >
-            <Headset />
-            <span className={styles.label}>CONTATO</span>
           </NavLink>
 
           <ButtonComponent

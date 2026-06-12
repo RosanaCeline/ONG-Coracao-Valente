@@ -34,7 +34,7 @@ const HeroSection = () => {
           <ButtonComponent onClick={() => navigate('/adocao')}>
             Conhecer os animais
           </ButtonComponent>
-          <ButtonComponent variant="outline" onClick={() => navigate('/ajudar')}>
+          <ButtonComponent variant="outline" onClick={() => navigate('/historia')}>
             Como atuamos
           </ButtonComponent>
         </div>
