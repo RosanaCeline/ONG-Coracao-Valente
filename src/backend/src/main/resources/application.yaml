@@ -12,7 +12,7 @@ spring:
     name: Coracao Valente API
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: ${CORACAO_VALENTE_DATABASE_URL}         # variável diferente para o banco dev
+    url: ${CORACAO_VALENTE_DATABASE_DEV_URL}         # variável diferente para o banco dev
     username: ${CORACAO_VALENTE_DATABASE_USERNAME}
     password: ${CORACAO_VALENTE_DATABASE_PASSWORD}
   jpa:
