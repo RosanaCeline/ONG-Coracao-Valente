@@ -3,8 +3,6 @@
 # Se quiser ver logs do front ou back: docker compose logs -f backend  (ou)  docker compose logs -f frontend
 # Se tiver mudanças no front ou back: docker compose build frontend  (e depois)   docker compose up -d frontend
 
-version: '3.9'
-
 services:
   backend:
     build:
