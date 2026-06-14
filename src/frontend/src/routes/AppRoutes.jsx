@@ -1,7 +1,6 @@
 import { Routes, Route } from 'react-router-dom';
 
 import Home from '../pages/Home/Home';
-import Contact from '../pages/Contact/Contact';
 import Adoption from '../pages/Adoption/Adoption';
 import Help from '../pages/Help/Help';
 import Donate from '../pages/Donate/Donate';
@@ -24,7 +23,6 @@ const AppRoutes = () => (
     <Route path="/historia"     element={<History />} />
     <Route path="/adocao"       element={<Adoption />} />
     <Route path="/voluntariado" element={<Help />} />
-    <Route path="/contato"      element={<Contact />} />
     <Route path="/doar"         element={<Donate />} />
     <Route path="/admin"        element={<Login />} />
 
