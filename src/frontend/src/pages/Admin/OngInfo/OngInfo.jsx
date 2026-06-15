@@ -556,7 +556,7 @@ const OngInfo = () => {
           </section>
 
           {/* ── Contato ── */}
-          {/* <section className={styles.card}>
+          <section className={styles.card}>
             <h2 className={styles.cardTitle}>Contato &amp; Redes sociais</h2>
             <div className={styles.field}>
               <label className={styles.label}>
@@ -605,7 +605,7 @@ const OngInfo = () => {
                 )}
               </div>
             </div>
-          </section> */}
+          </section>
 
           {/* ── Equipe ── */}
           {/* <section className={styles.card}>

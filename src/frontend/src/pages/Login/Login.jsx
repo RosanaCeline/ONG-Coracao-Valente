@@ -33,7 +33,7 @@ export function Login() {
       }
       const { token } = await res.json();
       localStorage.setItem('token', token);
-      navigate('/admin/painel');
+      navigate('/admin/painel/animais');
     } catch {
       setError('Erro ao conectar ao servidor. Verifique se o servidor está rodando.');
     } finally {
