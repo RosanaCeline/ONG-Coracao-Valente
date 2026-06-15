@@ -277,3 +277,55 @@
     font-size: 0.7rem;
   }
 }
+
+/* ===== Botão flutuante ===== */
+.floatingBtn {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: #c0392b;
+  color: #fff;
+  border: none;
+  border-radius: 999px;
+  padding: 0.6rem 1.1rem 0.6rem 0.85rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(192, 57, 43, 0.4);
+  transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+}
+
+.floatingBtn:hover {
+  background: #a93226;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(192, 57, 43, 0.45);
+}
+
+.floatingBtn:active {
+  transform: translateY(0);
+}
+
+.floatingIcon {
+  font-size: 1rem;
+  line-height: 1;
+}
+
+.floatingLabel {
+  letter-spacing: 0.02em;
+}
+
+@media (max-width: 400px) {
+  .floatingBtn {
+    bottom: 1rem;
+    right: 1rem;
+    padding: 0.6rem 0.85rem;
+  }
+
+  .floatingLabel {
+    display: none;
+  }
+}

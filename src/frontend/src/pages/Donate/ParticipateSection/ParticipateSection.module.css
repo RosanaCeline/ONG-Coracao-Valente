@@ -4,8 +4,6 @@
   transform: translateX(-50%);
   width: 100vw;
 
-  background: var(--color-primary);
-  margin-top: var(--section-padding-y);
   overflow: hidden;
 }
 
@@ -38,7 +36,8 @@
 }
 
 .heading {
-  color: #fff;
+    color: var(--color-text);
+
   max-width: 640px;
 }
 

@@ -163,7 +163,7 @@ const OngInfo = () => {
   }, []);
 
   const doSave = async (f, logo) => {
-    if (!isFormValid(f) || savingRef.current) return;
+    // if (!isFormValid(f) || savingRef.current) return;
     savingRef.current = true;
     setSaving(true);
     setSaveError('');
@@ -388,7 +388,7 @@ const OngInfo = () => {
           </section>
 
           {/* ── Identidade ── */}
-          <section className={styles.card}>
+          {/* <section className={styles.card}>
             <h2 className={styles.cardTitle}>Identidade</h2>
             <div className={styles.logoRow}>
               <div className={styles.logoWrap}>
@@ -453,7 +453,7 @@ const OngInfo = () => {
           </section>
 
           {/* ── Localização ── */}
-          <section className={styles.card}>
+          {/* <section className={styles.card}>
             <h2 className={styles.cardTitle}>Localização</h2>
 
             <div className={styles.field} style={{ maxWidth: 200 }}>
@@ -556,7 +556,7 @@ const OngInfo = () => {
           </section>
 
           {/* ── Contato ── */}
-          <section className={styles.card}>
+          {/* <section className={styles.card}>
             <h2 className={styles.cardTitle}>Contato &amp; Redes sociais</h2>
             <div className={styles.field}>
               <label className={styles.label}>
@@ -605,10 +605,10 @@ const OngInfo = () => {
                 )}
               </div>
             </div>
-          </section>
+          </section> */}
 
           {/* ── Equipe ── */}
-          <section className={styles.card}>
+          {/* <section className={styles.card}>
             <h2 className={styles.cardTitle}>Equipe</h2>
             <div className={styles.field}>
               <label className={styles.label}>
@@ -623,7 +623,7 @@ const OngInfo = () => {
                 placeholder="0"
               />
             </div>
-          </section>
+          </section> */}
 
         </div>
       </form>

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import styles from './RatingPopup.module.css';
 import { useRatingPopup } from './useRatingPopup';
 import { sendRating } from '../../services/rating';
-
+  
 const SUS_QUESTIONS = [
   { id: 'q1',  text: 'Acho que gostaria de utilizar a plataforma com frequência.' },
   { id: 'q2',  text: 'Considerei a plataforma mais complexa do que necessário.' },
@@ -20,13 +20,13 @@ const SCALE = [1, 2, 3, 4, 5];
 
 function SUSForm({ onSubmitted, onClose }) {
   const [answers, setAnswers] = useState({});
-  const [isTermAccepted, setIsTermAccepted] = useState(false);
+  const [consent, setConsent] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
   const allAnswered = SUS_QUESTIONS.every((q) => answers[q.id] !== undefined);
-  const canSubmit = allAnswered && isTermAccepted && !loading;
+  const canSubmit = allAnswered && consent && !loading;
 
   const handleSelect = (questionId, value) => {
     setAnswers((prev) => ({ ...prev, [questionId]: value }));
@@ -37,15 +37,15 @@ function SUSForm({ onSubmitted, onClose }) {
     setError('');
     setLoading(true);
 
-    const payload = {
-      ...answers,
-      isTermAccepted: true,
-    };
+    const payload = { ...answers, consent: true };
 
     try {
-        await sendRating(payload);
-        setSubmitted(true);
-        setTimeout(() => onSubmitted(), 2000);
+      const response = await sendRating(payload);
+
+      if (!response.ok) throw new Error(`Erro ${response.status}`);
+
+      setSubmitted(true);
+      setTimeout(() => onSubmitted(), 2000);
     } catch (err) {
       console.error('Erro ao enviar avaliação SUS:', err);
       setError('Não foi possível enviar. Tente novamente.');
@@ -113,8 +113,8 @@ function SUSForm({ onSubmitted, onClose }) {
             type="checkbox"
             id="sus-consent"
             className={styles.consentCheckbox}
-            checked={isTermAccepted}
-            onChange={(e) => setIsTermAccepted(e.target.checked)}
+            checked={consent}
+            onChange={(e) => setConsent(e.target.checked)}
           />
           <label htmlFor="sus-consent" className={styles.consentLabel}>
             <strong>Autorizo</strong> o uso das minhas respostas em pesquisas e relatórios
@@ -123,11 +123,7 @@ function SUSForm({ onSubmitted, onClose }) {
           </label>
         </div>
 
-        <button
-          className={styles.submitBtn}
-          onClick={handleSubmit}
-          disabled={!canSubmit}
-        >
+        <button className={styles.submitBtn} onClick={handleSubmit} disabled={!canSubmit}>
           {loading ? 'Enviando…' : 'Enviar avaliação'}
         </button>
 
@@ -137,16 +133,35 @@ function SUSForm({ onSubmitted, onClose }) {
   );
 }
 
-export function RatingPopup() {
-  const { isVisible, handleClose, handleSubmitted } = useRatingPopup();
+// Botão flutuante
+function FloatingRatingBtn({ onClick }) {
+  return (
+    <button
+      className={styles.floatingBtn}
+      onClick={onClick}
+      aria-label="Abrir avaliação do site"
+      title="Avaliar a plataforma"
+    >
+      <span className={styles.floatingIcon}>★</span>
+      <span className={styles.floatingLabel}>Avaliar</span>
+    </button>
+  );
+}
 
-  if (!isVisible) return null;
+export function RatingPopup() {
+  const { isVisible, open, close, handleSubmitted, showFloatingBtn } = useRatingPopup();
 
   return (
-    <div className={styles.overlay} onClick={handleClose}>
-      <div className={styles.popup} onClick={(e) => e.stopPropagation()}>
-        <SUSForm onSubmitted={handleSubmitted} onClose={handleClose} />
-      </div>
-    </div>
+    <>
+      {showFloatingBtn && <FloatingRatingBtn onClick={open} />}
+
+      {isVisible && (
+        <div className={styles.overlay} onClick={close}>
+          <div className={styles.popup} onClick={(e) => e.stopPropagation()}>
+            <SUSForm onSubmitted={handleSubmitted} onClose={close} />
+          </div>
+        </div>
+      )}
+    </>
   );
 }

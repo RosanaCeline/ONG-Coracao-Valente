@@ -8,28 +8,35 @@ export function useRatingPopup() {
   const [isVisible, setIsVisible] = useState(false);
   const location = useLocation();
 
-  useEffect(() => {
-    if (location.pathname.startsWith('/admin')) return;
+  const isAdmin = location.pathname.startsWith('/admin');
+  const alreadyDone = !!localStorage.getItem(STORAGE_KEY);
 
-    const alreadyDone = localStorage.getItem(STORAGE_KEY);
-    if (alreadyDone) return;
+  useEffect(() => {
+    if (isAdmin || alreadyDone) return;
 
     const visited = parseInt(sessionStorage.getItem(SESSION_KEY) || '0', 10);
     const newCount = visited + 1;
     sessionStorage.setItem(SESSION_KEY, String(newCount));
 
-    if (newCount >= 3 && newCount % 2 === 1) {
-      const timer = setTimeout(() => setIsVisible(true), 1500);
+    if (newCount >= 8 && newCount % 5 === 0) {
+      const timer = setTimeout(() => setIsVisible(true), 800);
       return () => clearTimeout(timer);
     }
-  }, [location.pathname]);
+  }, [location.pathname, alreadyDone, isAdmin]);
 
-  const handleClose = () => setIsVisible(false);
+  const open  = () => setIsVisible(true);
+  const close = () => setIsVisible(false);
 
   const handleSubmitted = () => {
     localStorage.setItem(STORAGE_KEY, 'true');
     setIsVisible(false);
   };
 
-  return { isVisible, handleClose, handleSubmitted };
+  return {
+    isVisible,
+    open,
+    close,
+    handleSubmitted,
+    showFloatingBtn: !isAdmin,
+  };
 }

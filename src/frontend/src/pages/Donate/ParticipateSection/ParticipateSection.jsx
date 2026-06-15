@@ -14,10 +14,10 @@ const ParticipateSection = () => {
     <section ref={ref} className={styles.mission}>
       <div className={styles.inner}>
         <div className={`${styles.content} ${inView ? styles.visible : ''}`}>
-          <Title as="h2" className={styles.heading}>
+          <Title as="h1">
             Sua doação pode salvar uma vida. Contribua com essa causa!
           </Title>
-          <ButtonComponent variant="white" onClick={scrollToTop}>
+          <ButtonComponent onClick={scrollToTop}>
             Quero contribuir
           </ButtonComponent>
         </div>

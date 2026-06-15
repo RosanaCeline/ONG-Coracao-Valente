@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import styles from './Donate.module.css';
 import DonateSection from './DonateSection/DonateSection';
 import DonationSaveLivesSection from './DonationSaveLivesSection/DonationSaveLivesSection';
-import TransparencySection from './TransparencySection/TransparencySection';
+//import TransparencySection from './TransparencySection/TransparencySection';
 import ParticipateSection from './ParticipateSection/ParticipateSection';
 
 const Donate = () => {
@@ -14,7 +14,7 @@ const Donate = () => {
     <main className={styles.main}>
       <DonateSection />
       <DonationSaveLivesSection />
-      <TransparencySection />
+      {/* <TransparencySection /> */}
       <ParticipateSection />
     </main>
   );
