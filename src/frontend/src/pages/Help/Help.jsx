@@ -32,6 +32,7 @@ const Help = () => {
   const topRef = useRef(null);
   const gridRef = useRef(null);
   const impactoRef = useRef(null);
+  const formRef = useRef(null);
 
   const topInView = useInView(topRef, 0.1);
   const gridInView = useInView(gridRef, 0.1);
@@ -97,7 +98,7 @@ const Help = () => {
           esperança para quem não sabe o que é isso ainda.
         </p>
 
-        <ButtonComponent style={{ alignSelf: 'center' }}>
+        <ButtonComponent style={{ alignSelf: 'center' }} onClick={() => formRef.current?.scrollIntoView({ behavior: 'smooth' })}>
           Quero começar a fazer diferença agora
         </ButtonComponent>
       </div>
@@ -127,7 +128,7 @@ const Help = () => {
         <img src={imageDog} alt="Cachorro resgatado" className={styles.cachorroImg} />
       </div>
 
-      <section className={styles.secaoForm}>
+      <section ref={formRef} className={styles.secaoForm}>
         <div className={styles.secaoFormInner}>
           <p className={styles.formTag}>Voluntarie-se</p>
           <h2 className={styles.headlineForm}>Participe, faça diferença.</h2>
