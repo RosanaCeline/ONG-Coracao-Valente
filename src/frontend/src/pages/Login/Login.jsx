@@ -35,7 +35,7 @@ export function Login() {
       localStorage.setItem('token', token);
       navigate('/admin/painel/animais');
     } catch {
-      setError('Erro ao conectar ao servidor. Verifique se o servidor está rodando.');
+      setError('Erro ao conectar ao servidor. Verifique com o suporte e retorne novamente mais tarde.');
     } finally {
       setLoading(false);
     }
