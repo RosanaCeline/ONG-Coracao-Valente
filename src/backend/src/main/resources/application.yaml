@@ -15,6 +15,9 @@ spring:
     url: ${CORACAO_VALENTE_DATABASE_DEV_URL}         # variável diferente para o banco dev
     username: ${CORACAO_VALENTE_DATABASE_USERNAME}
     password: ${CORACAO_VALENTE_DATABASE_PASSWORD}
+  jackson:
+    serialization:
+      write-dates-as-timestamps: false
   jpa:
     hibernate:
       ddl-auto: validate                        # permite validar schema automaticamente no dev
