@@ -52,7 +52,7 @@ const formatPix = (type, raw) => {
 
 const stripPixKey = (type, displayed) => {
   if (type === 'CPF')  return displayed.replace(/\D/g, '');
-  if (type === 'CNPJ') return displayed.replace(/[.\/\-]/g, '');
+  if (type === 'CNPJ') return displayed.replace(/[.\-]/g, '');
   return displayed;
 };
 
@@ -99,17 +99,6 @@ const formatCnpj = (v) => {
   if (d.length <= 12) return `${d.slice(0, 2)}.${d.slice(2, 5)}.${d.slice(5, 8)}/${d.slice(8)}`;
   return `${d.slice(0, 2)}.${d.slice(2, 5)}.${d.slice(5, 8)}/${d.slice(8, 12)}-${d.slice(12)}`;
 };
-
-const isFormValid = (f) =>
-  f?.name?.trim() &&
-  f?.responsibleName?.trim() &&
-  f?.address?.trim() &&
-  f?.neighborhood?.trim() &&
-  f?.city?.trim() &&
-  f?.state?.trim() &&
-  f?.whatsappNumber?.trim() &&
-  f?.instagramUrl?.trim() &&
-  f?.instagramHandle?.trim();
 
 // ── Component ────────────────────────────────────────────────────────────────
 
@@ -163,7 +152,6 @@ const OngInfo = () => {
   }, []);
 
   const doSave = async (f, logo) => {
-    // if (!isFormValid(f) || savingRef.current) return;
     savingRef.current = true;
     setSaving(true);
     setSaveError('');
@@ -388,7 +376,7 @@ const OngInfo = () => {
           </section>
 
           {/* ── Identidade ── */}
-          {/* <section className={styles.card}>
+          <section className={styles.card}>
             <h2 className={styles.cardTitle}>Identidade</h2>
             <div className={styles.logoRow}>
               <div className={styles.logoWrap}>
@@ -453,7 +441,7 @@ const OngInfo = () => {
           </section>
 
           {/* ── Localização ── */}
-          {/* <section className={styles.card}>
+          <section className={styles.card}>
             <h2 className={styles.cardTitle}>Localização</h2>
 
             <div className={styles.field} style={{ maxWidth: 200 }}>
@@ -567,7 +555,7 @@ const OngInfo = () => {
                 className={`${styles.input} ${err('whatsappNumber')}`}
                 value={form.whatsappNumber}
                 onChange={set('whatsappNumber')}
-                placeholder="5588994852867"
+                placeholder="5588998887766"
                 inputMode="numeric"
               />
               {showErr('whatsappNumber') && (
@@ -606,24 +594,6 @@ const OngInfo = () => {
               </div>
             </div>
           </section>
-
-          {/* ── Equipe ── */}
-          {/* <section className={styles.card}>
-            <h2 className={styles.cardTitle}>Equipe</h2>
-            <div className={styles.field}>
-              <label className={styles.label}>
-                Número de voluntários <span className={styles.optional}>(opcional)</span>
-              </label>
-              <input
-                className={`${styles.input} ${styles.inputNarrow}`}
-                value={form.volunteers}
-                onChange={set('volunteers')}
-                type="number"
-                min="0"
-                placeholder="0"
-              />
-            </div>
-          </section> */}
 
         </div>
       </form>
