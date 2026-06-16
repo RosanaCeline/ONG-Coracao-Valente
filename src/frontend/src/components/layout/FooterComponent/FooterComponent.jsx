@@ -1,10 +1,34 @@
+import { useState, useEffect } from 'react';
 import { FaInstagram, FaFacebook, FaWhatsapp } from 'react-icons/fa';
 import logo from '../../../assets/logo.png';
-import { ONG_INFO } from '../../../services/ong';
+import { ONG_INFO, getOngInfo } from '../../../services/ong';
 import styles from './FooterComponent.module.css';
 
+const buildSocials = (info) => ({
+  instagram: info.instagramUrl ?? null,
+  facebook:  null,
+  whatsapp:  info.whatsappNumber ? `https://wa.me/${info.whatsappNumber}` : null,
+});
+
+const buildAddress = (info) =>
+  [info.address, info.number, info.neighborhood, info.city && info.state ? `${info.city}/${info.state}` : (info.city ?? info.state)]
+    .filter(Boolean)
+    .join(', ');
+
 const FooterComponent = () => {
-  const { name, address, socials } = ONG_INFO;
+  const [name,    setName]    = useState(ONG_INFO.name);
+  const [address, setAddress] = useState(buildAddress(ONG_INFO));
+  const [socials, setSocials] = useState(ONG_INFO.socials);
+
+  useEffect(() => {
+    getOngInfo()
+      .then(info => {
+        if (info.name)    setName(info.name);
+        setAddress(buildAddress(info));
+        setSocials(buildSocials(info));
+      })
+      .catch(() => {});
+  }, []);
 
   return (
     <footer className={styles.footer}>

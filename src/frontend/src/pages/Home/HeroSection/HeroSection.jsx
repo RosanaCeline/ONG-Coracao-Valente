@@ -1,15 +1,29 @@
+import { useState, useEffect } from 'react';
 import { MapPin } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import ButtonComponent from '../../../components/btn/ButtonComponent/ButtonComponent';
 import Title from '../../../components/ui/Title/Title';
-import { ONG_INFO } from '../../../services/ong';
+import { ONG_INFO, getOngInfo } from '../../../services/ong';
 import heroDog from '../../../assets/landingpage/HOME_cachorro_hero.png';
 import ballImg from '../../../assets/landingpage/HOME_bola_cachorro.png';
 import styles from './HeroSection.module.css';
 
 const HeroSection = () => {
   const navigate = useNavigate();
-  const { name, city, state } = ONG_INFO;
+
+  const [name,  setName]  = useState(ONG_INFO.name);
+  const [city,  setCity]  = useState(ONG_INFO.city);
+  const [state, setState] = useState(ONG_INFO.state);
+
+  useEffect(() => {
+    getOngInfo()
+      .then(info => {
+        if (info.name)  setName(info.name);
+        if (info.city)  setCity(info.city);
+        if (info.state) setState(info.state);
+      })
+      .catch(() => {});
+  }, []);
 
   return (
     <section className={styles.hero}>
