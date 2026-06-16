@@ -34,8 +34,4 @@ public class AuthController implements AuthControllerDocs {
                 .status(HttpStatus.CREATED)
                 .body(user);
     }
-
-    public ResponseEntity<Void> resetPassword() {
-        return null;
-    }
 }
