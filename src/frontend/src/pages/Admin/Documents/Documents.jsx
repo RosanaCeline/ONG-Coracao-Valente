@@ -11,8 +11,10 @@ const fmtDate = (iso) =>
 
 const triggerDownload = (doc) => {
   const a = document.createElement('a');
-  a.href     = doc.dataUrl;
+  a.href     = doc.url;
   a.download = doc.fileName;
+  a.target   = '_blank';
+  a.rel      = 'noopener noreferrer';
   a.click();
 };
 
