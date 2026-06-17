@@ -1,0 +1,118 @@
+.canvas {
+  width: 1080px;
+  height: 1080px;
+  box-sizing: border-box;
+  border: 24px solid #C90008;
+  background: #FDFAF6;
+  display: flex;
+  flex-direction: column;
+  font-family: 'DM Sans', sans-serif;
+  overflow: hidden;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 28px 48px;
+  border-bottom: 3px solid #C90008;
+  flex-shrink: 0;
+}
+
+.logo {
+  width: 72px;
+  height: 72px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.wordmark {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  font-size: 40px;
+  color: #1A1A18;
+}
+
+.photoWrap {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  margin: 32px 48px 0;
+  border-radius: 28px;
+  overflow: hidden;
+  background: #E4EEF4;
+}
+
+.photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.statusRibbon {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: #C90008;
+  color: #fff;
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 700;
+  font-size: 22px;
+  padding: 10px 22px;
+  border-radius: 999px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+.info {
+  padding: 32px 48px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  flex-shrink: 0;
+}
+
+.name {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  font-size: 64px;
+  color: #C90008;
+  margin: 0;
+  text-align: center;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+}
+
+.chip {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 600;
+  font-size: 24px;
+  background: #F5F0EA;
+  border: 2px solid rgba(26, 26, 24, 0.12);
+  color: #1A1A18;
+  padding: 8px 22px;
+  border-radius: 999px;
+}
+
+.footer {
+  background: #3D6278;
+  color: #fff;
+  padding: 28px 48px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.footerLine {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 600;
+  font-size: 26px;
+}
