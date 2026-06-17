@@ -37,12 +37,10 @@ function SUSForm({ onSubmitted, onClose }) {
     setError('');
     setLoading(true);
 
-    const payload = { ...answers, consent: true };
+    const payload = { ...answers, isTermAccepted: consent };
 
     try {
-      const response = await sendRating(payload);
-
-      if (!response.ok) throw new Error(`Erro ${response.status}`);
+      await sendRating(payload);
 
       setSubmitted(true);
       setTimeout(() => onSubmitted(), 2000);

@@ -1,7 +1,8 @@
 import { useState, useEffect, useRef } from 'react';
-import { Plus, Pencil, Trash2, Heart, X, Upload, ChevronDown, Loader2 } from 'lucide-react';
+import { Plus, Pencil, Trash2, Heart, X, Upload, ChevronDown, Loader2, ImageDown } from 'lucide-react';
 import { getAnimals, createAnimal, updateAnimal, deleteAnimal, adoptAnimal } from '../../../services/animals';
 import { getTags, createTag } from '../../../services/tags';
+import CreatePostModal from './PostTemplate/CreatePostModal';
 import styles from './Animals.module.css';
 
 const STATUS_CONFIG = {
@@ -131,7 +132,7 @@ const TagSelect = ({ available, selected, onChange, onCreateTag }) => {
 };
 
 // ── Animal card ─────────────────────────────────────────────────────────────
-const AnimalCard = ({ animal, onEdit, onAdopt, onDelete }) => {
+const AnimalCard = ({ animal, onEdit, onAdopt, onDelete, onCreatePost }) => {
   const status    = animal.isAdopted ? STATUS_CONFIG.adotado : STATUS_CONFIG.disponivel;
   const raceLabel = animal.race === 'DOG' ? 'Cão' : 'Gato';
 
@@ -175,6 +176,16 @@ const AnimalCard = ({ animal, onEdit, onAdopt, onDelete }) => {
             >
               <Heart size={15} />
               Registrar adoção
+            </button>
+          )}
+          {animal.photoUrl && (
+            <button
+              className={styles.actionBtn}
+              onClick={() => onCreatePost(animal)}
+              aria-label="Criar publicação"
+            >
+              <ImageDown size={15} />
+              Criar publicação
             </button>
           )}
           <button
@@ -237,8 +248,9 @@ const Animals = () => {
     setModal({ type: 'edit', animal });
   };
 
-  const openAdopt  = (animal) => { setFormError(''); setModal({ type: 'adopt', animal }); };
-  const openDelete = (animal) => { setFormError(''); setModal({ type: 'delete', animal }); };
+  const openAdopt      = (animal) => { setFormError(''); setModal({ type: 'adopt', animal }); };
+  const openDelete     = (animal) => { setFormError(''); setModal({ type: 'delete', animal }); };
+  const openCreatePost = (animal) => setModal({ type: 'createPost', animal });
 
   const set = (field) => (e) =>
     setForm(prev => ({ ...prev, [field]: e.target.value }));
@@ -363,6 +375,7 @@ const Animals = () => {
               onEdit={openEdit}
               onAdopt={openAdopt}
               onDelete={openDelete}
+              onCreatePost={openCreatePost}
             />
           ))}
         </div>
@@ -518,6 +531,11 @@ const Animals = () => {
             </div>
           </div>
         </Modal>
+      )}
+
+      {/* ── Create post modal ── */}
+      {modal?.type === 'createPost' && (
+        <CreatePostModal animal={modal.animal} onClose={closeModal} />
       )}
     </div>
   );

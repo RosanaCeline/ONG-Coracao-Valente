@@ -7,8 +7,8 @@ const buildWhatsappUrl = (name, age) => {
   return `https://api.whatsapp.com/send/?phone=${WHATSAPP_NUMBER}&text=${encodeURIComponent(message)}&type=phone_number&app_absent=0`;
 };
 
-// API returns: { id, name, age, photoUrl, tags: [{id, name}], gender, race, isAdopted, ... }
-const AnimalCard = ({ name, age, photoUrl, tags = [] }) => {
+// API returns: { id, name, age, photoUrl, tags: [{id, name}], gender, race, isAdopted, registeredAt, ... }
+const AnimalCard = ({ name, age, photoUrl, tags = [], registeredAt }) => {
   return (
     <article className={styles.card}>
       <div className={styles.photoWrapper}>
@@ -27,6 +27,12 @@ const AnimalCard = ({ name, age, photoUrl, tags = [] }) => {
           </span>
         ))}
       </div>
+
+      {registeredAt && (
+        <p className={styles.registeredAt}>
+          Cadastrado em {new Date(registeredAt).toLocaleDateString('pt-BR')}
+        </p>
+      )}
 
       <div className={styles.cardActions}>
         <a

@@ -61,6 +61,13 @@
   padding: 0 var(--space-md) var(--space-sm);
 }
 
+.registeredAt {
+  font-size: var(--fs-xs);
+  color: rgba(255, 255, 255, 0.7);
+  padding: 0 var(--space-md) var(--space-sm);
+  margin: 0;
+}
+
 .cardActions {
   margin-top: auto;
   padding: var(--space-sm) var(--space-md) var(--space-md);
