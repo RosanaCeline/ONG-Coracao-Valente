@@ -119,10 +119,18 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
   padding: var(--space-md);
   background: #fff;
   border: 1px solid var(--color-border);
   border-radius: var(--radius);
+}
+
+@media (max-width: 480px) {
+  .summaryValue {
+    font-size: 28px;
+  }
 }
 
 .summaryLabel {
@@ -341,7 +349,7 @@
   gap: var(--space-sm);
 }
 
-@media (max-width: 380px) {
+@media (max-width: 480px) {
   .formGrid { grid-template-columns: 1fr; }
 }
 

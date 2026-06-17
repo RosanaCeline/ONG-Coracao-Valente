@@ -30,6 +30,7 @@ const AdminLayout = () => {
               key={to}
               to={to}
               end={end}
+              aria-label={label}
               className={({ isActive }) =>
                 isActive
                   ? `${navStyles['nav-item']} ${navStyles.active}`
@@ -46,6 +47,7 @@ const AdminLayout = () => {
             variant="red"
             onClick={handleLogout}
             className={navStyles.donateBtn}
+            aria-label="Sair"
           >
             SAIR
           </ButtonComponent>

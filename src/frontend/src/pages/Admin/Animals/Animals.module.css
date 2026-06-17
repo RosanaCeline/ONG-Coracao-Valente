@@ -293,7 +293,7 @@
   gap: var(--space-sm);
 }
 
-@media (max-width: 420px) {
+@media (max-width: 480px) {
   .formGrid {
     grid-template-columns: 1fr;
   }
