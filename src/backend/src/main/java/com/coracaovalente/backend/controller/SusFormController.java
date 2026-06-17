@@ -9,12 +9,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/sus")
+@RequestMapping("/api/sus")
 @RequiredArgsConstructor
 public class SusFormController implements SusFormControllerDocs {
 
     private final SusFormService susFormService;
 
+    @Override
     @PostMapping
     public ResponseEntity<Void> answerForm (@RequestBody @Valid SusFormRequestDTO request) {
         susFormService.answerForm(request);

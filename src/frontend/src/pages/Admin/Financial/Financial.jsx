@@ -19,8 +19,8 @@ const fmt = (value) =>
 const fmtDate = (iso) =>
   new Date(`${iso}T12:00:00`).toLocaleDateString('pt-BR');
 
-const EMPTY_EXPENSE  = { category: 'alimentacao', description: '', value: '', date: today() };
-const EMPTY_DONATION = { donor: '', type: 'dinheiro', description: '', value: '', date: today() };
+const EMPTY_EXPENSE  = { category: 'ALIMENTACAO', description: '', value: '', date: today() };
+const EMPTY_DONATION = { donor: '', type: 'DINHEIRO', description: '', value: '', date: today() };
 
 // ── PDF ─────────────────────────────────────────────────────────────────────
 const buildPDF = (expenses, ong) => {

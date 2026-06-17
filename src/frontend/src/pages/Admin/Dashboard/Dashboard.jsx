@@ -1,21 +1,14 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { PawPrint, Users, HandCoins } from 'lucide-react';
+import { PawPrint, CalendarDays, HandCoins } from 'lucide-react';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
-import { ONG_INFO } from '../../../services/ong';
 import { getAnimals } from '../../../services/animals';
-import { getExpenseBreakdown } from '../../../services/donations';
+import { getExpenseBreakdown, EXPENSE_COLORS } from '../../../services/donations';
+import { getEvents } from '../../../services/calendarEvents';
 import styles from './Dashboard.module.css';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
-
-const EXPENSE_COLORS = {
-  food:    '#E8B86A',
-  vet:     '#7AACBF',
-  vaccine: '#9EB89C',
-  shelter: '#C4A8A0',
-};
 
 const STATUS_META = {
   disponivel:    { label: 'Disponíveis',    color: '#9EB89C' },
@@ -32,6 +25,7 @@ const DOUGHNUT_OPTIONS = {
 const Dashboard = () => {
   const [animals, setAnimals]   = useState([]);
   const [expenses, setExpenses] = useState([]);
+  const [events, setEvents]     = useState([]);
 
   useEffect(() => {
     document.title = 'Painel | ONG Coração Valente';
@@ -40,12 +34,16 @@ const Dashboard = () => {
   useEffect(() => {
     getAnimals().then(setAnimals);
     getExpenseBreakdown().then(setExpenses);
+    getEvents().then(setEvents).catch(() => {});
   }, []);
 
   const totalArrecadado = expenses.reduce((acc, e) => acc + e.value, 0);
+  const today = new Date().toISOString().split('T')[0];
+  const upcomingCount = events.filter(ev => ev.date >= today).length;
 
   const statusGroups = animals.reduce((acc, a) => {
-    acc[a.status] = (acc[a.status] || 0) + 1;
+    const key = a.isAdopted ? 'adotado' : 'disponivel';
+    acc[key] = (acc[key] || 0) + 1;
     return acc;
   }, {});
 
@@ -80,9 +78,9 @@ const Dashboard = () => {
           <span className={styles.metricLabel}>Animais cadastrados</span>
         </div>
         <div className={styles.metricCard}>
-          <Users size={20} className={styles.metricIcon} aria-hidden="true" />
-          <span className={styles.metricValue}>{ONG_INFO.volunteers}</span>
-          <span className={styles.metricLabel}>Voluntários</span>
+          <CalendarDays size={20} className={styles.metricIcon} aria-hidden="true" />
+          <span className={styles.metricValue}>{upcomingCount}</span>
+          <span className={styles.metricLabel}>Próximos eventos</span>
         </div>
         <div className={styles.metricCard}>
           <HandCoins size={20} className={styles.metricIcon} aria-hidden="true" />

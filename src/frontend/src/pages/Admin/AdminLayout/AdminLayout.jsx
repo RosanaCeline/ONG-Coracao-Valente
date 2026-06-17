@@ -1,16 +1,15 @@
 import { NavLink, Outlet, useNavigate } from 'react-router-dom';
-import { Cat, Building2, LogOut } from 'lucide-react';
+import { Cat, Building2, LogOut, Wallet, FolderOpen, CalendarDays, LayoutDashboard } from 'lucide-react';
 import ButtonComponent from '../../../components/btn/ButtonComponent/ButtonComponent';
 import navStyles from '../../../components/layout/NavbarComponent/NavbarComponent.module.css';
 import styles from './AdminLayout.module.css';
 
 const NAV_LINKS = [
-  //{ to: '/admin/painel',             end: true,  icon: LayoutDashboard, label: 'PAINEL' },
+  { to: '/admin/painel',             end: true,  icon: LayoutDashboard, label: 'PAINEL' },
   { to: '/admin/painel/animais',     end: false, icon: Cat,             label: 'ANIMAIS' },
-  //{ to: '/admin/painel/financeiro',  end: false, icon: Wallet,          label: 'FINANCEIRO' },
-  //{ to: '/admin/painel/estoque',     end: false, icon: Package,         label: 'ESTOQUE' },
-  //{ to: '/admin/painel/calendario',  end: false, icon: CalendarDays,    label: 'CALENDÁRIO' },
-  //{ to: '/admin/painel/documentos',  end: false, icon: FolderOpen,      label: 'DOCUMENTOS' },
+  { to: '/admin/painel/financeiro',  end: false, icon: Wallet,          label: 'FINANCEIRO' },
+  { to: '/admin/painel/calendario',  end: false, icon: CalendarDays,    label: 'CALENDÁRIO' },
+  { to: '/admin/painel/documentos',  end: false, icon: FolderOpen,      label: 'DOCUMENTOS' },
   { to: '/admin/painel/ong',         end: false, icon: Building2,       label: 'ONG' },
 ];
 

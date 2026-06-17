@@ -1,4 +1,4 @@
-const _mockAreas = [
+const _areas = [
     { id: 1, titulo: 'Limpeza' },
     { id: 2, titulo: 'Organização' },
     { id: 3, titulo: 'Divulgação' },
@@ -6,6 +6,5 @@ const _mockAreas = [
 ];
 
 export async function getVolunteerAreas() {
-    await new Promise(resolve => setTimeout(resolve, 400));
-    return _mockAreas;
+    return _areas;
 }

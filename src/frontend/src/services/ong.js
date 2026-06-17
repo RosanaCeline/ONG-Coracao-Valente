@@ -1,38 +1,34 @@
-const _whatsappNumber = import.meta.env.VITE_WHATSAPP_NUMBER ?? null;
+import { apiFetch } from './api';
 
+// Valores estáticos usados por componentes públicos (Navbar, Footer, HeroSection).
+// Estes componentes lêem de forma síncrona — continuam usando este objeto como fallback.
 export const ONG_INFO = {
   name:            'ONG Coração Valente',
-  cnpj:            '',
+  cnpj:            '31.571.472/0001-28',
   responsibleName: '',
   logoUrl:         null,
-  address:         'Av. Manoel da Custódia',
-  number:          'nº 1.111 / 1.119',
-  neighborhood:    'Bairro São Geraldo',
+  address:         'Rua Lair Félix Nunes',
+  number:          '',
+  neighborhood:    'Cruzeiro',
   city:            'Tianguá',
   state:           'CE',
-  cep:             '',
-  volunteers:      12,
-  pix:             null,
-  pixType:         'cpf',
-  whatsappNumber:  _whatsappNumber ?? '5588994852867',
+  cep:             '62320-000',
+  phone:           '(88) 3249-9824',
+  volunteers:      4,
+  whatsappNumber:  import.meta.env.VITE_WHATSAPP_NUMBER,
   instagramUrl:    import.meta.env.VITE_INSTAGRAM_URL    ?? 'https://www.instagram.com/ong.coracaovalente/',
   instagramHandle: import.meta.env.VITE_INSTAGRAM_HANDLE ?? '@ong.coracaovalente',
   socials: {
     instagram: import.meta.env.VITE_INSTAGRAM_URL ?? 'https://www.instagram.com/ong.coracaovalente/',
     facebook:  import.meta.env.VITE_FACEBOOK_URL  ?? null,
-    whatsapp:  _whatsappNumber ? `https://wa.me/${_whatsappNumber}` : 'https://wa.me/5588994852867',
+    whatsapp:  import.meta.env.VITE_WHATSAPP_NUMBER ?? `https://wa.me/${import.meta.env.VITE_WHATSAPP_NUMBER}`,
   },
 };
 
 export async function getOngInfo() {
-  await new Promise(resolve => setTimeout(resolve, 400));
-  return { ...ONG_INFO };
+  return apiFetch('/api/ong');
 }
 
 export async function updateOngInfo(data) {
-  await new Promise(resolve => setTimeout(resolve, 500));
-  Object.assign(ONG_INFO, data);
-  ONG_INFO.socials.whatsapp  = data.whatsappNumber ? `https://wa.me/${data.whatsappNumber}` : null;
-  ONG_INFO.socials.instagram = data.instagramUrl ?? ONG_INFO.socials.instagram;
-  return { ...ONG_INFO };
+  return apiFetch('/api/ong', { method: 'PUT', body: data });
 }

@@ -13,7 +13,6 @@ import Dashboard from '../pages/Admin/Dashboard/Dashboard';
 import Animals from '../pages/Admin/Animals/Animals';
 import Financial from '../pages/Admin/Financial/Financial';
 import OngInfo from '../pages/Admin/OngInfo/OngInfo';
-import Inventory from '../pages/Admin/Inventory/Inventory';
 import CalendarPage from '../pages/Admin/Calendar/CalendarPage';
 import Documents from '../pages/Admin/Documents/Documents';
 
@@ -32,7 +31,6 @@ const AppRoutes = () => (
         <Route path="animais"     element={<Animals />} />
         <Route path="financeiro"  element={<Financial />} />
         <Route path="ong"         element={<OngInfo />} />
-        <Route path="estoque"     element={<Inventory />} />
         <Route path="calendario"  element={<CalendarPage />} />
         <Route path="documentos"  element={<Documents />} />
       </Route>

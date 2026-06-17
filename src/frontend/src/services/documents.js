@@ -1,3 +1,5 @@
+import { apiFetch } from './api';
+
 export const DOCUMENT_SLOTS = [
   {
     id: 'cnpj',
@@ -67,31 +69,16 @@ export const DOCUMENT_SLOTS = [
   },
 ];
 
-// In-memory store: slotId → { fileName, fileType, dataUrl, uploadedAt }
-const _store = {};
-
 export async function getDocuments() {
-  return new Promise(resolve => setTimeout(() => resolve({ ..._store }), 200));
+  return apiFetch('/api/document');
 }
 
 export async function uploadDocument(slotId, file) {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.onload = () => {
-      const entry = {
-        fileName:   file.name,
-        fileType:   file.type,
-        dataUrl:    reader.result,
-        uploadedAt: new Date().toISOString(),
-      };
-      _store[slotId] = entry;
-      setTimeout(() => resolve(entry), 200);
-    };
-    reader.onerror = () => reject(new Error('Erro ao ler o arquivo'));
-    reader.readAsDataURL(file);
-  });
+  const fd = new FormData();
+  fd.append('file', file);
+  return apiFetch(`/api/document/${slotId}`, { method: 'POST', body: fd });
 }
 
 export async function removeDocument(slotId) {
-  return new Promise(resolve => setTimeout(() => { delete _store[slotId]; resolve(); }, 200));
+  return apiFetch(`/api/document/${slotId}`, { method: 'DELETE' });
 }

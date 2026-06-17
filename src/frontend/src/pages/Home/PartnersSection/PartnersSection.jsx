@@ -1,6 +1,8 @@
 import { useState, useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
 import ButtonComponent from '../../../components/btn/ButtonComponent/ButtonComponent';
+
+const WHATSAPP_NUMBER = import.meta.env.VITE_WHATSAPP_NUMBER;
+const PARTNER_WHATSAPP_URL = `https://api.whatsapp.com/send/?phone=${WHATSAPP_NUMBER}&text=${encodeURIComponent('Olá! Vim pelo site da ONG Coração Valente e gostaria de apoiar e ser parceiro da ONG. 🐾')}&type=phone_number&app_absent=0`;
 import Title from '../../../components/ui/Title/Title';
 import useInView from '../../../hooks/useInView';
 import prefeituraImg from '../../../assets/landingpage/parceiros/pref-tiangua.jpg';
@@ -77,7 +79,6 @@ function PartnerCard({ partner }) {
 const PartnersSection = () => {
   const ref = useRef(null);
   const inView = useInView(ref, 0.2);
-  const navigate = useNavigate();
 
   return (
     <section className={styles.section} ref={ref}>
@@ -100,7 +101,7 @@ const PartnersSection = () => {
           ))}
         </div>
 
-        <ButtonComponent variant="white" onClick={() => navigate('/contato')}>
+        <ButtonComponent variant="white" onClick={() => window.open(PARTNER_WHATSAPP_URL, '_blank', 'noopener,noreferrer')}>
           Quero ser parceiro
         </ButtonComponent>
       </div>
