@@ -171,17 +171,30 @@ const OngInfo = () => {
       await updateOngInfo({ ...f, volunteers: Number(f.volunteers) || 0, logoUrl: logo });
 
       const rawKey = stripPixKey(f.pixKeyType, f.pixKey ?? '').trim();
-      if (rawKey && f.pixBank?.trim() && f.pixName?.trim() && f.pixCity?.trim()) {
-        const pixErr = validatePix(f.pixKeyType, f.pixKey);
-        if (!pixErr) {
-          await savePixConfig({
-            pixKey:     rawKey,
-            pixKeyType: f.pixKeyType,
-            pixBank:    f.pixBank.trim(),
-            pixName:    f.pixName.trim(),
-            pixCity:    f.pixCity.trim(),
-          });
+      const hasAnyPixData = rawKey || f.pixBank?.trim() || f.pixName?.trim() || f.pixCity?.trim();
+
+      if (hasAnyPixData) {
+        const missingTouch = {};
+        if (!rawKey)            missingTouch.pixKey  = true;
+        if (!f.pixBank?.trim()) missingTouch.pixBank = true;
+        if (!f.pixName?.trim()) missingTouch.pixName = true;
+        if (!f.pixCity?.trim()) missingTouch.pixCity = true;
+
+        if (Object.keys(missingTouch).length > 0) {
+          setTouched(prev => ({ ...prev, ...missingTouch }));
+          throw new Error('Preencha todos os campos obrigatórios do PIX. Os dados do PIX não foram salvos.');
         }
+
+        const pixErr = validatePix(f.pixKeyType, f.pixKey);
+        if (pixErr) throw new Error(pixErr);
+
+        await savePixConfig({
+          pixKey:     rawKey,
+          pixKeyType: f.pixKeyType,
+          pixBank:    f.pixBank.trim(),
+          pixName:    f.pixName.trim(),
+          pixCity:    f.pixCity.trim(),
+        });
       }
 
       setSaved(true);
@@ -340,15 +353,19 @@ const OngInfo = () => {
                 </select>
               </div>
               <div className={`${styles.pixBox} ${styles.pixBoxKey}`}>
-                <label className={styles.label}>Chave</label>
+                <label className={styles.label}>Chave <span className={styles.req}>*</span></label>
                 <input
-                  className={`${styles.input} ${pixError ? styles.inputError : ''}`}
+                  className={`${styles.input} ${(pixError || showErr('pixKey')) ? styles.inputError : ''}`}
                   value={form.pixKey}
                   onChange={handlePixKeyChange}
                   placeholder={PIX_PLACEHOLDERS[form.pixKeyType]}
                   inputMode={['CPF', 'CNPJ'].includes(form.pixKeyType) ? 'numeric' : 'text'}
                 />
-                {pixError && (
+                {showErr('pixKey') ? (
+                  <span className={styles.fieldError}>
+                    <AlertCircle size={13} /> Campo obrigatório
+                  </span>
+                ) : pixError && (
                   <span className={styles.fieldError}>
                     <AlertCircle size={13} /> {pixError}
                   </span>
@@ -358,32 +375,41 @@ const OngInfo = () => {
 
             <div className={styles.grid2}>
               <div className={styles.field}>
-                <label className={styles.label}>Nome do recebedor</label>
+                <label className={styles.label}>Nome do recebedor <span className={styles.req}>*</span></label>
                 <input
-                  className={styles.input}
+                  className={`${styles.input} ${err('pixName')}`}
                   value={form.pixName}
                   onChange={set('pixName')}
                   placeholder="Ex: ONG Coração Valente"
                 />
+                {showErr('pixName') && (
+                  <span className={styles.fieldError}><AlertCircle size={13} /> Campo obrigatório</span>
+                )}
               </div>
               <div className={styles.field}>
-                <label className={styles.label}>Banco</label>
+                <label className={styles.label}>Banco <span className={styles.req}>*</span></label>
                 <input
-                  className={styles.input}
+                  className={`${styles.input} ${err('pixBank')}`}
                   value={form.pixBank}
                   onChange={set('pixBank')}
                   placeholder="Ex: Nubank"
                 />
+                {showErr('pixBank') && (
+                  <span className={styles.fieldError}><AlertCircle size={13} /> Campo obrigatório</span>
+                )}
               </div>
             </div>
             <div className={styles.field}>
-              <label className={styles.label}>Cidade do recebedor</label>
+              <label className={styles.label}>Cidade do recebedor <span className={styles.req}>*</span></label>
               <input
-                className={styles.input}
+                className={`${styles.input} ${err('pixCity')}`}
                 value={form.pixCity}
                 onChange={set('pixCity')}
                 placeholder="Ex: Tianguá"
               />
+              {showErr('pixCity') && (
+                <span className={styles.fieldError}><AlertCircle size={13} /> Campo obrigatório</span>
+              )}
             </div>
           </section>
 
