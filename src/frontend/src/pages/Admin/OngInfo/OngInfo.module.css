@@ -260,7 +260,7 @@
   gap: var(--space-sm);
 }
 
-@media (max-width: 420px) {
+@media (max-width: 480px) {
   .grid2 { grid-template-columns: 1fr; }
   .pixBox { flex: 1 1 100%; }
 }

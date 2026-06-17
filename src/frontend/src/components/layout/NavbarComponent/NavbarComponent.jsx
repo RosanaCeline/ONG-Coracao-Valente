@@ -21,6 +21,7 @@ export const Navbar = () => {
           <NavLink
             to="/"
             end
+            aria-label="Início"
             className={({ isActive }) =>
               isActive
                 ? `${styles["nav-item"]} ${styles.active}`
@@ -33,6 +34,7 @@ export const Navbar = () => {
 
           <NavLink
             to="/historia"
+            aria-label="História"
             className={({ isActive }) =>
               isActive
                 ? `${styles["nav-item"]} ${styles.active}`
@@ -45,6 +47,7 @@ export const Navbar = () => {
 
           <NavLink
             to="/adocao"
+            aria-label="Adoção"
             className={({ isActive }) =>
               isActive
                 ? `${styles["nav-item"]} ${styles.active}`
@@ -57,6 +60,7 @@ export const Navbar = () => {
 
           <NavLink
             to="/voluntariado"
+            aria-label="Voluntariar"
             className={({ isActive }) =>
               isActive
                 ? `${styles["nav-item"]} ${styles.active}`
@@ -72,6 +76,7 @@ export const Navbar = () => {
             variant="red"
             onClick={() => navigate("/doar")}
             className={isDonateActive ? styles.donateActive : styles.donateBtn}
+            aria-label="Doar"
           >
             DOAR
           </ButtonComponent>
